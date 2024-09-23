@@ -1,0 +1,24 @@
+.footer-container {
+    height: fit-content;
+    background-color: $lavander;
+    margin-top: 4rem;
+    border-top: rgba(185, 180, 180, 0.877) 4px solid;
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+    font-size: 1.5rem;
+    display: grid;
+    grid-template-columns: 70% 30%;
+    gap: 1rem;
+    padding: 1rem;
+    color: black;
+
+  }
+  .footer-txt{
+      font-size: 1rem;
+      text-align: center;
+      margin-left: 3rem;
+      width: 100%;
+  }
+  .insta{
+      margin-left: 0.5rem;
+  }

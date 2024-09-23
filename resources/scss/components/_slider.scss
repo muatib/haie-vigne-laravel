@@ -1,0 +1,77 @@
+.slider-ttl {
+    color: black;
+    font-size: 2rem;
+    font-weight: 400;
+    text-align: center;
+    margin-bottom: 3rem;
+
+  }
+
+  .slider-btn {
+    background-color: $light-blue;
+    width: 120px;
+    height: 30px;
+    border-radius: 50px;
+    border: 1px solid rgb(202, 193, 193);
+    position: relative;
+    left: 4.3rem;
+    bottom: 5rem;
+    font-family: Roboto;
+    box-shadow: 2px 2px 2px goldenrod;
+  }
+  .slider-left-arrow {
+    position: relative;
+    left: 1rem;
+    bottom: 8.5rem;
+  }
+  .slider-right-arrow{
+      position: relative;
+      left: 7.7rem;
+      bottom: 8.5rem;
+  }
+  .slider-left-arrow,
+  .slider-right-arrow {
+    border: 1px solid grey;
+    font-size: 1.5rem;
+    border-radius: 100px;
+    width: 30px;
+    background-color: $light-blue;
+    color: black;
+  }
+
+  .slide-container {
+    gap: 1rem;
+    margin-left: 2rem;
+    margin-bottom: -2rem;
+    width: 325px;
+  }
+
+  .slide-image {
+    width: 100%;
+    border-radius: 10px;
+  }
+
+
+
+  // .slide-container {
+  //   // transition: opacity 0.5s ease-out;
+  // }
+
+  .slide-container:not(.active) {
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+  }
+
+  .slide-container.active {
+    opacity: 1;
+    position: relative;
+  }
+
+  .activity-slider {
+    position: relative;
+    overflow: hidden;
+
+  }

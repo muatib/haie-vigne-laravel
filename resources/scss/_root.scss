@@ -1,0 +1,20 @@
+:root {
+    font-size: 16px;
+    @font-face {
+      font-family: Italianno;
+      src: url(../font/Italianno.ttf);
+    }
+    @font-face {
+      font-family: Roboto;
+      src: url(../font/Roboto.ttf);
+    }
+  }
+
+  body {
+    background-color: $light-green;
+    color: white;
+    font-family: "Italianno";
+  }
+  .link {
+    text-decoration: none;
+  }
