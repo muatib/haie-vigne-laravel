@@ -22,7 +22,7 @@
             <ul class="nav__lg-lst">
                 <li><a class="nav__lnk link" href="{{ url('/') }}">Accueil</a></li>
                 <li><a class="nav__lnk link" href="{{ url('price') }}">tarifs</a></li>
-                <li><a class="nav__lnk link" href="{{ url('activities') }}">Nos activités</a></li>
+                <li><a class="nav__lnk link" href="{{ url('activityContent') }}">Nos activités</a></li>
                 <li><a class="nav__lnk link" href="{{ url('contact') }}">Nous contacter</a></li>
                 <li><a class="nav__lnk link" href="{{ url('form') }}">S'inscrire</a></li>
             </ul>
@@ -37,7 +37,7 @@
                     <a class="menu__container-lnk" href="{{ url('/') }}">Accueil</a>
                 </li>
                 <li class="menu__container-itm">
-                    <a class="menu__container-lnk" href="{{ url('activities') }}">Nos activités</a>
+                    <a class="menu__container-lnk" href="{{ url('activityContent') }}">Nos activités</a>
                 </li>
                 <li class="menu__container-itm">
                     <a class="menu__container-lnk" href="{{ url('price') }}">tarifs</a>

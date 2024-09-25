@@ -5,7 +5,7 @@
             <div class="slider-container">
                 <img class="slider-image" src="{{ asset($image->image_path) }}" alt="{{ $image->alt_text }}">
                 <button class="slide-left-arrow"><</button>
-                <button class="slide-btn">En savoir plus</button>
+                <a href="{{ url('actualityContent') }}"><button class="slider-btn">En savoir plus</button></a>
                 <button class="slide-right-arrow">></button>
             </div>
         @endforeach
