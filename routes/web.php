@@ -34,7 +34,5 @@ Route::get('/activityContent', function () {
     return view('activityContent');
 });
 
-Route::get('/actualityContent', function () {
-    return view('actualityContent');
-});
+
 
