@@ -13,47 +13,15 @@
 
     <p class="main-txt-itm">Buts et objectifs de l’association :</p>
 
-    <p class="main-txt-itm">- proposer un large choix de séances en termes d’activités et d’horaires</p>
+    <p class="main-txt-itm">- Proposer un large choix de séances en termes d’activités et d’horaires</p>
 
-    <p class="main-txt-itm">- lutter contre la sédentarité</p>
+    <p class="main-txt-itm">- Lutter contre la sédentarité</p>
 
-    <p class="main-txt-itm">- favoriser le lien social en associant loisir et bien être afin de conserver vitalité et élan pour la vie dans une société où forme, bien être, longévité, convivialité et plaisir sont très recherchés.</p>
+    <p class="main-txt-itm">- Favoriser le lien social en associant loisir et bien être afin de conserver vitalité et élan pour la vie dans une société où forme, bien être, longévité, convivialité et plaisir sont très recherchés.</p>
 </div>
 <img class="separation" src="{{ asset('asset/img/separation.png') }}" alt="separation">
 
-<section class="activity-slider">
-    <h2 class="slider-ttl">Les activités de l'association</h2>
-    <div class="slide-container">
-        <img class="slide-image" src="{{ asset('asset/img/yoga.png') }}" alt="yoga">
-        <button class="slider-left-arrow"><</button>
-        <button class="slider-btn">En savoir plus</button>
-        <button class="slider-right-arrow">></button>
-    </div>
-    <div class="slide-container">
-        <img class="slide-image" src="{{ asset('asset/img/fitness.png') }}" alt="fitness">
-        <button class="slider-left-arrow"><</button>
-        <button class="slider-btn">En savoir plus</button>
-        <button class="slider-right-arrow">></button>
-    </div>
-    <div class="slide-container">
-        <img class="slide-image" src="{{ asset('asset/img/pilates.png') }}" alt="pilates">
-        <button class="slider-left-arrow"><</button>
-        <button class="slider-btn">En savoir plus</button>
-        <button class="slider-right-arrow">></button>
-    </div>
-    <div class="slide-container">
-        <img class="slide-image" src="{{ asset('asset/img/stretching.png') }}" alt="stretching">
-        <button class="slider-left-arrow"><</button>
-        <button class="slider-btn">En savoir plus</button>
-        <button class="slider-right-arrow">></button>
-    </div>
-    <div class="slide-container">
-        <img class="slide-image" src="{{ asset('asset/img/gym.png') }}" alt="gym douce">
-        <button class="slider-left-arrow"><</button>
-        <button class="slider-btn">En savoir plus</button>
-        <button class="slider-right-arrow">></button>
-    </div>
-</section>
+@include('components.activity')
 
 <img class="separation" src="{{ asset('asset/img/separation.png') }}" alt="">
 
@@ -71,40 +39,9 @@
 
 <img class="separation" src="{{ asset('asset/img/separation.png') }}" alt="separation">
 
-<section class="actuality-slider">
-    <h2 class="planning-ttl">Notre actualité</h2>
-    <div class="slider-container">
-        <img class="slider-image" src="{{ asset('asset/img/event.png') }}" alt="event">
-        <button class="slide-left-arrow"><</button>
-        <button class="slide-btn">En savoir plus</button>
-        <button class="slide-right-arrow">></button>
-    </div>
-    <div class="slider-container">
-        <img class="slider-image" src="{{ asset('asset/img/event 2.jpg') }}" alt="event">
-        <button class="slide-left-arrow"><</button>
-        <button class="slide-btn">En savoir plus</button>
-        <button class="slide-right-arrow">></button>
-    </div>
-    <div class="slider-container">
-        <img class="slider-image" src="{{ asset('asset/img/event 3.jpg') }}" alt="event">
-        <button class="slide-left-arrow"><</button>
-        <button class="slide-btn">En savoir plus</button>
-        <button class="slide-right-arrow">></button>
-    </div>
-</section>
+@include('components.actuality')
 
-<script type="text/javascript" src="https://cookieconsent.popupsmart.com/src/js/popper.js"></script>
-<script>
-    window.start.init({
-        Palette: "palette6",
-        Mode: "floating left",
-        Theme: "block",
-        Message: "Notre site utilise de délicieux cookies afin de garantir la sécurité de vos données personnelles et une navigation optimale.",
-        ButtonText: "Compris !",
-        LinkText: "En savoir plus",
-        Time: "5",
-    })
-</script>
+@include('components.cookie')
 </body>
 @include('components.footer')
 
