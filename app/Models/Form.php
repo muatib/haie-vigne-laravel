@@ -15,6 +15,18 @@ class Form extends Model
         'email',
         'address',
         'phone',
+        'courses',
+        'question1',
+        'question2',
+        'question3',
+        'question4',
+        'question5',
+        'question6',
+        'question7',
+        'question8',
+        'question9',
         'file_upload',
+        'total'
     ];
+
 }

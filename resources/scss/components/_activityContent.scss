@@ -1,8 +1,11 @@
 .activity-box{
     background-color: $light-blue;
     border-radius: 5px;
-    margin: 2rem;
+    border: 1px solid #ccc;
+    box-shadow: 4px 4px 4px rgba(177, 174, 174, 0.74);
+    margin: 2rem auto;
     padding: 1rem;
+    width: 90%;
 }
 
 

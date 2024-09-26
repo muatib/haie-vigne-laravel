@@ -18,6 +18,16 @@ return new class extends Migration
             $table->string('email', 191)->unique();
             $table->string('address', 191);
             $table->string('phone', 191)->unique();
+            $table->json('courses')->nullable();
+            $table->string('question1')->nullable();
+            $table->string('question2')->nullable();
+            $table->string('question3')->nullable();
+            $table->string('question4')->nullable();
+            $table->string('question5')->nullable();
+            $table->string('question6')->nullable();
+            $table->string('question7')->nullable();
+            $table->string('question8')->nullable();
+            $table->string('question9')->nullable();
             $table->string('file_upload')->nullable();
             $table->timestamps();
         });
@@ -31,3 +41,5 @@ return new class extends Migration
         Schema::dropIfExists('forms');
     }
 };
+
+

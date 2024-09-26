@@ -2,7 +2,7 @@
 
 
 
-<section class="activity-box">
+<section id="activity-box-5" class="activity-box ">
     <h1 class="activity-ttl">Cours de yoga vygnasa doux</h1>
     <p class="activity-txt">Détente du corps et de l'esprit</p>
     <img class="activity-img" src="{{ asset('asset/img/yoga.png') }}" alt="yoga">
@@ -23,7 +23,7 @@
 </section>
 
 
-<section class="activity-box">
+<section id="activity-box-2" class="activity-box ">
     <h1 class="activity-ttl">Cours de pilates</h1>
     <p class="activity-txt">Amélioration de la souplesse et de la coordination, harmonie du corps et de l'esprit,
         détente et relaxation.</p>
@@ -53,7 +53,7 @@
 </section>
 
 
-<section class="activity-box">
+<section id="activity-box-3" class="activity-box ">
     <h1 class="activity-ttl">Cours de fitness</h1>
     <p class="activity-txt">Cours de GYM' fitness : <br> remise en forme et entretient.</p>
     <img class="activity-img" src="{{ asset('asset/img/fitness.png') }}" alt="fitness">
@@ -78,7 +78,7 @@
         coordination, étirements. <br> Permet de travailler efficacement le corps.</p>
 </section>
 
-<section class="activity-box">
+<section id="activity-box-1" class="activity-box ">
     <h1 class="activity-ttl">Cours de stretching</h1>
     <p class="activity-txt">Diminuer le stress et favoriser la relaxation</p>
     <img class="activity-img" src="{{ asset('asset/img/stretching.png') }}" alt="stretching">
@@ -98,7 +98,7 @@
 
 </section>
 
-<section class="activity-box">
+<section id="activity-box-4" class="activity-box ">
     <h1 class="activity-ttl">Cours de gym'douce</h1>
     <p class="activity-txt">gym'douce "bien vieillir".</p>
     <p class="activity-txt">Plus qu'une simple activité physique, <br> c'est un moment de convivialité et de partage.</p>

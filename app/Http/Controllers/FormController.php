@@ -22,13 +22,24 @@ class FormController extends Controller
             'address' => 'required',
             'phone' => 'required|unique:forms,phone',
             'file_upload' => 'nullable|file|max:2048',
+            'total' => 'required|numeric',
         ], [
             'email.unique' => 'Cette adresse e-mail est déjà utilisée.',
             'phone.unique' => 'Ce numéro de téléphone est déjà utilisé.',
         ]);
 
-        $formData = $request->all();
+        $formData = $request->except(['_token', 'courses']);
+        $formData['courses'] = json_encode($request->input('courses', []));
+        $formData['total'] = $request->input('total');
 
+
+        // Handle health questionnaire responses
+        for ($i = 1; $i <= 9; $i++) {
+            $questionKey = "question{$i}";
+            $formData[$questionKey] = $request->has($questionKey) ? $request->input($questionKey)[0] : null;
+        }
+
+        // Handle file upload (if applicable)
         if ($request->hasFile('file_upload')) {
             $file = $request->file('file_upload');
             $filename = time() . '_' . $file->getClientOriginalName();
@@ -36,6 +47,7 @@ class FormController extends Controller
             $formData['file_upload'] = $filename;
         }
 
+        // Create the form record
         Form::create($formData);
 
         return redirect()->route('payment');

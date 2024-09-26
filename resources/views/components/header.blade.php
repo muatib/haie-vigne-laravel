@@ -6,7 +6,7 @@
     <link rel="icon" type="image" href="{{ asset('img/enqueteur caen.png') }}" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Association Haie-Vigné</title>
-    @vite(['resources/js/app.js', 'resources/js/burger.js', 'resources/js/activity.js', 'resources/js/slider.js'])
+    @vite(['resources/js/app.js', 'resources/js/burger.js', 'resources/js/activity.js', 'resources/js/slider.js', 'resources/js/form.js'])
     @vite('resources/scss/main.scss')
 
 </head>
