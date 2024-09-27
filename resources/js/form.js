@@ -25,7 +25,14 @@ function calculateTotal() {
     document.getElementById('total').textContent = total;
 }
 
-window.onload = calculateTotal;
-document.getElementsByName('courses[]').forEach(function(course) {
-    course.addEventListener('change', calculateTotal);
-});
+// window.onload = calculateTotal;
+// document.getElementsByName('courses[]').forEach(function(course) {
+//     course.addEventListener('change', calculateTotal);
+// });
+// document.querySelector('form').addEventListener('submit', function(event) {
+//     var checkedCourses = document.querySelectorAll('input[name="courses[]"]:checked');
+//     if (checkedCourses.length === 0) {
+//         event.preventDefault();
+//         alert('Veuillez sélectionner au moins un cours.');
+//     }
+// });

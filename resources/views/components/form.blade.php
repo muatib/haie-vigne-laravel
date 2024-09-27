@@ -1,102 +1,139 @@
 <section class="down-form">
-    <p class="form-ttl">Important</p>
-    <p class="form-txt txt">Pour votre inscription veuillez remplir le formulaire en ligne ci dessous <br> <span
-            class="alt-txt">ou</span> <br> téléchager le document PDF ci dessous et le retourner complété à notre adresse
-    </p>
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+    <p class="form-main-txt">Important</p>
+    <p class="form-txt ">Pour votre inscription veuillez remplir le formulaire en ligne ci dessous </p>
+    <p class="form-txt txt">ou</p>
+    <p class="form-txt ">Téléchager le document PDF ci dessous et le retourner complété à notre adresse</p>
     <a class="form-lnk" href="{{ asset('documents/Feuille-inscription.pdf') }}" download>Télécharger le formulaire</a>
 </section>
 
+<img class="separation-form" src="{{ asset('asset/img/separation.png') }}" alt="">
 <form class="form-container" action="{{ route('form.submit') }}" method="POST" enctype="multipart/form-data">
     @csrf
     <label class="contact-label" for="name">Nom :</label>&ensp;&emsp;
-    <input class="contact-input" type="text" name="first_name" placeholder="Nom" required>
+    <input class="contact-input" type="text" name="first_name" placeholder="Nom" required value="{{ old('first_name') }}">
     <label class="contact-label" for="last_name">Prénom :</label>&ensp;&emsp;
-    <input class="contact-input" type="text" name="last_name" placeholder="Prénom" required>
+    <input class="contact-input" type="text" name="last_name" placeholder="Prénom" required value="{{ old('last_name') }}">
     <label class="contact-label" for="email">Email :</label>&ensp;&emsp;
-    <input class="contact-input" type="email" name="email" placeholder="Email" required>
+    <input class="contact-input" type="email" name="email" placeholder="Email" required value="{{ old('email') }}">
     <label class="contact-label" for="adress">Adresse :</label>&ensp;&emsp;
-    <input class="contact-input" type="text" name="address" placeholder="Adresse postale" required>
+    <input class="contact-input" type="text" name="address" placeholder="Adresse postale" required value="{{ old('address') }}">
     <label class="contact-label" for="phone">Numéro de téléphone :</label>&ensp;&emsp;
-    <input class="contact-input" type="text" name="phone" placeholder="Numéro de téléphone" required>
+    <input class="contact-input" type="text" name="phone" placeholder="Numéro de téléphone" required value="{{ old('phone') }}">
+    <img class="separation-form" src="{{ asset('asset/img/separation.png') }}" alt="">
 
+    <h2 class="form-ttl">Choix des cours :</h2>
+    <h3 class="form-scd-ttl">Nombre de cours par semaine :</h3>
 
-    <h2>Choix des cours</h2>
-    <h3>Nombre de cours par semaine :</h3>
     <div class="course-options">
+        <h3 class="course-ttl">Lundi :</h3>
+        <div class="course-item">
+            <label class="course-type" for="lundi_20h00">Fitness</label>
+            <span class="course-time">20h00-21h00</span>
+            <input class="course-input" type="checkbox" name="courses[]" value="lundi_20h">
+        </div>
 
-        <h3 class="course-ttl">Lundi</h3>
-        <label class="course-label" for="lundi_20h">Fitness - 20h-21h</label>
-        <input class="course-input" type="checkbox" name="courses[]" value="lundi_20h">
+        <h3 class="course-ttl">Mardi :</h3>
+        <div class="course-item">
+            <label class="course-type" for="mardi_11h30">Fitness</label>
+            <span class="course-time">11h30-12h30</span>
+            <input class="course-input" type="checkbox" name="courses[]" value="mardi_11h30">
+        </div>
+        <div class="course-item">
+            <label class="course-type" for="mardi_12h30">Pilates</label>
+            <span class="course-time">12h30-13h30</span>
+            <input class="course-input" type="checkbox" name="courses[]" value="mardi_12h30">
+        </div>
+        <div class="course-item">
+            <label class="course-type" for="mardi_20h00">Fitness</label>
+            <span class="course-time">20h00-21h00</span>
+            <input class="course-input" type="checkbox" name="courses[]" value="mardi_20h00">
+        </div>
 
-        <h3class="course-ttl" >Mardi</h3>
-        <label class="course-label" for="mardi_11h30">Fitness - 11h30-12h30</label>
-        <input class="course-input" type="checkbox" name="courses[]" value="mardi_11h30"> <br>
+        <h3 class="course-ttl">Mercredi :</h3>
+        <div class="course-item">
+            <label class="course-type" for="mercredi_20h00">Pilates</label>
+            <span class="course-time">20h00-21h00</span>
+            <input class="course-input" type="checkbox" name="courses[]" value="mercredi_20h00">
+        </div>
 
-        <label class="course-label" for="mardi_12h30">Pilates - 12h30-13h30</label>
-        <input class="course-input" type="checkbox" name="courses[]" value="mardi_12h30"> <br>
-
-        <label class="course-label" for="mardi_2Oh00">Fitness - 20h00-21h00</label>
-        <input class="course-input" type="checkbox" name="courses[]" value="mardi_20h00">
-
-        <h3 class="course-ttl">Mercredi</h3>
-        <label class="course-label" for="mercredi_20h00">Pilates - 20h00-21h00</label>
-        <input class="course-input" type="checkbox" name="courses[]" value="mercredi_20h00">
-
-        <h3 class="course-ttl">Jeudi</h3>
-        <label class="course-label" for="jeudi_12h30">Yoga - 12h30-13h30</label>
-        <input class="course-input" type="checkbox" name="courses[]" value="jeudi_12h30"> <br>
-
-
-        <label class="course-label" for="jeudi_15h00">Stretching - 14h00-15h00</label>
-        <input class="course-input" type="checkbox" name="courses[]" value="jeudi_15h00"> <br>
-
-
-        <label class="course-label" for="jeudi_15h00">Pilates - 15h00-16h00</label>
-        <input type="checkbox" name="courses[]" value="jeudi_15h00"> <br>
-
-        <label class="course-label" for="jeudi_20h00">Pilates - 20h00-21h00</label>
-        <input class="course-input" type="checkbox" name="courses[]" value="jeudi_20h00"> <br>
+        <h3 class="course-ttl">Jeudi :</h3>
+        <div class="course-item">
+            <label class="course-type" for="jeudi_12h30">Yoga</label>
+            <span class="course-time-1">12h30-13h30</span>
+            <input class="course-input" type="checkbox" name="courses[]" value="jeudi_12h30">
+        </div>
+        <div class="course-item">
+            <label class="course-type" for="jeudi_14h00">Stretching</label>
+            <span class="course-time-2">14h00-15h00</span>
+            <input class="course-input" type="checkbox" name="courses[]" value="jeudi_14h00">
+        </div>
+        <div class="course-item">
+            <label class="course-type" for="jeudi_15h00">Pilates</label>
+            <span class="course-time">15h00-16h00</span>
+            <input class="course-input" type="checkbox" name="courses[]" value="jeudi_15h00">
+        </div>
+        <div class="course-item">
+            <label class="course-type" for="jeudi_20h00">Pilates</label>
+            <span class="course-time">20h00-21h00</span>
+            <input class="course-input" type="checkbox" name="courses[]" value="jeudi_20h00">
+        </div>
         <input type="hidden" id="total_input" name="total" value="0">
-
     </div>
-    <h2>Total</h2>
-    <p>Le total de votre inscription est de : <span id="total"></span> €</p>
+    <div class="total">
+        <h2 class="form-ttl-total">Total : </h2>
+        <p class="total-txt">Montant total : <span id="total"></span> €</p>
+    </div>
+    <img class="separation-form" src="{{ asset('asset/img/separation.png') }}" alt="">
 
-    <h2>Questionnaire de santé</h2>
+    <h2 class="form-ttl">Questionnaire de santé : </h2>
     <div class="health-questions">
-        <h3>Durant les 12 derniers mois :</h3>
-        <ul>
-            <li>
-                <label for="question1">Un membre de votre famille est-il décédé subitement d'une cause cardiaque ou
-                    inexpliquée ?</label> <br>
+        <h3 class="form-scd-ttl">Durant les 12 derniers mois :</h3>
+        <ul class="question-lst">
+            <li class="lst-itm">
+                <label class="lst-box" for="question1">Un membre de votre famille est-il décédé subitement d'une cause
+                    cardiaque ou
+                    inexpliquée ? :</label> <br>
                 <input type="checkbox" name="question1[]" value="oui"> Oui
                 <input type="checkbox" name="question1[]" value="non"> Non
             </li>
-            <li>
-                <label for="question2">Avez-vous ressenti une douleur dans la poitrine, des palpitations, un
-                    essoufflement inhabituel ou un malaise ?</label> <br>
+            <li class="lst-itm">
+                <label class="lst-box" for="question2">Avez-vous ressenti une douleur dans la poitrine, des
+                    palpitations, un
+                    essoufflement inhabituel ou un malaise ? :</label> <br>
                 <input type="checkbox" name="question2[]" value="oui"> Oui
                 <input type="checkbox" name="question2[]" value="non"> Non
             </li>
-            <li>
-                <label for="question3">Avez-vous eu un épisode de respiration sifflante (asthme) ?</label> <br>
+            <li class="lst-itm">
+                <label class="lst-box" for="question3">Avez-vous eu un épisode de respiration sifflante (asthme) ?
+                    :</label> <br>
                 <input type="checkbox" name="question3[]" value="oui"> Oui
                 <input type="checkbox" name="question3[]" value="non"> Non
             </li>
-            <li>
-                <label for="question4">Avez-vous eu une perte de connaissance ?</label> <br>
+            <li class="lst-itm">
+                <label class="lst-box" for="question4">Avez-vous eu une perte de connaissance ? :</label> <br>
                 <input type="checkbox" name="question4[]" value="oui"> Oui
                 <input type="checkbox" name="question4[]" value="non"> Non
             </li>
-            <li>
-                <label for="question5">Si vous avez arrêté le sport pendant 30 jours ou plus pour des raisons de santé,
-                    avez vous repris sans l'accord d'un médecin ?</label> <br>
+            <li class="lst-itm">
+                <label class="lst-box" for="question5">Si vous avez arrêté le sport pendant 30 jours ou plus pour des
+                    raisons de santé,
+                    avez vous repris sans l'accord d'un médecin ? :</label> <br>
                 <input type="checkbox" name="question5[]" value="oui"> Oui
                 <input type="checkbox" name="question5[]" value="non"> Non
             </li>
-            <li>
-                <label for="question6">Avez-vous débuté un traitement médical de longue durée (hors contraception et
-                    désensibilisation aux allérgies) ?</label> <br>
+            <li class="lst-itm">
+                <label class="lst-box" for="question6">Avez-vous débuté un traitement médical de longue durée (hors
+                    contraception et
+                    désensibilisation aux allérgies) ? :</label> <br>
                 <input type="checkbox" name="question6[]" value="oui"> Oui
                 <input type="checkbox" name="question6[]" value="non"> Non
             </li>
@@ -105,55 +142,55 @@
 
 
     <div class="health-questions">
-        <h3>A ce jour :</h3>
-        <ul>
-            <li>
-                <label for="question7">Ressentez vous une douleur, un manque de force ou de raideur suite à un problème
+        <h3 class="form-scd-ttl">A ce jour :</h3>
+        <ul class="question-lst">
+            <li class="lst-itm">
+                <label class="lst-box" for="question7">Ressentez vous une douleur, un manque de force ou de raideur
+                    suite à un problème
                     osseux, articulaire ou musculaire (fracture, entorse, luxation, déchirure, tendinite, etc...)
-                    survenu durent les 12 derniers mois ?</label> <br>
+                    survenu durent les 12 derniers mois ? :</label> <br>
                 <input type="checkbox" name="question7[]" value="oui"> Oui
                 <input type="checkbox" name="question7[]" value="non"> Non
             </li>
-            <li>
-                <label for="question8">Votre pratique sportive est-elle interrompue pour des raisons de santé ?</label>
+            <li class="lst-itm">
+                <label class="lst-box" for="question8">Votre pratique sportive est-elle interrompue pour des raisons
+                    de santé ? :</label>
                 <br>
                 <input type="checkbox" name="question8[]" value="oui"> Oui
                 <input type="checkbox" name="question8[]" value="non"> Non
             </li>
-            <li>
-                <label for="question9">Pensez vous avoir besoin d'un avis médical pour poursuivre votre pratique
-                    sportive ?</label> <br>
+            <li class="lst-itm">
+                <label class="lst-box" for="question9">Pensez vous avoir besoin d'un avis médical pour poursuivre
+                    votre pratique
+                    sportive ? :</label> <br>
                 <input type="checkbox" name="question9[]" value="oui"> Oui
                 <input type="checkbox" name="question9[]" value="non"> Non
             </li>
         </ul>
-
+        <img class="separation-form" src="{{ asset('asset/img/separation.png') }}" alt="">
 
     </div>
-    <p class="question-nbtxt">NB : Les réponses formulés relévent de la seule responsabilité du licencié</p>
-    <div>
-        <h3>Si vous avez répondu NON à toutes les questions :</h3>
-        <p>Pas de cvertificat médical à fournir, attestez simplement, selon les modalités prévues par la fédéraion,
+    <p class="nbtxt">NB : Les réponses formulés relévent de la seule responsabilité du licencié</p>
+    <div class="cond-container">
+        <h3 class="form-scd-ttl">Si vous avez répondu NON à toutes les questions :</h3>
+        <p class="cond-txt">Pas de cvertificat médical à fournir, attestez simplement, selon les modalités prévues par
+            la fédéraion,
             avoir répondu NON à toutes les questions lors de la demande de renouvellement de la licence.</p>
     </div>
-    <div>h3>Si vous avez répondu OUI à une ou plusieurs questions : </h3>
-        <p>Vous devez fournir un certificat médical, consultez un médecin et présentez lui ce questionnaire renseigné.
+    <div class="cond-container">
+        <h3 class="form-scd-ttl">Si vous avez répondu OUI à une ou plusieurs questions : </h3>
+        <p class="cond-txt">Vous devez fournir un certificat médical, consultez un médecin et présentez lui ce
+            questionnaire renseigné.
         </p>
     </div>
+
+
     < <label for="file_upload" class="contact-label">Certificat médical :</label>
         <input class="contact-input form-up" type="file" name="file_upload">
 
 
 
-        @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
+
 
         <p class="form-txt">Aprés
             la validation d'inscription vous serez redirigé vers la page de paiement</p>

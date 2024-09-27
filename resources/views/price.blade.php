@@ -17,7 +17,7 @@
             <p>326 €</p>
         </div>
     </section>
-    <a href="{{ route('form') }}"><button class="price-btn">S'inscrire ici</button></a>
+    <a class="lnk" href="{{ route('form') }}"><button class="price-btn">S'inscrire ici</button></a>
     <section class="price-rule-txt">
         <h2 class="price-rule-ttl">Important : </h2>
         <p class="rule-txt">- Les inscriptions se font au moment des cours, elles sont possibles tout au long de l'année.</p> <br>
@@ -27,7 +27,7 @@
         <p class="rule-txt">- Pour les 17 ans dispositif "Pass Sport" (de septembre à au 31 octobre 2021). </p><br>
         <p class="rule-txt">- Possibilités de paiement en plusieurs fois. </p>
     </section>
-    <a href="{{ route('form') }}"><button class="price-btn">S'inscrire ici</button></a>
+    <a class="lnk" href="{{ route('form') }}"><button class="price-btn">S'inscrire ici</button></a>
 
     @include('components.footer')
 

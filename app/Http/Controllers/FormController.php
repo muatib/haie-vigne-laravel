@@ -23,9 +23,15 @@ class FormController extends Controller
             'phone' => 'required|unique:forms,phone',
             'file_upload' => 'nullable|file|max:2048',
             'total' => 'required|numeric',
+            'courses' => 'required|array|min:1',
+            'health_questions.*' => 'required|in:oui,non',
         ], [
             'email.unique' => 'Cette adresse e-mail est déjà utilisée.',
             'phone.unique' => 'Ce numéro de téléphone est déjà utilisé.',
+            'health_questions.*.required' => 'Veuillez sélectionner une option (oui ou non) pour chaque question.',
+            'health_questions.*.size' => 'Veuillez sélectionner une seule option (oui ou non) pour chaque question.',
+            'courses.required' => 'Veuillez sélectionner au moins un cours.',
+            'courses.min' => 'Veuillez sélectionner au moins un cours.',
         ]);
 
         $formData = $request->except(['_token', 'courses']);

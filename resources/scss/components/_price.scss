@@ -6,22 +6,23 @@
     margin-bottom: 1rem;
   }
   .price-btn {
-    position: relative;
-    left: 5rem;
+    display: block;
+    margin: 3rem auto;
     width: 200px;
     height: 50px;
     border-radius: 50px;
     font-family: Roboto;
     font-size: 1rem;
     border: 1px solid rgba(167, 160, 160, 0.781);
-    background-color: $light-blue;
-    margin-top: 2rem;
-    margin-bottom: 2rem;
+    background-color: $lavander;
     box-shadow: 4px 4px 4px rgba(177, 174, 174, 0.74);
 
   }
+  .lnk{
+    text-decoration: none;
+  }
   .price-btn:hover{
-    background-color: $lavander;
+    background-color: $light-green;
   }
   .price-txt,
   .price-nb {

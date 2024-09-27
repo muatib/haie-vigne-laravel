@@ -18,35 +18,35 @@
             <img class="logo-txt" src="{{ asset('asset/img/logo-titre.png') }}" alt="logo">
         </div>
 
-        <div class="nav__lg">
-            <ul class="nav__lg-lst">
-                <li><a class="nav__lnk link" href="{{ url('/') }}">Accueil</a></li>
-                <li><a class="nav__lnk link" href="{{ url('price') }}">tarifs</a></li>
-                <li><a class="nav__lnk link" href="{{ url('activityContent') }}">Nos activités</a></li>
-                <li><a class="nav__lnk link" href="{{ url('contact') }}">Nous contacter</a></li>
-                <li><a class="nav__lnk link" href="{{ url('form') }}">S'inscrire</a></li>
+        <div class="nav-lg">
+            <ul class="nav-lg-lst">
+                <li><a class="nav-lnk link" href="{{ url('/') }}">Accueil</a></li>
+                <li><a class="nav-lnk link" href="{{ url('price') }}">tarifs</a></li>
+                <li><a class="nav-lnk link" href="{{ url('activityContent') }}">Nos activités</a></li>
+                <li><a class="nav-lnk link" href="{{ url('contact') }}">Nous contacter</a></li>
+                <li><a class="nav-lnk link" href="{{ url('form') }}">S'inscrire</a></li>
             </ul>
         </div>
 
-        <div class="menu__toggle" id="burger__menu">
-            <span class="menu__toggle-bar"></span>
+        <div class="menu-toggle" id="burger__menu">
+            <span class="menu-toggle-bar"></span>
         </div>
         <nav id="menu">
-            <ul class="menu__container">
-                <li class="menu__container-itm">
-                    <a class="menu__container-lnk" href="{{ url('/') }}">Accueil</a>
+            <ul class="menu-container">
+                <li class="menu-container-itm">
+                    <a class="menu-container-lnk" href="{{ url('/') }}">Accueil</a>
                 </li>
-                <li class="menu__container-itm">
-                    <a class="menu__container-lnk" href="{{ url('activityContent') }}">Nos activités</a>
+                <li class="menu-container-itm">
+                    <a class="menu-container-lnk" href="{{ url('activityContent') }}">Nos activités</a>
                 </li>
-                <li class="menu__container-itm">
-                    <a class="menu__container-lnk" href="{{ url('price') }}">tarifs</a>
+                <li class="menu-container-itm">
+                    <a class="menu-container-lnk" href="{{ url('price') }}">tarifs</a>
                 </li>
-                <li class="menu__container-itm">
-                    <a class="menu__container-lnk" href="{{ url('form') }}">S'inscrire</a>
+                <li class="menu-container-itm">
+                    <a class="menu-container-lnk" href="{{ url('form') }}">S'inscrire</a>
                 </li>
-                <li class="menu__container-itm">
-                    <a class="menu__container-lnk" href="{{ url('contact') }}">Nous contacter</a>
+                <li class="menu-container-itm">
+                    <a class="menu-container-lnk" href="{{ url('contact') }}">Nous contacter</a>
                 </li>
             </ul>
         </nav>

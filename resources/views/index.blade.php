@@ -27,7 +27,7 @@
 
 <section class="price">
     <H2 class="price-ttl">Consuter nos tarifs</H2>
-    <a href="{{ url('price') }}"><button class="price-btn">Tarifs</button></a>
+    <a class="lnk" href="{{ url('price') }}"><button class="price-btn">Tarifs</button></a>
 </section>
 
 <section class="planning">
