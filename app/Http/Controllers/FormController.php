@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Form;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class FormController extends Controller
 {
@@ -15,7 +16,7 @@ class FormController extends Controller
 
     public function submitForm(Request $request)
     {
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'first_name' => 'required',
             'last_name' => 'required',
             'email' => 'required|email|unique:forms,email',
@@ -24,25 +25,39 @@ class FormController extends Controller
             'file_upload' => 'nullable|file|max:2048',
             'total' => 'required|numeric',
             'courses' => 'required|array|min:1',
-            'health_questions.*' => 'required|in:oui,non',
         ], [
             'email.unique' => 'Cette adresse e-mail est déjà utilisée.',
             'phone.unique' => 'Ce numéro de téléphone est déjà utilisé.',
-            'health_questions.*.required' => 'Veuillez sélectionner une option (oui ou non) pour chaque question.',
-            'health_questions.*.size' => 'Veuillez sélectionner une seule option (oui ou non) pour chaque question.',
             'courses.required' => 'Veuillez sélectionner au moins un cours.',
             'courses.min' => 'Veuillez sélectionner au moins un cours.',
         ]);
 
-        $formData = $request->except(['_token', 'courses']);
+        $validator->after(function ($validator) use ($request) {
+            $allQuestionsAnswered = true;
+            for ($i = 1; $i <= 9; $i++) {
+                $questionKey = "question{$i}";
+                if (!$request->has("health_questions.{$questionKey}") || count($request->input("health_questions.{$questionKey}")) != 1) {
+                    $allQuestionsAnswered = false;
+                    break;
+                }
+            }
+            if (!$allQuestionsAnswered) {
+                $validator->errors()->add('health_questions', 'Veuillez répondre à toutes les questions de santé.');
+            }
+        });
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        $formData = $request->except(['_token', 'courses', 'health_questions']);
         $formData['courses'] = json_encode($request->input('courses', []));
         $formData['total'] = $request->input('total');
-
 
         // Handle health questionnaire responses
         for ($i = 1; $i <= 9; $i++) {
             $questionKey = "question{$i}";
-            $formData[$questionKey] = $request->has($questionKey) ? $request->input($questionKey)[0] : null;
+            $formData[$questionKey] = $request->input("health_questions.{$questionKey}")[0] ?? null;
         }
 
         // Handle file upload (if applicable)

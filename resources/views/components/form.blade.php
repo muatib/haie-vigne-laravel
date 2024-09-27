@@ -1,13 +1,13 @@
 <section class="down-form">
     @if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <p class="form-main-txt">Important</p>
     <p class="form-txt ">Pour votre inscription veuillez remplir le formulaire en ligne ci dessous </p>
     <p class="form-txt txt">ou</p>
@@ -19,15 +19,19 @@
 <form class="form-container" action="{{ route('form.submit') }}" method="POST" enctype="multipart/form-data">
     @csrf
     <label class="contact-label" for="name">Nom :</label>&ensp;&emsp;
-    <input class="contact-input" type="text" name="first_name" placeholder="Nom" required value="{{ old('first_name') }}">
+    <input class="contact-input" type="text" name="first_name" placeholder="Nom" required
+        value="{{ old('first_name') }}">
     <label class="contact-label" for="last_name">Prénom :</label>&ensp;&emsp;
-    <input class="contact-input" type="text" name="last_name" placeholder="Prénom" required value="{{ old('last_name') }}">
+    <input class="contact-input" type="text" name="last_name" placeholder="Prénom" required
+        value="{{ old('last_name') }}">
     <label class="contact-label" for="email">Email :</label>&ensp;&emsp;
     <input class="contact-input" type="email" name="email" placeholder="Email" required value="{{ old('email') }}">
     <label class="contact-label" for="adress">Adresse :</label>&ensp;&emsp;
-    <input class="contact-input" type="text" name="address" placeholder="Adresse postale" required value="{{ old('address') }}">
+    <input class="contact-input" type="text" name="address" placeholder="Adresse postale" required
+        value="{{ old('address') }}">
     <label class="contact-label" for="phone">Numéro de téléphone :</label>&ensp;&emsp;
-    <input class="contact-input" type="text" name="phone" placeholder="Numéro de téléphone" required value="{{ old('phone') }}">
+    <input class="contact-input" type="text" name="phone" placeholder="Numéro de téléphone" required
+        value="{{ old('phone') }}">
     <img class="separation-form" src="{{ asset('asset/img/separation.png') }}" alt="">
 
     <h2 class="form-ttl">Choix des cours :</h2>
@@ -90,7 +94,7 @@
     </div>
     <div class="total">
         <h2 class="form-ttl-total">Total : </h2>
-        <p class="total-txt">Montant total : <span id="total"></span> €</p>
+        <p class="total-txt">Montant total : <span id="total"></span> </p>
     </div>
     <img class="separation-form" src="{{ asset('asset/img/separation.png') }}" alt="">
 
@@ -99,43 +103,54 @@
         <h3 class="form-scd-ttl">Durant les 12 derniers mois :</h3>
         <ul class="question-lst">
             <li class="lst-itm">
-                <label class="lst-box" for="question1">Un membre de votre famille est-il décédé subitement d'une cause
-                    cardiaque ou
-                    inexpliquée ? :</label> <br>
-                <input type="checkbox" name="question1[]" value="oui"> Oui
-                <input type="checkbox" name="question1[]" value="non"> Non
+
+                    <label class="lst-box" for="question1">Un membre de votre famille est-il décédé subitement d'une cause cardiaque ou inexpliquée ? :</label> <br>
+                    <input type="checkbox" name="health_questions[question1][]" value="oui" id="question1_oui">
+                    <label for="question1_oui">Oui</label>
+                    <input type="checkbox" name="health_questions[question1][]" value="non" id="question1_non">
+                    <label for="question1_non">Non</label>
             </li>
             <li class="lst-itm">
                 <label class="lst-box" for="question2">Avez-vous ressenti une douleur dans la poitrine, des
                     palpitations, un
                     essoufflement inhabituel ou un malaise ? :</label> <br>
-                <input type="checkbox" name="question2[]" value="oui"> Oui
-                <input type="checkbox" name="question2[]" value="non"> Non
+                    <input type="checkbox" name="health_questions[question2][]" value="oui" id="question2_oui">
+                    <label for="question2_oui">Oui</label>
+                    <input type="checkbox" name="health_questions[question2][]" value="non" id="question2_non">
+                    <label for="question2_non">Non</label>
             </li>
             <li class="lst-itm">
                 <label class="lst-box" for="question3">Avez-vous eu un épisode de respiration sifflante (asthme) ?
                     :</label> <br>
-                <input type="checkbox" name="question3[]" value="oui"> Oui
-                <input type="checkbox" name="question3[]" value="non"> Non
+                    <input type="checkbox" name="health_questions[question3][]" value="oui" id="question3_oui">
+                    <label for="question3_oui">Oui</label>
+                    <input type="checkbox" name="health_questions[question3][]" value="non" id="question3_non">
+                    <label for="question3_non">Non</label>
             </li>
             <li class="lst-itm">
                 <label class="lst-box" for="question4">Avez-vous eu une perte de connaissance ? :</label> <br>
-                <input type="checkbox" name="question4[]" value="oui"> Oui
-                <input type="checkbox" name="question4[]" value="non"> Non
+                <input type="checkbox" name="health_questions[question4][]" value="oui" id="question4_oui">
+                    <label for="question4_oui">Oui</label>
+                    <input type="checkbox" name="health_questions[question4][]" value="non" id="question4_non">
+                    <label for="question4_non">Non</label>
             </li>
             <li class="lst-itm">
                 <label class="lst-box" for="question5">Si vous avez arrêté le sport pendant 30 jours ou plus pour des
                     raisons de santé,
                     avez vous repris sans l'accord d'un médecin ? :</label> <br>
-                <input type="checkbox" name="question5[]" value="oui"> Oui
-                <input type="checkbox" name="question5[]" value="non"> Non
+                    <input type="checkbox" name="health_questions[question5][]" value="oui" id="question5_oui">
+                    <label for="question5_oui">Oui</label>
+                    <input type="checkbox" name="health_questions[question5][]" value="non" id="question5_non">
+                    <label for="question5_non">Non</label>
             </li>
             <li class="lst-itm">
                 <label class="lst-box" for="question6">Avez-vous débuté un traitement médical de longue durée (hors
                     contraception et
                     désensibilisation aux allérgies) ? :</label> <br>
-                <input type="checkbox" name="question6[]" value="oui"> Oui
-                <input type="checkbox" name="question6[]" value="non"> Non
+                    <input type="checkbox" name="health_questions[question6][]" value="oui" id="question6_oui">
+                    <label for="question6_oui">Oui</label>
+                    <input type="checkbox" name="health_questions[question6][]" value="non" id="question6_non">
+                    <label for="question6_non">Non</label>
             </li>
         </ul>
     </div>
@@ -149,22 +164,28 @@
                     suite à un problème
                     osseux, articulaire ou musculaire (fracture, entorse, luxation, déchirure, tendinite, etc...)
                     survenu durent les 12 derniers mois ? :</label> <br>
-                <input type="checkbox" name="question7[]" value="oui"> Oui
-                <input type="checkbox" name="question7[]" value="non"> Non
+                    <input type="checkbox" name="health_questions[question7][]" value="oui" id="question7_oui">
+                    <label for="question7_oui">Oui</label>
+                    <input type="checkbox" name="health_questions[question7][]" value="non" id="question7_non">
+                    <label for="question7_non">Non</label>
             </li>
             <li class="lst-itm">
                 <label class="lst-box" for="question8">Votre pratique sportive est-elle interrompue pour des raisons
                     de santé ? :</label>
                 <br>
-                <input type="checkbox" name="question8[]" value="oui"> Oui
-                <input type="checkbox" name="question8[]" value="non"> Non
+                <input type="checkbox" name="health_questions[question8][]" value="oui" id="question8_oui">
+                    <label for="question8_oui">Oui</label>
+                    <input type="checkbox" name="health_questions[question8][]" value="non" id="question8_non">
+                    <label for="question8_non">Non</label>
             </li>
             <li class="lst-itm">
                 <label class="lst-box" for="question9">Pensez vous avoir besoin d'un avis médical pour poursuivre
                     votre pratique
                     sportive ? :</label> <br>
-                <input type="checkbox" name="question9[]" value="oui"> Oui
-                <input type="checkbox" name="question9[]" value="non"> Non
+                    <input type="checkbox" name="health_questions[question9][]" value="oui" id="question9_oui">
+                    <label for="question9_oui">Oui</label>
+                    <input type="checkbox" name="health_questions[question9][]" value="non" id="question9_non">
+                    <label for="question9_non">Non</label>
             </li>
         </ul>
         <img class="separation-form" src="{{ asset('asset/img/separation.png') }}" alt="">
