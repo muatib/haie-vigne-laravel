@@ -16,6 +16,7 @@ class Form extends Model
         'address',
         'phone',
         'courses',
+        'payment_method',
         'question1',
         'question2',
         'question3',

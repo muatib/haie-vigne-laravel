@@ -36,7 +36,10 @@ Route::get('/activityContent', function () {
 
 
 
+Route::get('/actualityContent', function () {
+    return view('actualityContent');
+});
 
-Auth::routes();
+
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     let courses = document.getElementsByName('courses[]');
-
+    const questionItems = document.querySelectorAll('.lst-itm');
     courses.forEach(function(course) {
         course.addEventListener('change', calculateTotal);
     });
@@ -26,4 +26,21 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     calculateTotal();
+    questionItems.forEach(item => {
+        const checkboxes = item.querySelectorAll('input[type="checkbox"]');
+
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                // Si cette checkbox est cochée, décocher l'autre
+                if (this.checked) {
+                    checkboxes.forEach(cb => {
+                        if (cb !== this) {
+                            cb.checked = false;
+                        }
+                    });
+                }
+            });
+        });
+    });
 });
+

@@ -25,11 +25,14 @@ class FormController extends Controller
             'file_upload' => 'nullable|file|max:2048',
             'total' => 'required|numeric',
             'courses' => 'required|array|min:1',
+            'payment_method' => 'required|in:cheque,virement,carte,paypal',
         ], [
             'email.unique' => 'Cette adresse e-mail est déjà utilisée.',
             'phone.unique' => 'Ce numéro de téléphone est déjà utilisé.',
             'courses.required' => 'Veuillez sélectionner au moins un cours.',
             'courses.min' => 'Veuillez sélectionner au moins un cours.',
+            'payment_method.required' => 'Veuillez sélectionner une méthode de paiement.',
+            'payment_method.in' => 'La méthode de paiement sélectionnée n\'est pas valide.',
         ]);
 
         $validator->after(function ($validator) use ($request) {
@@ -53,6 +56,7 @@ class FormController extends Controller
         $formData = $request->except(['_token', 'courses', 'health_questions']);
         $formData['courses'] = json_encode($request->input('courses', []));
         $formData['total'] = $request->input('total');
+        $formData['payment_method'] = $request->input('payment_method');
 
         // Handle health questionnaire responses
         for ($i = 1; $i <= 9; $i++) {

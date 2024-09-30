@@ -3,12 +3,25 @@
     // font-size: 2rem;
     text-align: center;
     margin-top: 2rem;
-    margin-bottom: 2rem;
     padding: 2rem;
 }
-.pay-txt{
+.pay-txt {
     color: black;
     font-size: 1.5rem;
-    padding: 1rem;
+    margin-left: 1.5rem;
 }
 
+.pay-scdttl {
+    color: black;
+    margin-left: 1rem;
+    margin-top: 2rem;
+    margin-bottom: .05rem;
+}
+.CB,
+.paypal{
+width: 80%;
+border-radius: 5px;
+display: block;
+margin: 0 auto;
+margin: 2rem;
+}
