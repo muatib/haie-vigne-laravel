@@ -8,9 +8,11 @@ use App\Models\SliderImage2;
 class IndexController extends Controller
 {
     public function index()
-{
-    $sliderImages = SliderImage::all();
-    $sliderImages2 = SliderImage2::all();
-    return view('index', compact('sliderImages', 'sliderImages2'));
+    {
+        $sliderImages = SliderImage::all();
+        $sliderImages2 = SliderImage2::all();
+
+        return view('index', compact('sliderImages', 'sliderImages2'));
+    }
 }
-}
+

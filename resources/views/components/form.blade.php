@@ -8,24 +8,37 @@
             </ul>
         </div>
     @endif
-    <p class="form-main-txt">Important</p>
-    <p class="form-txt ">Pour votre inscription veuillez remplir le formulaire en ligne ci dessous </p>
-    <p class="form-txt txt">ou</p>
-    <p class="form-txt ">Téléchager le document PDF ci dessous et le retourner complété à notre adresse</p>
-    <a class="form-lnk" href="{{ asset('documents/Feuille-inscription.pdf') }}" download>Télécharger le formulaire</a>
+    @if (auth()->check())
+        <p class="form-main-txt">Important</p>
+        <p class="form-txt">Pour votre inscription veuillez remplir le formulaire en ligne ci dessous </p>
+        <p class="form-txt txt">ou</p>
+        <p class="form-txt">Télécharger le document PDF ci dessous et le retourner complété à notre adresse</p>
+        <a class="form-lnk" href="{{ asset('documents/Feuille-inscription.pdf') }}" download>Télécharger le formulaire</a>
+    @else
+        <p>You must be logged in to access this page.</p>
+        <a href="{{ route('login') }}">Login</a>
+    @endif
 </section>
 
 <img class="separation-form" src="{{ asset('asset/img/separation.png') }}" alt="">
 <form class="form-container" action="{{ route('form.submit') }}" method="POST" enctype="multipart/form-data">
     @csrf
+    @auth
+        <input type="hidden" name="user_id" value="{{ Auth::id() }}">
+    @else
+        <input type="hidden" name="firstname" value="{{ session('user_firstname', '') }}">
+        <input type="hidden" name="lastname" value="{{ session('user_lastname', '') }}">
+        <input type="hidden" name="email" value="{{ session('user_email', '') }}">
+    @endauth
     <label class="contact-label" for="name">Nom :</label>&ensp;&emsp;
     <input class="contact-input" type="text" name="first_name" placeholder="Nom" required
-        value="{{ old('first_name') }}">
+        value="{{ auth()->check() ? auth()->user()->lastname : old('first_name') }}">
     <label class="contact-label" for="last_name">Prénom :</label>&ensp;&emsp;
     <input class="contact-input" type="text" name="last_name" placeholder="Prénom" required
-        value="{{ old('last_name') }}">
+        value="{{ auth()->check() ? auth()->user()->firstname : old('last_name') }}">
     <label class="contact-label" for="email">Email :</label>&ensp;&emsp;
-    <input class="contact-input" type="email" name="email" placeholder="Email" required value="{{ old('email') }}">
+    <input class="contact-input" type="email" name="email" placeholder="Email" required
+        value="{{ auth()->check() ? auth()->user()->email : old('email') }}">
     <label class="contact-label" for="adress">Adresse :</label>&ensp;&emsp;
     <input class="contact-input" type="text" name="address" placeholder="Adresse postale" required
         value="{{ old('address') }}">
@@ -195,14 +208,14 @@
     <p class="nbtxt">NB : Les réponses formulés relévent de la seule responsabilité du licencié</p>
     <div class="cond-container">
         <h3 class="form-scd-ttl">Si vous avez répondu NON à toutes les questions :</h3>
-        <p class="cond-txt">Pas de cvertificat médical à fournir, attestez simplement, selon les modalités prévues par
+        <p class="cond-txt">Pas de certificat médical à fournir, attestez simplement, selon les modalités prévues par
             la fédéraion,
             avoir répondu NON à toutes les questions lors de la demande de renouvellement de la licence.</p>
     </div>
     <div class="cond-container">
         <h3 class="form-scd-ttl">Si vous avez répondu OUI à une ou plusieurs questions : </h3>
         <p class="cond-txt">Vous devez fournir un certificat médical, consultez un médecin et présentez lui ce
-            questionnaire renseigné.
+            questionnaire renseigné. (Téléchargement en haut de la page)
         </p>
     </div>
 
