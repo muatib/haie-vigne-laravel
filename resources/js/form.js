@@ -1,12 +1,14 @@
-document.addEventListener('DOMContentLoaded', function() {
-    let courses = document.getElementsByName('courses[]');
-    const questionItems = document.querySelectorAll('.lst-itm');
-    courses.forEach(function(course) {
-        course.addEventListener('change', calculateTotal);
+document.addEventListener("DOMContentLoaded", function () {
+    let courses = document.getElementsByName("courses[]");
+    const questionItems = document.querySelectorAll(".lst-itm");
+    courses.forEach(function (course) {
+        course.addEventListener("change", calculateTotal);
     });
 
     function calculateTotal() {
-        let checkedCourses = document.querySelectorAll('input[name="courses[]"]:checked').length;
+        let checkedCourses = document.querySelectorAll(
+            'input[name="courses[]"]:checked'
+        ).length;
 
         let total;
         if (checkedCourses === 0) {
@@ -21,19 +23,18 @@ document.addEventListener('DOMContentLoaded', function() {
             total = 326;
         }
 
-        document.getElementById('total').textContent = total + ' €';
-        document.getElementById('total_input').value = total;
+        document.getElementById("total").textContent = total + " €";
+        document.getElementById("total_input").value = total;
     }
 
     calculateTotal();
-    questionItems.forEach(item => {
+    questionItems.forEach((item) => {
         const checkboxes = item.querySelectorAll('input[type="checkbox"]');
 
-        checkboxes.forEach(checkbox => {
-            checkbox.addEventListener('change', function() {
-                // Si cette checkbox est cochée, décocher l'autre
+        checkboxes.forEach((checkbox) => {
+            checkbox.addEventListener("change", function () {
                 if (this.checked) {
-                    checkboxes.forEach(cb => {
+                    checkboxes.forEach((cb) => {
                         if (cb !== this) {
                             cb.checked = false;
                         }

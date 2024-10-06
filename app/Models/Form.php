@@ -9,6 +9,8 @@ class Form extends Model
 {
     use HasFactory;
 
+    protected $table = 'forms';
+
     protected $fillable = [
         'first_name',
         'last_name',
@@ -27,7 +29,10 @@ class Form extends Model
         'question8',
         'question9',
         'file_upload',
-        'total'
+        'total',
+        'user_id'
     ];
-
+    protected $casts = [
+        'courses' => 'array',
+    ];
 }

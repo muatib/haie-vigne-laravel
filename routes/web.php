@@ -15,15 +15,15 @@ use App\Models\SliderImage2;
 use App\Http\Controllers\AuthController;
 use App\Http\Middleware\AdminMiddleware;
 use App\Http\Controllers\AdminController;
+use App\Models\Form;
 use App\Http\Controllers\UserController;
 
 
 
 
-Route::get('/index', function () {
+Route::get('/', function () {
     $sliderImages = SliderImage::all();
     $sliderImages2 = SliderImage2::all();
-
     return view('index', compact('sliderImages', 'sliderImages2'));
 })->name('index');
 
@@ -33,7 +33,12 @@ Route::post('/contact', [ContactController::class, 'submit'])->name('contact.sub
 Route::get('/register', [AuthController::class, 'showRegistrationForm'])->name('register');
 Route::post('/register', [AuthController::class, 'register']);
 Route::get('/dashboard', [AdminController::class, 'index'])->middleware('admin')->name('dashboard');
+Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
 Route::get('UserAccount', [UserController::class, 'account'])->name('UserAccount');
+Route::post('/delete-selected-forms', [FormController::class, 'deleteSelected'])->name('delete.selected.forms');
+Route::post('/delete-selected-users', [UserController::class, 'deleteSelected'])->name('delete.selected.users');
+Route::get('/download-file/{form}', [FormController::class, 'downloadFile'])->name('download.file');
+Route::post('/delete-selected-forms', [FormController::class, 'deleteSelected'])->name('delete.selected.forms');
 Route::get('/price', function () {
     return view('price');
 });
@@ -67,4 +72,8 @@ Route::get('/dashboard', function () {
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/index', [IndexController::class, 'index'])->name('home');
+
+
+
+

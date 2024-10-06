@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Association Haie-Vigné</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    @vite(['resources/js/app.js', 'resources/js/burger.js', 'resources/js/activity.js', 'resources/js/slider.js', 'resources/js/form.js'])
+    @vite(['resources/js/app.js', 'resources/js/burger.js', 'resources/js/activity.js', 'resources/js/slider.js', 'resources/js/form.js', 'resources/js/dashboard.js'])
     @vite('resources/scss/main.scss')
 
 </head>
@@ -21,7 +21,10 @@
 
         <div class="nav-lg">
             <ul class="nav-lg-lst">
-                <li><a class="nav-lnk link" href="{{ url('index') }}">Accueil</a></li>
+                @if (auth()->check() && auth()->user()->is_admin)
+                    <li><a class="menu-container-lnk nav-lnk" href="{{ url('dashboard') }}">Page administration</a></li>
+                @endif
+                <li><a class="nav-lnk link" href="{{ route('home') }}">Accueil</a></li>
                 <li><a class="nav-lnk link" href="{{ url('price') }}">tarifs</a></li>
                 <li><a class="nav-lnk link" href="{{ url('activityContent') }}">Nos activités</a></li>
                 <li><a class="nav-lnk link" href="{{ url('contact') }}">Nous contacter</a></li>
@@ -43,6 +46,7 @@
                 @if (auth()->check() && auth()->user()->is_admin)
                     <li><a class="menu-container-lnk" href="{{ url('dashboard') }}">Page administration</a></li>
                 @endif
+
                 <li class="menu-container-itm">
                     <a class="menu-container-lnk" href="{{ url('index') }}">Accueil</a>
                 </li>
