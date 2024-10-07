@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Log;
+
 class FormController extends Controller
 {
     public function showForm()
@@ -32,38 +33,21 @@ class FormController extends Controller
             return redirect()->back()->with('warning', 'Aucun formulaire n\'a pu être supprimé.');
         }
     }
+
+
     public function downloadFile(Form $form)
     {
-        Log::info('Tentative de téléchargement', ['form_id' => $form->id, 'file_upload' => $form->file_upload]);
-
         if (!$form->file_upload) {
-            Log::warning('file_upload est vide', ['form_id' => $form->id]);
-            abort(404, 'Formulaire non trouvé');
+            abort(404, 'Fichier non trouvé');
         }
 
-        // Générez le contenu du fichier basé sur les données du formulaire
-        $content = $this->generateFormContent($form);
+        $fileName = $form->file_name ?? 'document.pdf';
+        $fileContent = $form->file_upload;
 
-        $fileName = 'formulaire_' . $form->id . '.txt'; // ou .txt si vous préférez un format texte
-        $headers = [
-            'Content-type'        => 'text/plain', // ou 'text/plain' pour un fichier texte
-            'Content-Disposition' => 'attachment; filename="' . $fileName . '"',
-        ];
-
-        return Response::make($content, 200, $headers);
-    }
-
-    private function generateFormContent(Form $form)
-    {
-        // Ici, générez le contenu du fichier basé sur les données du formulaire
-        // Par exemple, pour un fichier texte simple :
-        $content = "Formulaire ID: " . $form->id . "\n";
-        $content .= "Prénom: " . $form->first_name . "\n";
-        $content .= "Nom: " . $form->last_name . "\n";
-        $content .= "Email: " . $form->email . "\n";
-        // Ajoutez d'autres champs selon votre structure de formulaire
-
-        return $content;
+        return Response::make($fileContent, 200, [
+            'Content-Type' => 'application/pdf',
+            'Content-Disposition' => 'attachment; filename="' . $fileName . '"'
+        ]);
     }
     public function submitForm(Request $request)
     {
@@ -120,9 +104,10 @@ class FormController extends Controller
         // Handle file upload (if applicable)
         if ($request->hasFile('file_upload')) {
             $file = $request->file('file_upload');
-            $filename = time() . '_' . $file->getClientOriginalName();
-            $file->storeAs('public/uploads', $filename);
-            $formData['file_upload'] = $filename;
+            $fileName = $file->getClientOriginalName();
+            $fileContent = file_get_contents($file->getRealPath());
+            $formData['file_upload'] = $fileContent;
+            $formData['file_name'] = $fileName; // Ajoutez une nouvelle colonne 'file_name' à votre table 'forms'
         }
 
         // Create the form record

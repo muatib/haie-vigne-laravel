@@ -3,28 +3,24 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 use App\Models\SliderImage2;
+use Illuminate\Support\Facades\File;
 
 class SliderImages2Seeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
     public function run()
     {
-        DB::table('slider_images_2')->insert([
-            ['image_path' => 'asset/img/event.png', 'alt_text' => ''],
-            ['image_path' => 'asset/img/event2.jpg', 'alt_text' => ''],
-            ['image_path' => 'asset/img/event3.jpg', 'alt_text' => ''],
-            // Ajoutez autant d'images que nécessaire
-        ]);
+        $imageFiles = ['event.png', 'event2.png', 'event3.png'];
 
-        // Ou utilisez le modèle SliderImage2 pour créer des enregistrements
-        // SliderImage2::create(['image_path' => 'chemin/vers/image1.jpg', 'alt_text' => 'Texte alternatif pour l\'image 1']);
-        // SliderImage2::create(['image_path' => 'chemin/vers/image2.jpg', 'alt_text' => 'Texte alternatif pour l\'image 2']);
+        foreach ($imageFiles as $file) {
+            $path = public_path('asset/img/' . $file);
+            if (File::exists($path)) {
+                SliderImage2::create([
+                    'image_path' => $file,
+                    'image_data' => file_get_contents($path),
+                    'alt_text' => pathinfo($file, PATHINFO_FILENAME)
+                ]);
+            }
+        }
     }
 }
-

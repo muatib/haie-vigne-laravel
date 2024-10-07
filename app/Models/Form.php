@@ -29,6 +29,7 @@ class Form extends Model
         'question8',
         'question9',
         'file_upload',
+        'file_name',
         'total',
         'user_id'
     ];

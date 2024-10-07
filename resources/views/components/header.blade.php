@@ -18,12 +18,18 @@
             <img src="{{ asset('asset/img/logo.png') }}" alt="logo">
             <img class="logo-txt" src="{{ asset('asset/img/logo-titre.png') }}" alt="logo">
         </div>
-
+<div class="header-actions">
+            <a href="{{ route('UserAccount') }}" class="account-icon">
+                <i class="fas fa-user {{ Auth::check() ? 'text-success' : 'text-primary' }}"></i>
+            </a>
+        </div>
         <div class="nav-lg">
             <ul class="nav-lg-lst">
-                @if (auth()->check() && auth()->user()->is_admin)
-                    <li><a class="menu-container-lnk nav-lnk" href="{{ url('dashboard') }}">Page administration</a></li>
-                @endif
+                <li class="admin-link">
+                    @if (auth()->check() && auth()->user()->is_admin)
+                        <a class="menu-container-lnk nav-lnk" href="{{ url('dashboard') }}">Page administration</a>
+                    @endif
+                </li>
                 <li><a class="nav-lnk link" href="{{ route('home') }}">Accueil</a></li>
                 <li><a class="nav-lnk link" href="{{ url('price') }}">tarifs</a></li>
                 <li><a class="nav-lnk link" href="{{ url('activityContent') }}">Nos activités</a></li>
@@ -32,14 +38,11 @@
             </ul>
         </div>
 
-        <div class="header-actions">
-            <a href="{{ route('UserAccount') }}" class="account-icon">
-                <i class="fas fa-user {{ Auth::check() ? 'text-success' : 'text-primary' }}"></i>
-            </a>
+
             <div class="menu-toggle" id="burger__menu">
                 <span class="menu-toggle-bar"></span>
             </div>
-        </div>
+
 
         <nav id="menu">
             <ul class="menu-container">

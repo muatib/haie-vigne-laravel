@@ -1,27 +1,25 @@
 .img-up {
     width: 100%;
-  }
-  .main-ttl {
+}
+.main-ttl {
     color: black;
     font-weight: 200;
     font-size: 2.5rem;
     text-align: center;
     margin-top: 3rem;
     margin-bottom: 2rem;
-  }
-  .main-txt-itm {
+}
+.main-txt-itm {
     color: black;
     padding: 1rem;
     font-size: 1rem;
     font-family: Roboto;
-  }
-  .separation {
-    position: relative;
-    left: 25%;
-    margin-bottom: 3rem;
-    margin-top: 3rem;
-  }
-  .main-txt-container {
+}
+.separation {
+    display: block;
+    margin: 5rem auto;
+}
+.main-txt-container {
     background-color: $light-blue;
     display: flex;
     flex-direction: column;
@@ -32,4 +30,4 @@
     margin-bottom: 1rem;
     box-shadow: 4px 4px 4px rgba(177, 174, 174, 0.74);
     border: 1px solid rgba(177, 174, 174, 0.74);
-  }
+}

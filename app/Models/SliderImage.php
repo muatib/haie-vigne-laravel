@@ -11,6 +11,7 @@ class SliderImage extends Model
 
     protected $fillable = [
         'image_path',
+        'image_data',
         'alt_text'
     ];
 }

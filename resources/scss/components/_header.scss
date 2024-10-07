@@ -154,19 +154,37 @@
     width: 100%;
 }
 
-    .nav-lg-lst {
-      position: absolute;
-      left: 40%;
-      bottom: 25%;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .nav-lnk {
-      margin: 0 2rem 0 1rem;
-      font-size: 1.5rem;
-      color: black;
-    }
+.header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
+
+  .header-logo {
+    margin-right: 5rem;
+  }
+
+  .nav-lg-lst {
+    display: flex;
+    align-items: center;
+  }
+
+  .admin-link {
+    margin-left: -25rem;
+  }
+
+  .header-actions {
+    margin-left: 2rem;
+  }
+
+.nav-lnk {
+    margin: 0 2rem 0 1rem;
+    font-size: 1.5rem;
+    color: black;
+}
+.fa-user{
+    margin-left: 30%;
+}
   }
   .header-actions {
     display: flex;
