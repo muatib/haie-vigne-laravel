@@ -191,7 +191,7 @@
     </div>
 
     <div class="table-container activities-form">
-        <h2 class="dash-subttl act-ttl">Éditer les activités</h2>
+        <h2 class="dash-subttl">Éditer les activités</h2>
 
         <p>Test d'affichage du formulaire des activités</p>
 
@@ -204,6 +204,7 @@
                     @foreach ($images as $index => $image)
                         <div class="activity-section activity-edit-form">
                             <h3>Activité {{ $index + 1 }}</h3>
+                            <input type="hidden" name="activities[{{ $index }}][id]" value="{{ $image->id }}">
                             <div class="form-group">
                                 <input type="text" name="activities[{{ $index }}][title]" class="form-control" value="{{ $image->title ?? old('activities.' . $index . '.title') }}" placeholder="Titre de l'activité">
                             </div>
@@ -230,6 +231,8 @@
                     @endforeach
                     <button type="submit" class="btn btn-primary mt-3 btn-update">Mettre à jour les activités</button>
                 </form>
+
+
             @else
                 <p>La collection $images est vide.</p>
             @endif
@@ -237,6 +240,7 @@
             <p>La variable $images n'est pas définie.</p>
         @endif
     </div>
+
 
 
 

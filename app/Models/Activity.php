@@ -16,8 +16,7 @@ class Activity extends Model
         'additional_line1',
         'additional_line2',
     ];
-    public function image()
-{
-    return $this->belongsTo(SliderImage::class);
-}
+    public function image() {
+        return $this->belongsTo(SliderImage::class, 'image_id');
+    }
 }

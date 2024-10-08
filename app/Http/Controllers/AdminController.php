@@ -8,39 +8,40 @@ use App\Models\User;
 use App\Models\Form;
 use App\Models\SliderImage;
 use App\Models\Activity;
+
 class AdminController extends Controller
 {
     public function index()
-{
-    $users = [];
-    $forms = [];
-    $images = [];
+    {
+        $users = [];
+        $forms = [];
+        $images = [];
 
-    try {
-        $users = User::all();
-    } catch (\Exception $e) {
-        Log::error('Erreur lors de la récupération des utilisateurs: ' . $e->getMessage());
+        try {
+            $users = User::all();
+        } catch (\Exception $e) {
+            Log::error('Erreur lors de la récupération des utilisateurs: ' . $e->getMessage());
+        }
+
+        try {
+            $forms = Form::all();
+        } catch (\Exception $e) {
+            Log::error('Erreur lors de la récupération des formulaires: ' . $e->getMessage());
+        }
+
+        try {
+            $images = SliderImage::all();
+
+            $images = $images->map(function ($image) {
+                $image->full_path = 'data:image/png;base64,' . base64_encode($image->image_data);
+                return $image;
+            });
+        } catch (\Exception $e) {
+            Log::error('Erreur lors de la récupération des images: ' . $e->getMessage());
+        }
+
+        return view('dashboard', compact('users', 'forms', 'images'));
     }
-
-    try {
-        $forms = Form::all();
-    } catch (\Exception $e) {
-        Log::error('Erreur lors de la récupération des formulaires: ' . $e->getMessage());
-    }
-
-    try {
-        $images = SliderImage::all();
-
-        $images = $images->map(function ($image) {
-            $image->full_path = 'data:image/png;base64,' . base64_encode($image->image_data);
-            return $image;
-        });
-    } catch (\Exception $e) {
-        Log::error('Erreur lors de la récupération des images: ' . $e->getMessage());
-    }
-
-    return view('dashboard', compact('users', 'forms', 'images'));
-}
 
     public function filterUsersByCourse(Request $request)
     {
@@ -91,36 +92,36 @@ class AdminController extends Controller
         return response()->stream($callback, 200, $headers);
     }
 
-
-    public function updateActivities(Request $request)
+    public function showDashboard()
 {
-    try {
-
-        $activities = $request->input('activities');
-
-        foreach ($activities as $index => $activity) {
-
-            $activityModel = Activity::find($index + 1);
-            if ($activityModel) {
-                $activityModel->title = $activity['title'];
-                $activityModel->description = $activity['description'];
-                $activityModel->location = $activity['location'];
-                $activityModel->schedule = $activity['schedule'];
-                $activityModel->coach = $activity['coach'];
-                $activityModel->additional_line1 = $activity['additional_line1'];
-                $activityModel->additional_line2 = $activity['additional_line2'];
-                $activityModel->save();
-            }
-        }
-
-        return redirect()->route('dashboard')->with('success', 'Activités mises à jour avec succès');
-    } catch (\Exception $e) {
-        return redirect()->route('dashboard')->with('error', 'Erreur lors de la mise à jour des activités');
-    }
+    $activities = Activity::with('image')->orderBy('id', 'asc')->get();
+    return view('dashboard', ['images' => $activities]);
 }
+    public function updateActivities(Request $request)
+    {
+        try {
+            $activitiesData = $request->input('activities');
 
+            foreach ($activitiesData as $index => $activityData) {
+                $activity = Activity::find($activityData['id']);
 
+                if ($activity) {
+                    // Mettre à jour uniquement les champs qui ont été envoyés
+                    if (isset($activityData['title'])) $activity->title = $activityData['title'];
+                    if (isset($activityData['description'])) $activity->description = $activityData['description'];
+                    if (isset($activityData['location'])) $activity->location = $activityData['location'];
+                    if (isset($activityData['schedule'])) $activity->schedule = $activityData['schedule'];
+                    if (isset($activityData['coach'])) $activity->coach = $activityData['coach'];
+                    if (isset($activityData['additional_line1'])) $activity->additional_line1 = $activityData['additional_line1'];
+                    if (isset($activityData['additional_line2'])) $activity->additional_line2 = $activityData['additional_line2'];
 
+                    $activity->save();
+                }
+            }
 
-
+            return redirect()->route('dashboard')->with('success', 'Activités mises à jour avec succès');
+        } catch (\Exception $e) {
+            return redirect()->route('dashboard')->with('error', 'Erreur lors de la mise à jour des activités: ' . $e->getMessage());
+        }
+    }
 }
