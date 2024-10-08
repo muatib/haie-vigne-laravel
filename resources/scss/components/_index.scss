@@ -31,3 +31,12 @@
     box-shadow: 4px 4px 4px rgba(177, 174, 174, 0.74);
     border: 1px solid rgba(177, 174, 174, 0.74);
 }
+
+@media screen and (min-width: 900px){
+    .main-txt-container{
+        width: 70%;
+    }
+    .img-up{
+        height: 15rem;
+    }
+}

@@ -7,5 +7,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class Activity extends Model
 {
-    use HasFactory;
+    protected $fillable = [
+        'title',
+        'description',
+        'location',
+        'schedule',
+        'coach',
+        'additional_line1',
+        'additional_line2',
+    ];
+    public function image()
+{
+    return $this->belongsTo(SliderImage::class);
+}
 }

@@ -1,23 +1,26 @@
+
+
 <section class="down-form">
     @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
-    @if (auth()->check())
-        <p class="form-main-txt">Important</p>
-        <p class="form-txt">Pour votre inscription veuillez remplir le formulaire en ligne ci dessous </p>
-        <p class="form-txt txt">ou</p>
-        <p class="form-txt">Télécharger le document PDF ci dessous et le retourner complété à notre adresse</p>
-        <a class="form-lnk" href="{{ asset('documents/Feuille-inscription.pdf') }}" download>Télécharger le formulaire</a>
-    @else
-        <p>You must be logged in to access this page.</p>
-        <a href="{{ route('login') }}">Login</a>
-    @endif
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
+@if (auth()->check())
+    <p class="form-main-txt">Important</p>
+    <p class="form-txt">Pour votre inscription veuillez remplir le formulaire en ligne ci dessous </p>
+    <p class="form-txt txt">ou</p>
+    <p class="form-txt">Télécharger le document PDF ci dessous et le retourner complété à notre adresse</p>
+    <a class="form-lnk" href="{{ asset('documents/Feuille-inscription.pdf') }}" download>Télécharger le formulaire</a>
+@else
+    <p class="form-main-txt">Création de compte et inscription</p>
+    <p class="form-txt">Veuillez remplir le formulaire ci-dessous pour créer votre compte et vous inscrire</p>
+@endif
 </section>
 
 <img class="separation-form" src="{{ asset('asset/img/separation.png') }}" alt="">
@@ -30,20 +33,28 @@
         <input type="hidden" name="lastname" value="{{ session('user_lastname', '') }}">
         <input type="hidden" name="email" value="{{ session('user_email', '') }}">
     @endauth
-    <label class="contact-label" for="name">Nom :</label>&ensp;&emsp;
-    <input class="contact-input" type="text" name="first_name" placeholder="Nom" required
+    <label class="contact-label" for="first_name">Nom :</label>&ensp;&emsp;
+    <input class="contact-input" type="text" name="first_name" id="first_name" placeholder="Nom" required
         value="{{ auth()->check() ? auth()->user()->lastname : old('first_name') }}">
     <label class="contact-label" for="last_name">Prénom :</label>&ensp;&emsp;
-    <input class="contact-input" type="text" name="last_name" placeholder="Prénom" required
+    <input class="contact-input" type="text" name="last_name" id="last_name" placeholder="Prénom" required
         value="{{ auth()->check() ? auth()->user()->firstname : old('last_name') }}">
     <label class="contact-label" for="email">Email :</label>&ensp;&emsp;
-    <input class="contact-input" type="email" name="email" placeholder="Email" required
+    <input class="contact-input" type="email" name="email" id="email" placeholder="Email" required
         value="{{ auth()->check() ? auth()->user()->email : old('email') }}">
-    <label class="contact-label" for="adress">Adresse :</label>&ensp;&emsp;
-    <input class="contact-input" type="text" name="address" placeholder="Adresse postale" required
+
+    @guest
+        <label class="contact-label" for="password">Mot de passe :</label>&ensp;&emsp;
+        <input class="contact-input" type="password" name="password" id="password" placeholder="Mot de passe" required>
+        <label class="contact-label" for="password_confirmation">Confirmer le mot de passe :</label>&ensp;&emsp;
+        <input class="contact-input" type="password" name="password_confirmation" id="password_confirmation" placeholder="Confirmer le mot de passe" required>
+    @endguest
+
+    <label class="contact-label" for="address">Adresse :</label>&ensp;&emsp;
+    <input class="contact-input" type="text" name="address" id="address" placeholder="Adresse postale" required
         value="{{ old('address') }}">
     <label class="contact-label" for="phone">Numéro de téléphone :</label>&ensp;&emsp;
-    <input class="contact-input" type="text" name="phone" placeholder="Numéro de téléphone" required
+    <input class="contact-input" type="text" name="phone" id="phone" placeholder="Numéro de téléphone" required
         value="{{ old('phone') }}">
     <img class="separation-form" src="{{ asset('asset/img/separation.png') }}" alt="">
 

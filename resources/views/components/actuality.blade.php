@@ -18,12 +18,47 @@
 
 
 <section class="actuality-lg">
-    <div class="actuality-lg-left">
+    <div class="actuality-lg-left" id="actuality-content">
         <h1 class="actuality-ttl-lg">Notre actualité</h1>
+        <!-- Le contenu de l'actualité sera injecté ici -->
     </div>
     <div class="actuality-lg-right">
-        @foreach ($sliderImages2 as $image)
-            <img class="actuality-lg-img" src="{{ $image->full_path }}" alt="{{ $image->alt_text }}">
+        @foreach ($sliderImages2 as $index => $image)
+            <img class="actuality-lg-img"
+                 src="{{ $image->full_path }}"
+                 alt="{{ $image->alt_text }}"
+                 data-content-id="actuality-box-{{ $index + 1 }}"
+                 onclick="showActualityContent(this)">
         @endforeach
     </div>
 </section>
+
+<!-- Contenu caché des actualités -->
+<div style="display: none;">
+    @include('actualityContent')
+</div>
+
+<script>
+function showActualityContent(img) {
+    const contentId = img.getAttribute('data-content-id');
+    const content = document.getElementById(contentId).innerHTML;
+    const actualityContent = document.getElementById('actuality-content');
+
+    // Garder le titre "Notre actualité"
+    const title = actualityContent.querySelector('.actuality-ttl-lg');
+    actualityContent.innerHTML = '';
+    actualityContent.appendChild(title);
+
+    // Ajouter le nouveau contenu
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = content;
+    actualityContent.appendChild(tempDiv);
+}
+
+// Afficher le contenu de la première actualité au chargement de la page
+document.addEventListener('DOMContentLoaded', function() {
+    const firstImg = document.querySelector('.actuality-lg-img');
+    if (firstImg) showActualityContent(firstImg);
+});
+</script>
+    </script>

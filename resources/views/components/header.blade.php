@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Association Haie-Vigné</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    @vite(['resources/js/app.js', 'resources/js/burger.js', 'resources/js/activity.js', 'resources/js/slider.js', 'resources/js/form.js', 'resources/js/dashboard.js'])
+    @vite(['resources/js/app.js', 'resources/js/burger.js', 'resources/js/activity.js', 'resources/js/slider.js', 'resources/js/form.js', 'resources/js/dashboard.js', 'resources/js/activitySlider.js'])
     @vite('resources/scss/main.scss')
 
 </head>
@@ -18,9 +18,12 @@
             <img src="{{ asset('asset/img/logo.png') }}" alt="logo">
             <img class="logo-txt" src="{{ asset('asset/img/logo-titre.png') }}" alt="logo">
         </div>
-<div class="header-actions">
+        <div class="header-actions">
             <a href="{{ route('UserAccount') }}" class="account-icon">
-                <i class="fas fa-user {{ Auth::check() ? 'text-success' : 'text-primary' }}"></i>
+                <div class="user-status-indicator {{ Auth::check() ? 'logged-in' : 'logged-out' }}">
+                    <i class="fas fa-user"></i>
+                    <span class="user-status-text">{{ Auth::check() ? Auth::user()->firstname : 'Connexion' }}</span>
+                </div>
             </a>
         </div>
         <div class="nav-lg">
@@ -53,9 +56,7 @@
                 <li class="menu-container-itm">
                     <a class="menu-container-lnk" href="{{ url('index') }}">Accueil</a>
                 </li>
-                <li class="menu-container-itm">
-                    <a class="menu-container-lnk" href="{{ url('register') }}">Compte</a>
-                </li>
+
                 <li class="menu-container-itm">
                     <a class="menu-container-lnk" href="{{ url('activityContent') }}">Nos activités</a>
                 </li>

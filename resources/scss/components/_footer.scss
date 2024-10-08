@@ -22,3 +22,25 @@
   .insta{
       margin-left: 0.5rem;
   }
+@media screen and (min-width: 900px){
+    .footer-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: auto;
+        padding: 2rem 4rem;
+        font-size: 1.5rem;
+    }
+
+    .footer-txt {
+        font-size: 1rem;
+        text-align: left;
+        margin-left: 0;
+        width: auto;
+        flex: 1;
+    }
+
+    .insta {
+        margin-left: 1rem;
+    }
+}

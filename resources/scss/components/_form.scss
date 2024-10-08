@@ -202,3 +202,13 @@ text-align: center;
     background-color: $lavander;
     border-radius: 5px;
 }
+@media screen and (min-width: 900px) {
+    .down-form,
+     .form-container{
+        width: 60%;
+    }
+.form-scd-ttl{
+    margin-bottom: 3rem;
+    margin-top: 2rem;
+}
+}

@@ -73,7 +73,9 @@ Route::get('/dashboard', function () {
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::get('/index', [IndexController::class, 'index'])->name('home');
+Route::get('/filter-users-by-course', [AdminController::class, 'filterUsersByCourse'])->name('filter.users.by.course');
+Route::get('/export-users-by-course/{course}', [AdminController::class, 'exportUsersByCourse'])->name('export.users.by.course');
+Route::get('/admin/edit-activities', [AdminController::class, 'editActivities'])->name('edit.activities');
+Route::post('/admin/update-activities', [AdminController::class, 'updateActivities'])->name('update.activities');
 
-
-
-
+Route::get('/dashboard', [App\Http\Controllers\AdminController::class, 'index'])->name('dashboard');

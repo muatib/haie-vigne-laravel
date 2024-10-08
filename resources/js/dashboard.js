@@ -32,3 +32,29 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+document.addEventListener('DOMContentLoaded', function() {
+    const toggleButtons = document.querySelectorAll('.toggle-details');
+    toggleButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const formId = this.getAttribute('data-form-id');
+            const detailsRow = document.getElementById(`form-details-${formId}`);
+            detailsRow.style.display = detailsRow.style.display === 'none' ? 'table-row' : 'none';
+            this.textContent = detailsRow.style.display === 'none' ? 'Détails' : 'Masquer';
+        });
+    });
+});
+document.querySelectorAll('.image-select').forEach(select => {
+    select.addEventListener('change', function() {
+        const textarea = this.closest('.activity-edit-form').querySelector('textarea');
+        const selectedImage = this.options[this.selectedIndex].text;
+        const content = textarea.value;
+        const updatedContent = content.replace(
+            /(src=").*?(")/,
+            '$1{{ $image->full_path }}$2'
+        ).replace(
+            /(alt=").*?(")/,
+            `$1${selectedImage}$2`
+        );
+        textarea.value = updatedContent;
+    });
+});

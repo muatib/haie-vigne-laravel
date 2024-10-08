@@ -13,25 +13,76 @@
     position: sticky;
     width: 100%;
     z-index: 2;
-  }
-  .header-logo {
+}
+.header-logo {
     display: flex;
     flex-direction: row;
-    left: -2rem;
-  }
-  .logo-txt {
+
+}
+.logo-txt {
     margin-left: -15px;
-  }
-  .header-user-img {
+}
+.header-user-img {
     position: relative;
     left: 30%;
 
     bottom: 3%;
-  }
+}
+.account-icon {
+    text-decoration: none;
+    color: inherit;
+}
 
-  // MENU BURGER
+.user-status-indicator {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* Centre le contenu horizontalement */
+    padding: 5px 12px; /* Réduit légèrement le padding horizontal */
+    border-radius: 10px;
+    transition: background-color 0.3s ease;
+    height: 50px;
+    width: 60px;
+    margin-left: -10px;
+}
 
-  .menu-toggle {
+.user-status-indicator.logged-in {
+    background-color: rgba(40, 167, 69, 0.2);
+}
+
+.user-status-indicator.logged-out {
+    background-color: rgba(0, 123, 255, 0.2);
+}
+
+.user-status-indicator:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.user-status-indicator i {
+    margin-right: 8px; /* Réduit légèrement l'espace entre l'icône et le texte */
+    transition: color 0.3s ease;
+    flex-shrink: 0;
+}
+
+.user-status-indicator.logged-in i {
+    color: #28a745;
+}
+
+.user-status-indicator.logged-out i {
+    color: #007bff;
+}
+
+.user-status-text {
+    font-size: 1rem;
+    font-weight: bold;
+    color: black;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+// MENU BURGER
+
+.menu-toggle {
     height: 27px;
     width: 30px;
     margin: 50px;
@@ -44,59 +95,59 @@
     .menu-toggle-bar,
     .menu-toggle-bar:before,
     .menu-toggle-bar:after {
-      background: $brown;
-      display: block;
-      height: 2px;
-      opacity: 1;
-      position: absolute;
-      transition: 0.3s ease-in-out;
+        background: $brown;
+        display: block;
+        height: 2px;
+        opacity: 1;
+        position: absolute;
+        transition: 0.3s ease-in-out;
     }
 
     .menu-toggle-bar:before,
     .menu-toggle-bar:after {
-      content: "";
+        content: "";
     }
     .menu-toggle-bar:before {
-      left: 0px;
-      top: -7px;
-      width: 27px;
+        left: 0px;
+        top: -7px;
+        width: 27px;
     }
     .menu-toggle-bar {
-      right: 0px;
-      top: 13px;
-      width: 27px;
-    }
-    .menu-toggle-bar:after {
-      left: 0px;
-      top: 7px;
-      width: 27px;
-    }
-    &.close {
-      .menu-toggle-bar:before {
-        top: 0px;
-        transform: rotate(90deg);
-        width: 27px;
-      }
-      .menu-toggle {
-        transform: rotate(-45deg);
+        right: 0px;
         top: 13px;
         width: 27px;
-      }
-      .menu-toggle-bar:after {
-        top: 0px;
-        left: 0;
-        transform: rotate(90deg);
-        opacity: 0;
-        width: 0;
-      }
     }
-  }
-  // OVERLAY MENU BURGER
+    .menu-toggle-bar:after {
+        left: 0px;
+        top: 7px;
+        width: 27px;
+    }
+    &.close {
+        .menu-toggle-bar:before {
+            top: 0px;
+            transform: rotate(90deg);
+            width: 27px;
+        }
+        .menu-toggle {
+            transform: rotate(-45deg);
+            top: 13px;
+            width: 27px;
+        }
+        .menu-toggle-bar:after {
+            top: 0px;
+            left: 0;
+            transform: rotate(90deg);
+            opacity: 0;
+            width: 0;
+        }
+    }
+}
+// OVERLAY MENU BURGER
 
-  #menu {
+#menu {
     z-index: 1;
     min-width: 80%;
-    min-height: 55%;
+    min-height: 60%;
     position: fixed;
     margin-left: 4.5rem;
     top: 0;
@@ -111,82 +162,134 @@
     background: $lavander;
 
     &.overlay {
-      visibility: visible;
-      opacity: 1;
-      padding-top: 4rem;
+        visibility: visible;
+        opacity: 1;
+        padding-top: 4rem;
 
-      border-radius: 0.5rem;
+        border-radius: 0.5rem;
     }
     .menu-container {
-      padding: 1rem;
+        padding: 1rem;
     }
     .menu-container-lnk {
-      color: black;
-      display: block;
-      font-size: 2rem;
-      margin-bottom: 0.5rem;
-      margin-left: 15px;
-      text-decoration: none;
-      text-align: left;
+        color: black;
+        display: block;
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+        margin-left: 15px;
+        text-decoration: none;
+        text-align: left;
     }
-  }
-  @media screen and (max-width: 900px) {
+}
+@media screen and (max-width: 900px) {
     .nav-lg-lst {
-      display: none;
+        display: none;
     }
-  }
-  @media screen and (min-width: 550px) {
-
-
+}
+@media screen and (min-width: 550px) {
     .menu-toggle {
-      position: relative;
-      height: 27px;
-      width: 30px;
-      overflow: visible;
-      z-index: 2;
+        position: relative;
+        height: 27px;
+        width: 30px;
+        overflow: visible;
+        z-index: 2;
     }
-  }
-  @media screen and (min-width: 900px) {
+}
+@media screen and (min-width: 900px) {
     .menu-toggle {
-      display: none;
+        display: none;
     }
-.nav-lg{
-    width: 100%;
+    .nav-lg {
+        width: 100%;
+    }
+
+    .header-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+    }
+
+    .header-logo {
+        margin-right: 5rem;
+    }
+
+    .nav-lg-lst {
+        display: flex;
+        align-items: center;
+    }
+
+    .admin-link {
+        margin-left: -25rem;
+    }
+
+    .header-actions {
+        margin-left: 2rem;
+    }
+
+    .nav-lnk {
+        margin: 0 2rem 0 1rem;
+        font-size: 1.5rem;
+        color: black;
+    }
+    .fa-user {
+        margin-left: 30%;
+    }
+    .account-icon {
+        text-decoration: none;
+        color: inherit;
+    }
+
+    .user-status-indicator {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding: 5px 40px 5px 2px; /* Réduit le padding gauche */
+        border-radius: 50px;
+        transition: background-color 0.3s ease;
+        min-width: 160px;
+        max-width: 200px;
+        width: auto;
+    }
+
+    .user-status-indicator.logged-in {
+        background-color: rgba(40, 167, 69, 0.2);
+    }
+
+    .user-status-indicator.logged-out {
+        background-color: rgba(0, 123, 255, 0.2);
+    }
+
+    .user-status-indicator:hover {
+        background-color: rgba(0, 0, 0, 0.1);
+    }
+
+    .user-status-indicator i {
+        margin-right: 8px;
+        flex-shrink: 0;
+        transition: color 0.3s ease;
+        flex-shrink: 0;
+    }
+
+    .user-status-indicator.logged-in i {
+        color: #28a745;
+    }
+
+    .user-status-indicator.logged-out i {
+        color: #007bff;
+    }
+
+    .user-status-text {
+        flex-grow: 1;
+        text-align: center;
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: black;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
 }
-
-.header-container {
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-  }
-
-  .header-logo {
-    margin-right: 5rem;
-  }
-
-  .nav-lg-lst {
-    display: flex;
-    align-items: center;
-  }
-
-  .admin-link {
-    margin-left: -25rem;
-  }
-
-  .header-actions {
-    margin-left: 2rem;
-  }
-
-.nav-lnk {
-    margin: 0 2rem 0 1rem;
-    font-size: 1.5rem;
-    color: black;
-}
-.fa-user{
-    margin-left: 30%;
-}
-  }
-  .header-actions {
+.header-actions {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -202,7 +305,6 @@
 
 .menu-toggle {
     margin-left: 1rem;
-
 }
 
 .account-icon .fa-user {

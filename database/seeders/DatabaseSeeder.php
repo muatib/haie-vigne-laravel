@@ -2,8 +2,10 @@
 
 namespace Database\Seeders;
 
+
 use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Activity;
+// use Database\Seeders\ActivitiesTableSeeder as SeedersActivitiesTableSeeder;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -13,15 +15,16 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+
 
         User::factory()->create([
             'name' => 'Test User',
             'email' => 'test@example.com',
         ]);
 
+
         $this->call(SliderImagesSeeder::class);
         $this->call(SliderImages2Seeder::class);
+        $this->call(ActivitiesTableSeeder::class);
     }
 }
-
