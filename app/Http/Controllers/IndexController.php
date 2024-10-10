@@ -23,5 +23,17 @@ class IndexController extends Controller
 
     return view('index', compact('sliderImages', 'sliderImages2'));
 }
+public function updateSliderImages(Request $request)
+{
+    foreach ($request->file('images') as $id => $image) {
+        $sliderImage = SliderImage::find($id);
+        if ($sliderImage && $image) {
+            $sliderImage->image_data = file_get_contents($image->getRealPath());
+            $sliderImage->image_path = $image->getClientOriginalName();
+            $sliderImage->save();
+        }
+    }
+    return redirect()->back()->with('success', 'Images mises à jour avec succès.');
+}
+}
 
- }

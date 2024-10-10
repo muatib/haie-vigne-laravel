@@ -7,13 +7,27 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 
+/**
+ * Controller for handling user authentication.
+ */
 class AuthController extends Controller
 {
+    /**
+     * Show the registration form.
+     *
+     * @return \Illuminate\View\View
+     */
     public function showRegistrationForm()
     {
         return view('register');
     }
 
+    /**
+     * Handle user registration.
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function register(Request $request)
     {
         $request->validate([
@@ -30,22 +44,28 @@ class AuthController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        // Stockez les informations de l'utilisateur dans la session
+        // Store user information in the session
         session([
             'user_firstname' => $user->firstname,
             'user_lastname' => $user->lastname,
             'user_email' => $user->email,
         ]);
 
-        return redirect()->route('login')->with('success', 'Compte créé ! Vous pouvez vous connecter.');
+        return redirect()->route('login')->with('success', 'Account created! You can now log in.');
     }
 
+    /**
+     * Handle user login.
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function login(Request $request)
     {
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
-            // Si l'utilisateur se connecte avec succès, stockez également ses informations dans la session
+            // If the user logs in successfully, also store their information in the session
             $user = Auth::user();
             session([
                 'user_firstname' => $user->firstname,
@@ -57,17 +77,23 @@ class AuthController extends Controller
         }
 
         return redirect()->route('login')->withErrors([
-            'email' => 'Les informations d\'identification fournies ne correspondent pas à nos enregistrements.',
+            'email' => 'The provided credentials do not match our records.',
         ]);
     }
 
+    /**
+     * Handle user logout.
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function logout(Request $request)
     {
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        // Effacez les informations de l'utilisateur de la session lors de la déconnexion
+        // Clear user information from the session during logout
         session()->forget(['user_firstname', 'user_lastname', 'user_email']);
 
         return redirect('/');

@@ -34,7 +34,7 @@ class ActivitiesTableSeeder extends Seeder
                 'location' => 'Au centre sportif de la haie-Vigné.',
                 'schedule' => 'Le lundi de 20h00 à 21h, Le mardi de 11h30 à 12h30, Le mardi de 20h à 21h',
                 'coach' => 'Léa Huchet, Evelyne Bertrand',
-                'image_id' => 3,
+                'image_id' => 2,
                 'additional_line1' => 'Renforcement musculaire (abdos, fessiers...) enchaînements dansés pour certains cours,
         coordination, étirements.',
                 'additional_line2' => 'Renforcement musculaire (abdos, fessiers...) enchaînements dansés pour certains cours,
@@ -48,7 +48,7 @@ class ActivitiesTableSeeder extends Seeder
                 'location' => 'Au centre sportif de la haie-Vigné.',
                 'schedule' => 'Le mardi de 12h30 à 13h30, Le mercredi de 20h à 21h, Le jeudi de 15h à 16h, Le jeudi de 20h à 21h',
                 'coach' => 'Delphine Vattier, Nathalie Bon, Maud Lemoine, Julie Noblet',
-                'image_id' => 4,
+                'image_id' => 3,
                 'additional_line1' => 'Méthode de remise en forme globale basée sur des excercices doux aynat pour objectif de
         renforcer les muscles profons essentiels à une bonne posture.',
                 'additional_line2' => 'Cours visant à muscler harmonieusement toutes les parties du corps, avec une mention
@@ -62,7 +62,7 @@ class ActivitiesTableSeeder extends Seeder
                 'location' => 'Au centre sportif de la haie-Vigné.',
                 'schedule' => 'Le lundi de 20h à 21h',
                 'coach' => 'Maud Lemoine',
-                'image_id' => 5,
+                'image_id' => 4,
                 'additional_line1' => 'Le stretching permet d\'étirer les différents muscles ou groupes musculaires du corps et
         d\'assouplir les articulations.',
                 'additional_line2' => ' De ce fait, il préserve contre les traumatismes musculaires et articulaires.',

@@ -78,3 +78,4 @@ Route::get('/export-users-by-course/{course}', [AdminController::class, 'exportU
 Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
 Route::get('/admin/edit-activities', [AdminController::class, 'editActivities'])->name('edit.activities');
 Route::post('/admin/update-activities', [AdminController::class, 'updateActivities'])->name('update.activities');
+Route::post('/update-slider-images', [IndexController::class, 'updateSliderImages'])->name('update.slider.images');

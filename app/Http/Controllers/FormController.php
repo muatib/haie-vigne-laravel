@@ -13,35 +13,55 @@ use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Hash;
 
+/**
+ * Controller for handling form-related operations.
+ */
 class FormController extends Controller
 {
+    /**
+     * Display the form.
+     *
+     * @return \Illuminate\View\View
+     */
     public function showForm()
     {
         return view('form');
     }
 
+    /**
+     * Delete selected forms.
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function deleteSelected(Request $request)
     {
         $selectedForms = $request->input('selected_forms', []);
 
         if (empty($selectedForms)) {
-            return redirect()->back()->with('warning', 'Aucun formulaire n\'a été sélectionné pour la suppression.');
+            return redirect()->back()->with('warning', 'No forms were selected for deletion.');
         }
 
         $deletedCount = Form::whereIn('id', $selectedForms)->delete();
 
         if ($deletedCount > 0) {
-            $message = $deletedCount === 1 ? 'Un formulaire a été supprimé.' : "$deletedCount formulaires ont été supprimés.";
+            $message = $deletedCount === 1 ? 'One form has been deleted.' : "$deletedCount forms have been deleted.";
             return redirect()->back()->with('success', $message);
         } else {
-            return redirect()->back()->with('warning', 'Aucun formulaire n\'a pu être supprimé.');
+            return redirect()->back()->with('warning', 'No forms could be deleted.');
         }
     }
 
+    /**
+     * Download a file associated with a form.
+     *
+     * @param Form $form
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function downloadFile(Form $form)
     {
         if (!$form->file_upload) {
-            abort(404, 'Fichier non trouvé');
+            abort(404, 'File not found');
         }
 
         $fileName = $form->file_name ?? 'document.pdf';
@@ -53,6 +73,12 @@ class FormController extends Controller
         ]);
     }
 
+    /**
+     * Handle form submission.
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function submitForm(Request $request)
     {
         $currentDate = now();
@@ -60,7 +86,7 @@ class FormController extends Controller
         $endDate = Carbon::create($currentDate->year, 6, 30);
 
         if ($currentDate->month >= 7 && $currentDate->month <= 8) {
-            return redirect()->back()->with('error', 'Les inscriptions sont fermées en juillet et août.');
+            return redirect()->back()->with('error', 'Registration is closed in July and August.');
         }
 
         $rules = [
@@ -81,13 +107,13 @@ class FormController extends Controller
         }
 
         $validator = Validator::make($request->all(), $rules, [
-            'email.unique' => 'Cette adresse e-mail est déjà utilisée.',
-            'phone.unique' => 'Ce numéro de téléphone est déjà utilisé.',
-            'courses.required' => 'Veuillez sélectionner au moins un cours.',
-            'courses.min' => 'Veuillez sélectionner au moins un cours.',
-            'payment_method.required' => 'Veuillez sélectionner une méthode de paiement.',
-            'payment_method.in' => 'La méthode de paiement sélectionnée n\'est pas valide.',
-            'password.confirmed' => 'La confirmation du mot de passe ne correspond pas.',
+            'email.unique' => 'This email address is already in use.',
+            'phone.unique' => 'This phone number is already in use.',
+            'courses.required' => 'Please select at least one course.',
+            'courses.min' => 'Please select at least one course.',
+            'payment_method.required' => 'Please select a payment method.',
+            'payment_method.in' => 'The selected payment method is invalid.',
+            'password.confirmed' => 'The password confirmation does not match.',
         ]);
 
         $validator->after(function ($validator) use ($request) {
@@ -100,7 +126,7 @@ class FormController extends Controller
                 }
             }
             if (!$allQuestionsAnswered) {
-                $validator->errors()->add('health_questions', 'Veuillez répondre à toutes les questions de santé.');
+                $validator->errors()->add('health_questions', 'Please answer all health questions.');
             }
         });
 
@@ -109,7 +135,7 @@ class FormController extends Controller
         }
 
         if (!Auth::check()) {
-            // Créer l'utilisateur
+            // Create user
             $user = User::create([
                 'firstname' => $request->first_name,
                 'lastname' => $request->last_name,
@@ -147,7 +173,4 @@ class FormController extends Controller
 
         return redirect()->route('payment');
     }
-
-
-
 }

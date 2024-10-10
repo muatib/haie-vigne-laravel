@@ -7,9 +7,9 @@
 }
 .dash-subttl {
     color: black;
-    margin: 3rem 0 1rem 0;
+    margin: 1rem 0 0.5rem 0;
     font-weight: 500;
-    font-size: 2rem;
+    font-size: 1.5rem;
 }
 .custom-table {
     width: 100%;
@@ -126,95 +126,212 @@
     margin-bottom: 2rem;
     font-size: 1rem;
 }
-.exp-txt{
+.exp-txt {
     color: #c82333;
 }
-.rem-txt{
+.rem-txt {
     color: green;
 }
-.no-course-txt{
+.no-course-txt {
     color: black;
-    // font-size: 1.5rem;
     margin-bottom: 2rem;
     font-family: Roboto;
-
 }
-.activities-form {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
+
+/* Styles pour les formulaires côte à côte */
+.forms-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    margin: 0 20px;
+}
+
+.form-column {
+    flex: 1;
+}
+
+.form-column.activities-column {
+    max-width: calc(100% - 248px);
+}
+
+.form-column.slider-column {
+    width: 248px;
+    flex: none;
+}
+
+.form-column .activities-form,
+.form-column .slider-image-form {
+    margin: 0;
+    height: auto;
+    width: 100%;
+    padding: 10px;
     background-color: #f9f9f9;
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    margin-bottom: 5rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.activity-section {
+.form-column .activity-section {
     background-color: white;
     border: 1px solid #ddd;
     border-radius: 4px;
-    padding: 15px;
-    margin-bottom: 20px;
+    padding: 10px;
+    margin-bottom: 10px;
 }
 
-.activity-section h3 {
+.form-column .activity-section h3 {
     color: #333;
     border-bottom: 2px solid #007bff;
-    padding-bottom: 10px;
-    margin-bottom: 15px;
-}
-.act-ttl{
-    text-align: center;
-    font-size: 2rem;
-}
-.form-group {
-    margin-bottom: 15px;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+    font-size: 1.2rem;
 }
 
-.form-group label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-    color: #555;
+.form-column .form-group {
+    margin-bottom: 10px;
 }
 
-.form-control {
+.form-column .form-control {
     width: 100%;
-    padding: 8px;
+    padding: 5px;
     border: 1px solid #ddd;
     border-radius: 4px;
-    font-size: 14px;
+    font-size: 12px;
 }
 
-textarea.form-control {
-    height: 100px;
+.form-column textarea.form-control {
+    height: 60px;
 }
 
-.activity-image {
-    max-width: 200px;
+.form-column .activity-image {
+    max-width: 100px;
     height: auto;
     display: block;
-    margin: 10px 0;
+    margin: 5px 0;
     border-radius: 4px;
 }
 
-.btn-update {
-    background-color: #007bff;
+.form-column .btn-update {
+    display: block;
+    margin: 20px auto 0;
+    padding: 8px 20px;
+    background-color: #4caf50;
     color: white;
-    padding: 10px 20px;
     border: none;
-    border-radius: 4px;
+    border-radius: 20px;
+    font-size: 14px;
     cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, transform 0.3s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-.btn-update:hover {
-    background-color: #0056b3;
+.form-column .btn-update:hover {
+    background-color: #45a049;
+    transform: translateY(-2px);
 }
-.courses-user{
-    background-color: $lavander;
-    padding: 2rem;
-    border: 1px solid black;
-    margin-bottom: 4rem;
+
+/* Styles pour le formulaire des images du slider */
+.form-column .slider-image-form .image-mosaic {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 20px;
+    align-items: center;
+}
+
+.form-column .slider-image-form .image-item {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.form-column .slider-image-form .image-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.form-column .slider-image-form .image-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.form-column .slider-image-form .image-item:hover .image-overlay {
+    opacity: 1;
+}
+
+.form-column .slider-image-form .file-input-label {
+    background-color: white;
+    color: #333;
+    padding: 6px 12px;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+    font-size: 12px;
+}
+
+.form-column .slider-image-form .file-input-label:hover {
+    background-color: #f0f0f0;
+    transform: scale(1.05);
+}
+
+.form-column .slider-image-form .file-input {
+    display: none;
+}
+
+.form-column .slider-image-form .button-container {
+    display: flex;
+    justify-content: center;
+}
+
+.form-column .slider-image-form .submit-button {
+    padding: 8px 20px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.form-column .slider-image-form .submit-button:hover {
+    background-color: #45a049;
+    transform: translateY(-2px);
+}
+
+@media (max-width: 1200px) {
+    .forms-container {
+        flex-direction: column;
+    }
+
+    .form-column.activities-column,
+    .form-column.slider-column {
+        max-width: 100%;
+        width: 100%;
+    }
+
+    .form-column .slider-image-form .image-mosaic {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .form-column .slider-image-form .image-item {
+        width: 150px;
+        height: 150px;
+    }
 }
