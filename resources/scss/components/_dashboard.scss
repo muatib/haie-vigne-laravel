@@ -12,6 +12,9 @@
     font-weight: 500;
     font-size: 1.5rem;
 }
+.form-column{
+    margin-bottom: 5rem;
+}
 
 .custom-table {
     width: 100%;
@@ -149,7 +152,7 @@
     font-family: Roboto;
 }
 
-/* Styles pour les formulaires */
+
 .forms-container {
     display: flex;
     flex-direction: column;
@@ -357,4 +360,5 @@
         width: 150px;
         height: 150px;
     }
+
 }

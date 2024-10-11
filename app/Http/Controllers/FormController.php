@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Hash;
 class FormController extends Controller
 {
     /**
-     * Display the form.
+     * Display the form view.
      *
      * @return \Illuminate\View\View
      */
@@ -134,43 +134,47 @@ class FormController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
-        if (!Auth::check()) {
-            // Create user
-            $user = User::create([
-                'firstname' => $request->first_name,
-                'lastname' => $request->last_name,
-                'email' => $request->email,
-                'password' => Hash::make($request->password),
-            ]);
-            Auth::login($user);
-        } else {
-            $user = Auth::user();
+        try {
+            if (!Auth::check()) {
+                $user = User::create([
+                    'firstname' => $request->first_name,
+                    'lastname' => $request->last_name,
+                    'email' => $request->email,
+                    'password' => Hash::make($request->password),
+                ]);
+                Auth::login($user);
+            } else {
+                $user = Auth::user();
+            }
+
+            $formData = $request->except(['_token', 'courses', 'health_questions', 'password', 'password_confirmation']);
+            $formData['courses'] = json_encode($request->input('courses', []));
+            $formData['total'] = $request->input('total');
+            $formData['payment_method'] = $request->input('payment_method');
+            $formData['user_id'] = $user->id;
+
+            // Handle health questionnaire responses
+            for ($i = 1; $i <= 9; $i++) {
+                $questionKey = "question{$i}";
+                $formData[$questionKey] = $request->input("health_questions.{$questionKey}")[0] ?? null;
+            }
+
+            // Handle file upload (if applicable)
+            if ($request->hasFile('file_upload')) {
+                $file = $request->file('file_upload');
+                $fileName = $file->getClientOriginalName();
+                $fileContent = file_get_contents($file->getRealPath());
+                $formData['file_upload'] = $fileContent;
+                $formData['file_name'] = $fileName;
+            }
+
+            // Create the form record
+            Form::create($formData);
+
+            return redirect()->route('payment')->with('success', 'Form submitted successfully. Proceeding to payment.');
+        } catch (\Exception $e) {
+            Log::error('Error submitting form: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'An error occurred while submitting the form. Please try again.');
         }
-
-        $formData = $request->except(['_token', 'courses', 'health_questions', 'password', 'password_confirmation']);
-        $formData['courses'] = json_encode($request->input('courses', []));
-        $formData['total'] = $request->input('total');
-        $formData['payment_method'] = $request->input('payment_method');
-        $formData['user_id'] = $user->id;
-
-        // Handle health questionnaire responses
-        for ($i = 1; $i <= 9; $i++) {
-            $questionKey = "question{$i}";
-            $formData[$questionKey] = $request->input("health_questions.{$questionKey}")[0] ?? null;
-        }
-
-        // Handle file upload (if applicable)
-        if ($request->hasFile('file_upload')) {
-            $file = $request->file('file_upload');
-            $fileName = $file->getClientOriginalName();
-            $fileContent = file_get_contents($file->getRealPath());
-            $formData['file_upload'] = $fileContent;
-            $formData['file_name'] = $fileName;
-        }
-
-        // Create the form record
-        Form::create($formData);
-
-        return redirect()->route('payment');
     }
 }

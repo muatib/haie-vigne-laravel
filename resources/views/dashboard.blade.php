@@ -76,7 +76,6 @@
                         <th>Prénom</th>
                         <th>Informations</th>
                         <th>Validitée inscription</th>
-
                     </tr>
                 </thead>
                 <tbody>
@@ -96,9 +95,6 @@
                                 @php
                                     $expirationDate = Carbon::now()->endOfYear()->addYear()->month(6)->day(30);
                                     $monthsRemaining = floor(abs($expirationDate->diffInMonths($form->created_at)));
-
-                                    //test date
-                                    $currentDate = Carbon::create(2024, 30, 6);
                                     $currentDate = Carbon::now();
                                 @endphp
 
@@ -108,8 +104,6 @@
                                     <span class="rem-txt"> {{ $monthsRemaining }} mois avant expiration.</span>
                                 @endif
                             </td>
-
-
                         </tr>
                         <tr class="form-details" id="form-details-{{ $form->id }}" style="display: none;">
                             <td colspan="5">
@@ -119,7 +113,15 @@
                                 <strong>Date de création:</strong> {{ $form->created_at ?? 'N/A' }}<br>
                                 <strong>Total:</strong> {{ $form->total ?? 'N/A' }}<br>
                                 <strong>Méthode de paiement:</strong> {{ $form->payment_method ?? 'N/A' }}<br>
-                                <strong>Cours:</strong> {{ $form->courses ?? 'N/A' }}<br>
+                                <strong>Cours:</strong>
+                                @if(is_string($form->courses))
+                                    {{ $form->courses }}
+                                @elseif(is_array($form->courses))
+                                    {{ implode(', ', $form->courses) }}
+                                @else
+                                    N/A
+                                @endif
+                                <br>
                                 @for ($i = 1; $i <= 9; $i++)
                                     <strong>Question {{ $i }}:</strong>
                                     {{ $form->{"question$i"} ?? 'N/A' }}<br>
@@ -149,7 +151,7 @@
     @if (empty(request('course')))
         <p class="no-course-txt">Veuillez sélectionner un cours pour filtrer les utilisateurs.</p>
     @endif
-    <form action="{{ route('filter.users.by.course') }}" method="GET">
+    <form id="filter-form" action="{{ route('filter.users.by.course') }}" method="GET">
         <select name="course" id="course-select" class="course-select">
             <option value="">Sélectionner un cours</option>
             <option value="lundi_12h30">Lundi 12h30</option>
@@ -162,10 +164,11 @@
             <option value="jeudi_15h00">Jeudi 15h00</option>
             <option value="jeudi_20h00">Jeudi 20h00</option>
         </select>
-        <button type="submit" class="filter-btn ">Filtrer</button>
+        <button type="submit" class="filter-btn">Filtrer</button>
     </form>
 
-    @isset($filteredUsers)
+    <div id="filtered-users-container">
+        @isset($filteredUsers)
         <h3 class="dash-subttl">Utilisateurs inscrits au cours : {{ request('course') }}</h3>
         <a href="{{ route('export.users.by.course', ['course' => request('course')]) }}"><button
                 class="export-btn">Exporter en CSV</button></a>>
@@ -190,7 +193,7 @@
     @else
         @endif
     </div>
-
+</div>
 
     <img class="separation" src="{{ asset('asset/img/separation.png') }}" alt="separation">
 
