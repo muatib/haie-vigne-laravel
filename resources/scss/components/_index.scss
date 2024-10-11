@@ -25,7 +25,7 @@
     flex-direction: column;
     margin: 0 auto;
     justify-content: center;
-    border-radius: 4px;
+    border-radius: 10px;
     width: 90%;
     margin-bottom: 1rem;
     box-shadow: 4px 4px 4px rgba(177, 174, 174, 0.74);
@@ -34,7 +34,7 @@
 
 @media screen and (min-width: 900px){
     .main-txt-container{
-        width: 70%;
+        width: 90%;
     }
     .img-up{
         height: 15rem;

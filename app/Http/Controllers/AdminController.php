@@ -8,22 +8,19 @@ use App\Models\User;
 use App\Models\Form;
 use App\Models\SliderImage;
 use App\Models\Activity;
-
+use App\Models\SliderImage2;
+use App\Models\Actuality;
 /**
  * Controller for handling administrative functions.
  */
 class AdminController extends Controller
 {
-    /**
-     * Display the index page with users, forms, and images.
-     *
-     * @return \Illuminate\View\View
-     */
     public function index()
     {
         $users = [];
         $forms = [];
         $images = [];
+        $actualities = [];
 
         try {
             $users = User::all();
@@ -38,19 +35,29 @@ class AdminController extends Controller
         }
 
         try {
-            $images = SliderImage::all();
+            $images = Activity::with('image')->orderBy('id', 'asc')->get();
 
-            $images = $images->map(function ($image) {
-                $image->full_path = 'data:image/png;base64,' . base64_encode($image->image_data);
-                return $image;
+            $images = $images->map(function ($activity) {
+                $activity->image->full_path = 'data:image/png;base64,' . base64_encode($activity->image->image_data);
+                return $activity;
             });
         } catch (\Exception $e) {
-            Log::error('Error while retrieving images: ' . $e->getMessage());
+            Log::error('Error while retrieving activities: ' . $e->getMessage());
         }
 
-        return view('dashboard', compact('users', 'forms', 'images'));
-    }
+        try {
+            $actualities = Actuality::with('image')->orderBy('id', 'asc')->get();
 
+            $actualities = $actualities->map(function ($actuality) {
+                $actuality->image->full_path = 'data:image/png;base64,' . base64_encode($actuality->image->image_data);
+                return $actuality;
+            });
+        } catch (\Exception $e) {
+            Log::error('Error while retrieving actualities: ' . $e->getMessage());
+        }
+
+        return view('dashboard', compact('users', 'forms', 'images', 'actualities'));
+    }
     /**
      * Filter users by course.
      *
@@ -111,15 +118,20 @@ class AdminController extends Controller
     }
 
     /**
-     * Show the dashboard with activities.
-     *
-     * @return \Illuminate\View\View
-     */
-    public function showDashboard()
-    {
-        $activities = Activity::with('image')->orderBy('id', 'asc')->get();
-        return view('dashboard', ['images' => $activities]);
-    }
+ * Show the dashboard with activities and actualities.
+ *
+ * @return \Illuminate\View\View
+ */
+public function showDashboard()
+{
+    $activities = Activity::with('image')->orderBy('id', 'asc')->get();
+    $actualities = Actuality::with('image')->orderBy('id', 'asc')->get();
+
+    return view('dashboard', [
+        'images' => $activities,
+        'actualities' => $actualities
+    ]);
+}
 
     /**
  * Update activities.
@@ -153,5 +165,56 @@ public function updateActivities(Request $request)
     } catch (\Exception $e) {
         return redirect()->route('dashboard')->with('error', 'Error updating activities: ' . $e->getMessage());
     }
+}
+public function updateSliderImages(Request $request)
+{
+    foreach ($request->file('images') as $id => $image) {
+        $sliderImage = SliderImage::find($id);
+        if ($sliderImage && $image) {
+            $sliderImage->image_data = file_get_contents($image->getRealPath());
+            $sliderImage->image_path = $image->getClientOriginalName();
+            $sliderImage->save();
+        }
+    }
+    return redirect()->back()->with('success', 'Images mises à jour avec succès.');
+}
+
+public function updateActualities(Request $request)
+{
+    try {
+        $actualitiesData = $request->input('actualities');
+
+        foreach ($actualitiesData as $index => $actualityData) {
+            $actuality = Actuality::find($actualityData['id']);
+
+            if ($actuality) {
+                // Update only the fields that have been sent
+                if (isset($actualityData['title'])) $actuality->title = $actualityData['title'];
+                if (isset($actualityData['description'])) $actuality->description = $actualityData['description'];
+                if (isset($actualityData['location'])) $actuality->location = $actualityData['location'];
+                if (isset($actualityData['additional_info_1'])) $actuality->additional_info_1 = $actualityData['additional_info_1'];
+                if (isset($actualityData['additional_info_2'])) $actuality->additional_info_2 = $actualityData['additional_info_2'];
+
+                $actuality->save();
+            }
+        }
+
+        return redirect()->route('dashboard')->with('success', 'Actualities updated successfully');
+    } catch (\Exception $e) {
+        return redirect()->route('dashboard')->with('error', 'Error updating actualities: ' . $e->getMessage());
+    }
+}
+
+public function updateSliderImages2(Request $request)
+{
+    foreach ($request->file('images2') as $id => $image) {
+        $sliderImage = SliderImage2::find($id);
+        if ($sliderImage && $image) {
+            $sliderImage->image_data = file_get_contents($image->getRealPath());
+            $sliderImage->image_path = $image->getClientOriginalName();
+            $sliderImage->save();
+        }
+    }
+    return redirect()->back()->with('success', 'Images des actualités mises à jour avec succès.');
 }
 }

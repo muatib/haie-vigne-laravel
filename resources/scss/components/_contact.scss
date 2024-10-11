@@ -43,4 +43,10 @@
 
     box-shadow: 4px 4px 4px rgba(177, 174, 174, 0.74);
 }
-
+@media screen and (min-width: 900px){
+    .contact-container{
+        width: 50%;
+        display: block;
+        margin: 5rem auto;
+    }
+}

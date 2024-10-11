@@ -230,11 +230,14 @@
         </p>
     </div>
 
-
-    < <label for="file_upload" class="contact-label">Certificat médical :</label>
+<div class="cond-container">
+     <label for="file_upload" class="contact-label">Certificat médical :</label>
         <input class="contact-input form-up" type="file" name="file_upload">
+</div>
 
+        <div class="cond-container">
         <label for="payment_method" class="contact-label">Choisissez votre mode de paiement :</label>
+
         <select class="contact-input pay-choice" name="payment_method" required>
             <option value="" disabled selected>--</option>
             <option value="cheque">Chèque bancaire</option>
@@ -242,7 +245,7 @@
             <option value="carte">Carte bancaire</option>
             <option value="paypal">PayPal</option>
         </select>
-
+</div>
 
 
         <p class="form-txt">Aprés

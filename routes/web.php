@@ -17,7 +17,7 @@ use App\Http\Middleware\AdminMiddleware;
 use App\Http\Controllers\AdminController;
 use App\Models\Form;
 use App\Http\Controllers\UserController;
-
+use App\Http\Controllers\ActivitiesController;
 
 
 
@@ -78,4 +78,7 @@ Route::get('/export-users-by-course/{course}', [AdminController::class, 'exportU
 Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
 Route::get('/admin/edit-activities', [AdminController::class, 'editActivities'])->name('edit.activities');
 Route::post('/admin/update-activities', [AdminController::class, 'updateActivities'])->name('update.activities');
-Route::post('/update-slider-images', [IndexController::class, 'updateSliderImages'])->name('update.slider.images');
+Route::post('/update-slider-images', [AdminController::class, 'updateSliderImages'])->name('update.slider.images');
+Route::post('/update-actualities', [AdminController::class, 'updateActualities'])->name('update.actualities');
+Route::post('/update-slider-images2', [AdminController::class, 'updateSliderImages2'])->name('update.slider.images2');
+

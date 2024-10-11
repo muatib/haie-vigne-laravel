@@ -5,12 +5,14 @@
     font-weight: 500;
     font-size: 5rem;
 }
+
 .dash-subttl {
     color: black;
     margin: 1rem 0 0.5rem 0;
     font-weight: 500;
     font-size: 1.5rem;
 }
+
 .custom-table {
     width: 100%;
     border-collapse: collapse;
@@ -42,6 +44,7 @@
         font-weight: bold;
         margin-right: 5px;
     }
+
     input[type="checkbox"] {
         width: 20px;
         height: 20px;
@@ -52,6 +55,7 @@
     margin: 0 20px;
     overflow-x: auto;
 }
+
 .btn-danger {
     border: 1px solid red;
     background-color: $lavander;
@@ -66,6 +70,7 @@
         background-color: #c82333;
     }
 }
+
 .alert {
     padding: 15px;
     margin-bottom: 20px;
@@ -86,6 +91,7 @@
     font-size: 2rem;
     width: 60%;
 }
+
 .btn-sm {
     padding: 0.25rem 0.5rem;
     font-size: 0.875rem;
@@ -109,6 +115,7 @@
     background-color: #0056b3;
     border-color: #0056b3;
 }
+
 .course-select {
     padding: 0.8rem;
     width: 15rem;
@@ -117,6 +124,7 @@
     margin-right: 2rem;
     margin-bottom: 3rem;
 }
+
 .export-btn {
     color: #fff;
     background-color: #007bff;
@@ -126,40 +134,48 @@
     margin-bottom: 2rem;
     font-size: 1rem;
 }
+
 .exp-txt {
     color: #c82333;
 }
+
 .rem-txt {
     color: green;
 }
+
 .no-course-txt {
     color: black;
     margin-bottom: 2rem;
     font-family: Roboto;
 }
 
-/* Styles pour les formulaires côte à côte */
+/* Styles pour les formulaires */
 .forms-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin: 0 20px;
+}
+
+.content-forms {
     display: flex;
     justify-content: space-between;
     gap: 20px;
-    margin: 0 20px;
+}
+
+.image-forms {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    margin-top: 20px;
 }
 
 .form-column {
     flex: 1;
 }
 
-.form-column.activities-column {
-    max-width: calc(100% - 248px);
-}
-
-.form-column.slider-column {
-    width: 248px;
-    flex: none;
-}
-
 .form-column .activities-form,
+.form-column .actualities-form,
 .form-column .slider-image-form {
     margin: 0;
     height: auto;
@@ -170,7 +186,8 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.form-column .activity-section {
+.form-column .activity-section,
+.form-column .actuality-section {
     background-color: white;
     border: 1px solid #ddd;
     border-radius: 4px;
@@ -178,7 +195,8 @@
     margin-bottom: 10px;
 }
 
-.form-column .activity-section h3 {
+.form-column .activity-section h3,
+.form-column .actuality-section h3 {
     color: #333;
     border-bottom: 2px solid #007bff;
     padding-bottom: 5px;
@@ -202,7 +220,8 @@
     height: 60px;
 }
 
-.form-column .activity-image {
+.form-column .activity-image,
+.form-column .actuality-image {
     max-width: 100px;
     height: auto;
     display: block;
@@ -312,14 +331,18 @@
     background-color: #45a049;
     transform: translateY(-2px);
 }
-
+.courses-user{
+    background-color: $lavander;
+    padding: 2rem;
+    border: 1px solid black;
+}
 @media (max-width: 1200px) {
-    .forms-container {
+    .content-forms,
+    .image-forms {
         flex-direction: column;
     }
 
-    .form-column.activities-column,
-    .form-column.slider-column {
+    .form-column {
         max-width: 100%;
         width: 100%;
     }

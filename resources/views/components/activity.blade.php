@@ -1,20 +1,22 @@
+
+@vite(['resources/js/app.js', 'resources/js/sliders.js'])
 <section class="activity-slider">
     <h2 class="slider-ttl">Les activités de l'association</h2>
     @if ($sliderImages->isEmpty())
         <p>Aucune image n'est disponible.</p>
     @else
         @foreach ($sliderImages as $index => $image)
-            <div class="slide-container ">
+            <div class="slide-container"> <!-- Ensure this class matches JS selector -->
                 <img class="slide-image" src="{{ $image->full_path }}" alt="{{ $image->alt_text }}">
-                <button class="slider-left-arrow"><</button>
+                <button class="slide-left-arrow"><</button>
                 <a href="{{ url('activityContent#activity-box-' . ($index + 1)) }}">
                     <button class="slider-btn">En savoir plus</button>
                 </a>
-                <button class="slider-right-arrow">></button>
+                <button class="slide-right-arrow">></button>
             </div>
         @endforeach
     @endif
-</section>
+  </section>
 
 
 <section class="activity-lg">
@@ -59,3 +61,4 @@
         if (firstImg) showContent(firstImg);
     });
     </script>
+

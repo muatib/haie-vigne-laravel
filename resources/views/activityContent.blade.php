@@ -12,7 +12,7 @@
     <section id="activity-box-{{ $index + 1 }}" class="activity-box activity-box-lg">
         <h1 class="activity-ttl">{{ $activity->title }}</h1>
         <p class="activity-txt">{{ $activity->description }}</p>
-        <img class="activity-img" src="data:image/png;base64,{{ base64_encode($activity->image->image_data) }}"
+        <img class="activity-img activity-img-lg" src="data:image/png;base64,{{ base64_encode($activity->image->image_data) }}"
             alt="{{ $activity->image->alt_text }}">
         <p class="activity-txt">{{ $activity->location }}</p>
         <div class="box-content">

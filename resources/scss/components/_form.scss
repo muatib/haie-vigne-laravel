@@ -173,10 +173,10 @@
     box-shadow: 4px 4px 4px rgba(177, 174, 174, 0.74);
     margin-bottom: 2rem;
 }
-.cond-txt{
+.cond-txt {
     font-family: Roboto;
 }
-.cond-container{
+.cond-container {
     background-color: $lavander;
     padding: 0.5rem;
     border: 1px solid #ccc;
@@ -186,29 +186,64 @@
     margin: 1rem auto;
     box-sizing: border-box;
     text-align: center;
-
 }
-.contact-label{
-font-size: 2rem;
-margin: 1rem 0 1rem 0;
-text-align: center;
+.contact-label {
+    font-size: 2rem;
+    margin: 1rem 0 1rem 0;
+    text-align: center;
 }
-.separation-form{
+.separation-form {
     display: block;
     margin: 2rem auto;
 }
-.pay-choice{
+.pay-choice {
     margin-top: 1rem;
     background-color: $lavander;
     border-radius: 5px;
 }
 @media screen and (min-width: 900px) {
     .down-form,
-     .form-container{
-        width: 60%;
+    .form-container {
+        width: 50%;
     }
-.form-scd-ttl{
-    margin-bottom: 3rem;
-    margin-top: 2rem;
-}
+    .form-scd-ttl {
+        margin-bottom: 3rem;
+        margin-top: 2rem;
+    }
+    .course-ttl,
+    .course-type {
+        margin-left: 2rem;
+    }
+
+    .course-time,
+    .course-time-1,
+    .course-time-2 {
+        margin-left: -3rem;
+        text-align: center;
+    }
+    .course-input {
+        margin-right: 2rem;
+        align-items: center;
+    }
+    .health-questions {
+        margin-left: 2rem;
+    }
+    .total,
+    .nbtxt,
+    .cond-container {
+        width: 70%;
+        display: block;
+        margin: 3rem auto;
+    }
+    .form-up[type="file"]{
+        border: none;
+        box-shadow: none;
+        margin-left: 0.5rem;
+        text-align: center;
+
+    }
+
+    .contact-label{
+        margin-right: 2rem;
+    }
 }

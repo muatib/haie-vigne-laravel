@@ -5,7 +5,3 @@
 @include('components.contact-form')
 
 @include('components.footer')
-
-</body>
-
-</html

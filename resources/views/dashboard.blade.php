@@ -196,98 +196,187 @@
 
 
     <div class="forms-container">
-        <div class="form-column">
-            <div class="table-container activities-form">
-                <h2 class="dash-subttl">Éditer les activités</h2>
+        <div class="content-forms">
+            <div class="form-column">
+                <div class="table-container activities-form">
+                    <h2 class="dash-subttl">Éditer les activités</h2>
 
-                <p>Test d'affichage du formulaire des activités</p>
+                    <p>Test d'affichage du formulaire des activités</p>
 
-                @if (isset($images))
-                    <p>La variable $images est définie.</p>
-                    @if ($images->count() > 0)
-                        <p>Il y a {{ $images->count() }} images.</p>
-                        <form action="{{ route('update.activities') }}" method="POST">
-                            @csrf
-                            @foreach ($images as $index => $image)
-                                <div class="activity-section activity-edit-form">
-                                    <h3>Activité {{ $index + 1 }}</h3>
-                                    <input type="hidden" name="activities[{{ $index }}][id]" value="{{ $image->id }}">
-                                    <div class="form-group">
-                                        <input type="text" name="activities[{{ $index }}][title]" class="form-control"
-                                            value="{{ $image->title ?? old('activities.' . $index . '.title') }}"
-                                            placeholder="Titre de l'activité">
+                    @if (isset($images))
+                        <p>La variable $images est définie.</p>
+                        @if ($images->count() > 0)
+                            <p>Il y a {{ $images->count() }} images.</p>
+                            <form action="{{ route('update.activities') }}" method="POST">
+                                @csrf
+                                @foreach ($images as $index => $image)
+                                    <div class="activity-section activity-edit-form">
+                                        <h3>Activité {{ $index + 1 }}</h3>
+                                        <input type="hidden" name="activities[{{ $index }}][id]" value="{{ $image->id }}">
+                                        <div class="form-group">
+                                            <input type="text" name="activities[{{ $index }}][title]" class="form-control"
+                                                value="{{ $image->title ?? old('activities.' . $index . '.title') }}"
+                                                placeholder="Titre de l'activité">
+                                        </div>
+                                        <div class="form-group">
+                                            <textarea name="activities[{{ $index }}][description]" class="form-control"
+                                                placeholder="Description de l'activité">{{ $image->description ?? old('activities.' . $index . '.description') }}</textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" name="activities[{{ $index }}][location]" class="form-control"
+                                                value="{{ $image->location ?? old('activities.' . $index . '.location') }}"
+                                                placeholder="Lieu">
+                                        </div>
+                                        <div class="form-group">
+                                            <textarea name="activities[{{ $index }}][schedule]" class="form-control" rows="4"
+                                                placeholder="Horaire">{{ $image->schedule ?? old('activities.' . $index . '.schedule') }}</textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <textarea name="activities[{{ $index }}][coach]" class="form-control" rows="4"
+                                                placeholder="Coach">{{ $image->coach ?? old('activities.' . $index . '.coach') }}</textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" name="activities[{{ $index }}][additional_line1]"
+                                                class="form-control"
+                                                value="{{ $image->additional_line1 ?? old('activities.' . $index . '.additional_line1') }}"
+                                                placeholder="Ligne supplémentaire 1">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" name="activities[{{ $index }}][additional_line2]"
+                                                class="form-control"
+                                                value="{{ $image->additional_line2 ?? old('activities.' . $index . '.additional_line2') }}"
+                                                placeholder="Ligne supplémentaire 2">
+                                        </div>
+                                        @if(isset($image->image) && $image->image->image_data)
+                                            <img src="data:image/png;base64,{{ base64_encode($image->image->image_data) }}"
+                                                 alt="{{ $image->image->alt_text ?? 'Image de l\'activité' }}"
+                                                 class="activity-image">
+                                        @else
+                                            <p>Aucune image disponible pour cette activité</p>
+                                        @endif
                                     </div>
-                                    <div class="form-group">
-                                        <textarea name="activities[{{ $index }}][description]" class="form-control"
-                                            placeholder="Description de l'activité">{{ $image->description ?? old('activities.' . $index . '.description') }}</textarea>
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="text" name="activities[{{ $index }}][location]" class="form-control"
-                                            value="{{ $image->location ?? old('activities.' . $index . '.location') }}"
-                                            placeholder="Lieu">
-                                    </div>
-                                    <div class="form-group">
-                                        <textarea name="activities[{{ $index }}][schedule]" class="form-control" rows="4"
-                                            placeholder="Horaire">{{ $image->schedule ?? old('activities.' . $index . '.schedule') }}</textarea>
-                                    </div>
-                                    <div class="form-group">
-                                        <textarea name="activities[{{ $index }}][coach]" class="form-control" rows="4"
-                                            placeholder="Coach">{{ $image->coach ?? old('activities.' . $index . '.coach') }}</textarea>
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="text" name="activities[{{ $index }}][additional_line1]"
-                                            class="form-control"
-                                            value="{{ $image->additional_line1 ?? old('activities.' . $index . '.additional_line1') }}"
-                                            placeholder="Ligne supplémentaire 1">
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="text" name="activities[{{ $index }}][additional_line2]"
-                                            class="form-control"
-                                            value="{{ $image->additional_line2 ?? old('activities.' . $index . '.additional_line2') }}"
-                                            placeholder="Ligne supplémentaire 2">
-                                    </div>
-                                    <img src="{{ $image->full_path }}" alt="{{ $image->alt_text }}" class="activity-image">
-                                </div>
-                            @endforeach
-                            <button type="submit" class="btn btn-primary mt-3 btn-update">Mettre à jour les activités</button>
-                        </form>
+                                @endforeach
+                                <button type="submit" class="btn btn-primary mt-3 btn-update">Mettre à jour les activités</button>
+                            </form>
+                        @else
+                            <p>La collection $images est vide.</p>
+                        @endif
                     @else
-                        <p>La collection $images est vide.</p>
+                        <p>La variable $images n'est pas définie.</p>
                     @endif
-                @else
-                    <p>La variable $images n'est pas définie.</p>
-                @endif
+                </div>
+            </div>
+
+            <div class="form-column">
+                <div class="table-container actualities-form">
+                    <h2 class="dash-subttl">Éditer les actualités</h2>
+
+                    @if (isset($actualities))
+                        @if ($actualities->count() > 0)
+                            <p>Il y a {{ $actualities->count() }} actualités.</p>
+                            <form action="{{ route('update.actualities') }}" method="POST">
+                                @csrf
+                                @foreach ($actualities as $index => $actuality)
+                                    <div class="actuality-section actuality-edit-form">
+                                        <h3>Actualité {{ $index + 1 }}</h3>
+                                        <input type="hidden" name="actualities[{{ $index }}][id]" value="{{ $actuality->id }}">
+                                        <div class="form-group">
+                                            <input type="text" name="actualities[{{ $index }}][title]" class="form-control"
+                                                value="{{ $actuality->title ?? old('actualities.' . $index . '.title') }}"
+                                                placeholder="Titre de l'actualité">
+                                        </div>
+                                        <div class="form-group">
+                                            <textarea name="actualities[{{ $index }}][description]" class="form-control"
+                                                placeholder="Description de l'actualité">{{ $actuality->description ?? old('actualities.' . $index . '.description') }}</textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" name="actualities[{{ $index }}][location]" class="form-control"
+                                                value="{{ $actuality->location ?? old('actualities.' . $index . '.location') }}"
+                                                placeholder="Lieu">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" name="actualities[{{ $index }}][additional_info_1]"
+                                                class="form-control"
+                                                value="{{ $actuality->additional_info_1 ?? old('actualities.' . $index . '.additional_info_1') }}"
+                                                placeholder="Information supplémentaire 1">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" name="actualities[{{ $index }}][additional_info_2]"
+                                                class="form-control"
+                                                value="{{ $actuality->additional_info_2 ?? old('actualities.' . $index . '.additional_info_2') }}"
+                                                placeholder="Information supplémentaire 2">
+                                        </div>
+                                        <img src="data:image/png;base64,{{ base64_encode($actuality->image->image_data) }}" alt="{{ $actuality->image->alt_text }}" class="actuality-image">
+                                    </div>
+                                @endforeach
+                                <button type="submit" class="btn btn-primary mt-3 btn-update">Mettre à jour les actualités</button>
+                            </form>
+                        @else
+                            <p>Aucune actualité n'est disponible.</p>
+                        @endif
+                    @else
+                        <p>La variable $actualities n'est pas définie.</p>
+                    @endif
+                </div>
             </div>
         </div>
 
-
-    <div class="form-column">
-        <div class="slider-image-form">
-            <h2 class="dash-subttl">Modifier les images des activités</h2>
-            <form action="{{ route('update.slider.images') }}" method="POST" enctype="multipart/form-data">
-                @csrf
-                @method('POST')
-                @php
-                    $sliderImages = App\Models\SliderImage::all();
-                @endphp
-                <div class="image-mosaic">
-                    @foreach ($sliderImages as $image)
-                        <div class="image-item">
-                            <img src="data:image/png;base64,{{ base64_encode($image->image_data) }}"
-                                alt="{{ $image->alt_text }}">
-                            <div class="image-overlay">
-                                <label for="image-{{ $image->id }}" class="file-input-label">Choisir</label>
-                                <input type="file" id="image-{{ $image->id }}" name="images[{{ $image->id }}]"
-                                    class="file-input" accept="image/*">
-                            </div>
+        <div class="image-forms">
+            <div class="form-column">
+                <div class="slider-image-form">
+                    <h2 class="dash-subttl">Modifier les images des activités</h2>
+                    <form action="{{ route('update.slider.images') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        @method('POST')
+                        @php
+                            $sliderImages = App\Models\SliderImage::all();
+                        @endphp
+                        <div class="image-mosaic">
+                            @foreach ($sliderImages as $image)
+                                <div class="image-item">
+                                    <img src="data:image/png;base64,{{ base64_encode($image->image_data) }}"
+                                        alt="{{ $image->alt_text }}">
+                                    <div class="image-overlay">
+                                        <label for="image-{{ $image->id }}" class="file-input-label">Choisir</label>
+                                        <input type="file" id="image-{{ $image->id }}" name="images[{{ $image->id }}]"
+                                            class="file-input" accept="image/*">
+                                    </div>
+                                </div>
+                            @endforeach
                         </div>
-                    @endforeach
+                        <div class="button-container">
+                            <button type="submit" class="submit-button">Mettre à jour</button>
+                        </div>
+                    </form>
                 </div>
-                <div class="button-container">
-                    <button type="submit" class="submit-button">Mettre à jour</button>
+            </div>
+            <div class="form-column">
+                <div class="slider-image-form">
+                    <h2 class="dash-subttl">Modifier les images des actualités</h2>
+                    <form action="{{ route('update.slider.images2') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        @method('POST')
+                        @php
+                            $sliderImages2 = App\Models\SliderImage2::all();
+                        @endphp
+                        <div class="image-mosaic">
+                            @foreach ($sliderImages2 as $image)
+                                <div class="image-item">
+                                    <img src="data:image/png;base64,{{ base64_encode($image->image_data) }}"
+                                        alt="{{ $image->alt_text }}">
+                                    <div class="image-overlay">
+                                        <label for="image2-{{ $image->id }}" class="file-input-label">Choisir</label>
+                                        <input type="file" id="image2-{{ $image->id }}" name="images2[{{ $image->id }}]"
+                                            class="file-input" accept="image/*">
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                        <div class="button-container">
+                            <button type="submit" class="submit-button">Mettre à jour</button>
+                        </div>
+                    </form>
                 </div>
-            </form>
+            </div>
         </div>
     </div>
-
-</div>
