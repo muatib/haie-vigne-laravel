@@ -362,3 +362,21 @@
     }
 
 }
+.badge {
+    display: inline-block;
+    margin-bottom: 5px;
+}
+
+.exp-txt, .rem-txt {
+    display: block;
+    margin-top: 5px;
+    font-size: 0.9em;
+}
+.bg-warning {
+    background-color: #ffc107;
+    color: #212529;
+}
+.bg-success {
+    background-color: #28a745;
+    color: #fff;
+}

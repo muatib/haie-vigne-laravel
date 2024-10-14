@@ -1,11 +1,13 @@
 
 .contact-ttl {
-    color: black;
-    font-weight: 200;
-    font-size: 2.5rem;
+    font-size: 3.5rem;
     text-align: center;
+    margin: 1rem;
+    font-weight: 550;
+    text-decoration: underline;
     margin-top: 3rem;
     margin-bottom: 2rem;
+    color: black;
 }
 .contact-input {
     margin-bottom: 1rem;
@@ -45,7 +47,7 @@
 }
 @media screen and (min-width: 900px){
     .contact-container{
-        width: 50%;
+        width: 70%;
         display: block;
         margin: 5rem auto;
     }

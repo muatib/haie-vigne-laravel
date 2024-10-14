@@ -31,9 +31,20 @@ class Form extends Model
         'file_upload',
         'file_name',
         'total',
-        'user_id'
+        'user_id',
+        'rgpd_consent',
+        'rgpd_consent_date',
+        'needs_medical_certificate',
+        'medical_certificate_deadline',
+        'registration_status',
+
     ];
     protected $casts = [
         'courses' => 'array',
+    ];
+    protected $dates = [
+        'created_at',
+        'updated_at',
+        'medical_certificate_deadline',
     ];
 }

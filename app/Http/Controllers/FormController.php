@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Hash;
+use App\Services\NonceGenerator;
 
 /**
  * Controller for handling form-related operations.
@@ -21,18 +22,19 @@ class FormController extends Controller
     /**
      * Display the form view.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function showForm()
     {
-        return view('form');
+        $nonce = NonceGenerator::generate();
+        return view('form', compact('nonce'));
     }
 
     /**
      * Delete selected forms.
      *
      * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function deleteSelected(Request $request)
     {
@@ -56,7 +58,7 @@ class FormController extends Controller
      * Download a file associated with a form.
      *
      * @param Form $form
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function downloadFile(Form $form)
     {
@@ -77,10 +79,18 @@ class FormController extends Controller
      * Handle form submission.
      *
      * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function submitForm(Request $request)
     {
+
+        Log::info('Nonce reçu : ' . $request->input('nonce'));
+        Log::info('Nonce en session : ' . session('nonce'));
+
+        if (!NonceGenerator::verify($request->input('nonce'))) {
+            return redirect()->back()->with('error', 'Invalid form submission. Please try again.');
+        }
+        Log::info('Nonce vérifié avec succès');
         $currentDate = now();
         $startDate = Carbon::create($currentDate->year, 9, 1);
         $endDate = Carbon::create($currentDate->year, 6, 30);
@@ -99,6 +109,8 @@ class FormController extends Controller
             'total' => 'required|numeric',
             'courses' => 'required|array|min:1',
             'payment_method' => 'required|in:cheque,virement,carte,paypal',
+            'rgpd_consent' => 'required|accepted',
+            'nonce' => 'required',
         ];
 
         if (!Auth::check()) {
@@ -106,7 +118,7 @@ class FormController extends Controller
             $rules['password'] = 'required|min:8|confirmed';
         }
 
-        $validator = Validator::make($request->all(), $rules, [
+        $messages = [
             'email.unique' => 'This email address is already in use.',
             'phone.unique' => 'This phone number is already in use.',
             'courses.required' => 'Please select at least one course.',
@@ -114,7 +126,10 @@ class FormController extends Controller
             'payment_method.required' => 'Please select a payment method.',
             'payment_method.in' => 'The selected payment method is invalid.',
             'password.confirmed' => 'The password confirmation does not match.',
-        ]);
+            'rgpd_consent.accepted' => 'Vous devez accepter la politique de confidentialité pour continuer.',
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $messages);
 
         $validator->after(function ($validator) use ($request) {
             $allQuestionsAnswered = true;
@@ -147,17 +162,28 @@ class FormController extends Controller
                 $user = Auth::user();
             }
 
-            $formData = $request->except(['_token', 'courses', 'health_questions', 'password', 'password_confirmation']);
+            $formData = $request->except(['_token', 'courses', 'health_questions', 'password', 'password_confirmation', 'rgpd_consent']);
             $formData['courses'] = json_encode($request->input('courses', []));
             $formData['total'] = $request->input('total');
             $formData['payment_method'] = $request->input('payment_method');
             $formData['user_id'] = $user->id;
+            $formData['rgpd_consent'] = true;
+            $formData['rgpd_consent_date'] = now();
 
-            // Handle health questionnaire responses
+            // Vérifier les réponses au questionnaire de santé
+            $needsMedicalCertificate = false;
             for ($i = 1; $i <= 9; $i++) {
                 $questionKey = "question{$i}";
                 $formData[$questionKey] = $request->input("health_questions.{$questionKey}")[0] ?? null;
+                if ($formData[$questionKey] === 'oui') {
+                    $needsMedicalCertificate = true;
+                }
             }
+
+            // Ajouter les champs liés au certificat médical
+            $formData['needs_medical_certificate'] = $needsMedicalCertificate;
+            $formData['medical_certificate_deadline'] = $needsMedicalCertificate ? now()->addDays(10) : null;
+            $formData['registration_status'] = $needsMedicalCertificate ? 'pending' : 'completed';
 
             // Handle file upload (if applicable)
             if ($request->hasFile('file_upload')) {
@@ -169,9 +195,16 @@ class FormController extends Controller
             }
 
             // Create the form record
-            Form::create($formData);
+            $form = Form::create($formData);
 
-            return redirect()->route('payment')->with('success', 'Form submitted successfully. Proceeding to payment.');
+            // Log RGPD consent
+            Log::info("RGPD consent given by user {$user->id} on " . now() . ". Nonce: " . $request->input('nonce'));
+
+            if ($needsMedicalCertificate) {
+                return redirect()->route('payment')->with('info', 'Votre inscription sera définitive après réception du certificat médical dans un délai de 10 jours. Vous pouvez procéder au paiement.');
+            } else {
+                return redirect()->route('payment')->with('success', 'Form submitted successfully. Proceeding to payment.');
+            }
         } catch (\Exception $e) {
             Log::error('Error submitting form: ' . $e->getMessage());
             return redirect()->back()->with('error', 'An error occurred while submitting the form. Please try again.');

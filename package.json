@@ -14,5 +14,11 @@
         "sass": "^1.56.1",
         "sass-loader": "^16.0.2",
         "vite": "^5.4.7"
+    },
+    "dependencies": {
+        "@fullcalendar/core": "^6.1.15",
+        "@fullcalendar/daygrid": "^6.1.15",
+        "@fullcalendar/interaction": "^6.1.15",
+        "@fullcalendar/vue3": "^6.1.15"
     }
 }

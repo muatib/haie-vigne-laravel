@@ -11,6 +11,7 @@ use App\Models\SliderImage;
 use App\Models\Activity;
 use App\Models\SliderImage2;
 use App\Models\Actuality;
+use App\Services\NonceGenerator;
 
 class AdminController extends Controller
 {
@@ -139,6 +140,10 @@ class AdminController extends Controller
 
     public function updateActivities(Request $request)
     {
+        if (!NonceGenerator::verify($request->input('nonce'))) {
+            return redirect()->route('dashboard')->with('error', 'Invalid form submission. Please try again.');
+        }
+
         $validator = Validator::make($request->all(), [
             'activities' => 'required|array',
             'activities.*.id' => 'required|exists:activities,id',
@@ -174,6 +179,10 @@ class AdminController extends Controller
 
     public function updateSliderImages(Request $request)
     {
+        if (!NonceGenerator::verify($request->input('nonce'))) {
+            return redirect()->back()->with('error', 'Invalid form submission. Please try again.');
+        }
+
         $validator = Validator::make($request->all(), [
             'images' => 'required|array',
             'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
@@ -199,6 +208,10 @@ class AdminController extends Controller
 
     public function updateActualities(Request $request)
     {
+        if (!NonceGenerator::verify($request->input('nonce'))) {
+            return redirect()->route('dashboard')->with('error', 'Invalid form submission. Please try again.');
+        }
+
         $validator = Validator::make($request->all(), [
             'actualities' => 'required|array',
             'actualities.*.id' => 'required|exists:actualities,id',
@@ -232,6 +245,10 @@ class AdminController extends Controller
 
     public function updateSliderImages2(Request $request)
     {
+        if (!NonceGenerator::verify($request->input('nonce'))) {
+            return redirect()->back()->with('error', 'Invalid form submission. Please try again.');
+        }
+
         $validator = Validator::make($request->all(), [
             'images2' => 'required|array',
             'images2.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048',

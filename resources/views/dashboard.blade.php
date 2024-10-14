@@ -1,6 +1,7 @@
 @include('components.header')
 @php
     use Carbon\Carbon;
+    $nonce = App\Services\NonceGenerator::generate();
 @endphp
 @if (session('success'))
     <div class="alert alert-success">
@@ -20,6 +21,7 @@
         <div id="message-container"></div>
         <form action="{{ route('delete.selected.users') }}" method="POST">
             @csrf
+            <input type="hidden" name="nonce" value="{{ $nonce }}">
             <button type="submit" class="btn btn-danger mb-3">Supprimer les utilisateurs sélectionnés</button>
             <table class="custom-table">
                 <thead>
@@ -67,6 +69,7 @@
     @if ($forms->count() > 0)
         <form action="{{ route('delete.selected.forms') }}" method="POST">
             @csrf
+            <input type="hidden" name="nonce" value="{{ $nonce }}">
             <button type="submit" class="btn btn-danger mb-3">Supprimer les formulaires sélectionnés</button>
             <table class="custom-table">
                 <thead>
@@ -92,17 +95,32 @@
                                     data-form-id="{{ $form->id }}">Détails</button>
                             </td>
                             <td>
+                                @if ($form->needs_medical_certificate)
+                                    <span class="badge bg-warning text-dark">En attente du certificat médical</span>
+                                    <br>
+                                    <small>
+                                        Date limite :
+                                        @if ($form->medical_certificate_deadline)
+                                            {{ \Carbon\Carbon::parse($form->medical_certificate_deadline)->format('d/m/Y') }}
+                                        @else
+                                            N/A
+                                        @endif
+                                    </small>
+                                @else
+                                    <span class="badge bg-success">Inscription complète</span>
+                                @endif
+                                <br>
                                 @php
                                     $expirationDate = Carbon::now()->endOfYear()->addYear()->month(6)->day(30);
                                     $monthsRemaining = floor(abs($expirationDate->diffInMonths($form->created_at)));
                                     $currentDate = Carbon::now();
                                 @endphp
-
                                 @if ($currentDate >= $expirationDate)
                                     <span class="exp-txt">Expiré.</span>
                                 @else
-                                    <span class="rem-txt"> {{ $monthsRemaining }} mois avant expiration.</span>
+                                    <span class="rem-txt">{{ $monthsRemaining }} mois avant expiration.</span>
                                 @endif
+
                             </td>
                         </tr>
                         <tr class="form-details" id="form-details-{{ $form->id }}" style="display: none;">
@@ -114,7 +132,7 @@
                                 <strong>Total:</strong> {{ $form->total ?? 'N/A' }}<br>
                                 <strong>Méthode de paiement:</strong> {{ $form->payment_method ?? 'N/A' }}<br>
                                 <strong>Cours:</strong>
-                                @if(is_string($form->courses))
+                                @if (is_string($form->courses))
                                     {{ $form->courses }}
                                 @elseif(is_array($form->courses))
                                     {{ implode(', ', $form->courses) }}
@@ -133,6 +151,25 @@
                                 @else
                                     N/A
                                 @endif
+                                <strong>Statut de l'inscription:</strong>
+                                @if ($form->needs_medical_certificate)
+                                    En attente du certificat médical
+                                    (Date limite :
+                                    @if ($form->medical_certificate_deadline)
+                                        @if (is_string($form->medical_certificate_deadline))
+                                            {{ \Carbon\Carbon::parse($form->medical_certificate_deadline)->format('d/m/Y') }}
+                                        @else
+                                            {{ $form->medical_certificate_deadline->format('d/m/Y') }}
+                                        @endif
+                                    @else
+                                        N/A
+                                    @endif
+                                    )
+                                @else
+                                    Inscription complète
+                                @endif
+                                <br>
+                                <strong>Statut:</strong> {{ $form->registration_status }}
                             </td>
                         </tr>
                     @endforeach
@@ -169,33 +206,36 @@
 
     <div id="filtered-users-container">
         @isset($filteredUsers)
-        <h3 class="dash-subttl">Utilisateurs inscrits au cours : {{ request('course') }}</h3>
-        <a href="{{ route('export.users.by.course', ['course' => request('course')]) }}"><button
-                class="export-btn">Exporter en CSV</button></a>>
-        <table class="custom-table">
-            <thead>
-                <tr>
-                    <th>Nom</th>
-                    <th>Prénom</th>
-                    <th>Téléphone</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($filteredUsers as $user)
+            <h3 class="dash-subttl">Utilisateurs inscrits au cours : {{ request('course') }}</h3>
+            <a href="{{ route('export.users.by.course', ['course' => request('course')]) }}"><button
+                    class="export-btn">Exporter en CSV</button></a>>
+            <table class="custom-table">
+                <thead>
                     <tr>
-                        <td>{{ $user->lastname }}</td>
-                        <td>{{ $user->firstname }}</td>
-                        <td>{{ $user->form->phone ?? 'N/A' }}</td>
+                        <th>Nom</th>
+                        <th>Prénom</th>
+                        <th>Téléphone</th>
                     </tr>
-                @endforeach
-            </tbody>
-        </table>
-    @else
-        @endif
+                </thead>
+                <tbody>
+                    @foreach ($filteredUsers as $user)
+                        <tr>
+                            <td>{{ $user->lastname }}</td>
+                            <td>{{ $user->firstname }}</td>
+                            <td>{{ $user->form->phone ?? 'N/A' }}</td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        @else
+            @endif
+        </div>
     </div>
-</div>
 
     <img class="separation" src="{{ asset('asset/img/separation.png') }}" alt="separation">
+
+
+
 
 
     <div class="forms-container">
@@ -212,12 +252,15 @@
                             <p>Il y a {{ $images->count() }} images.</p>
                             <form action="{{ route('update.activities') }}" method="POST">
                                 @csrf
+                                <input type="hidden" name="nonce" value="{{ $nonce }}">
                                 @foreach ($images as $index => $image)
                                     <div class="activity-section activity-edit-form">
                                         <h3>Activité {{ $index + 1 }}</h3>
-                                        <input type="hidden" name="activities[{{ $index }}][id]" value="{{ $image->id }}">
+                                        <input type="hidden" name="activities[{{ $index }}][id]"
+                                            value="{{ $image->id }}">
                                         <div class="form-group">
-                                            <input type="text" name="activities[{{ $index }}][title]" class="form-control"
+                                            <input type="text" name="activities[{{ $index }}][title]"
+                                                class="form-control"
                                                 value="{{ $image->title ?? old('activities.' . $index . '.title') }}"
                                                 placeholder="Titre de l'activité">
                                         </div>
@@ -226,7 +269,8 @@
                                                 placeholder="Description de l'activité">{{ $image->description ?? old('activities.' . $index . '.description') }}</textarea>
                                         </div>
                                         <div class="form-group">
-                                            <input type="text" name="activities[{{ $index }}][location]" class="form-control"
+                                            <input type="text" name="activities[{{ $index }}][location]"
+                                                class="form-control"
                                                 value="{{ $image->location ?? old('activities.' . $index . '.location') }}"
                                                 placeholder="Lieu">
                                         </div>
@@ -235,31 +279,33 @@
                                                 placeholder="Horaire">{{ $image->schedule ?? old('activities.' . $index . '.schedule') }}</textarea>
                                         </div>
                                         <div class="form-group">
-                                            <textarea name="activities[{{ $index }}][coach]" class="form-control" rows="4"
-                                                placeholder="Coach">{{ $image->coach ?? old('activities.' . $index . '.coach') }}</textarea>
+                                            <textarea name="activities[{{ $index }}][coach]" class="form-control" rows="4" placeholder="Coach">{{ $image->coach ?? old('activities.' . $index . '.coach') }}</textarea>
                                         </div>
                                         <div class="form-group">
-                                            <input type="text" name="activities[{{ $index }}][additional_line1]"
+                                            <input type="text"
+                                                name="activities[{{ $index }}][additional_line1]"
                                                 class="form-control"
                                                 value="{{ $image->additional_line1 ?? old('activities.' . $index . '.additional_line1') }}"
                                                 placeholder="Ligne supplémentaire 1">
                                         </div>
                                         <div class="form-group">
-                                            <input type="text" name="activities[{{ $index }}][additional_line2]"
+                                            <input type="text"
+                                                name="activities[{{ $index }}][additional_line2]"
                                                 class="form-control"
                                                 value="{{ $image->additional_line2 ?? old('activities.' . $index . '.additional_line2') }}"
                                                 placeholder="Ligne supplémentaire 2">
                                         </div>
-                                        @if(isset($image->image) && $image->image->image_data)
+                                        @if (isset($image->image) && $image->image->image_data)
                                             <img src="data:image/png;base64,{{ base64_encode($image->image->image_data) }}"
-                                                 alt="{{ $image->image->alt_text ?? 'Image de l\'activité' }}"
-                                                 class="activity-image">
+                                                alt="{{ $image->image->alt_text ?? 'Image de l\'activité' }}"
+                                                class="activity-image">
                                         @else
                                             <p>Aucune image disponible pour cette activité</p>
                                         @endif
                                     </div>
                                 @endforeach
-                                <button type="submit" class="btn btn-primary mt-3 btn-update">Mettre à jour les activités</button>
+                                <button type="submit" class="btn btn-primary mt-3 btn-update">Mettre à jour les
+                                    activités</button>
                             </form>
                         @else
                             <p>La collection $images est vide.</p>
@@ -279,12 +325,15 @@
                             <p>Il y a {{ $actualities->count() }} actualités.</p>
                             <form action="{{ route('update.actualities') }}" method="POST">
                                 @csrf
+                                <input type="hidden" name="nonce" value="{{ $nonce }}">
                                 @foreach ($actualities as $index => $actuality)
                                     <div class="actuality-section actuality-edit-form">
                                         <h3>Actualité {{ $index + 1 }}</h3>
-                                        <input type="hidden" name="actualities[{{ $index }}][id]" value="{{ $actuality->id }}">
+                                        <input type="hidden" name="actualities[{{ $index }}][id]"
+                                            value="{{ $actuality->id }}">
                                         <div class="form-group">
-                                            <input type="text" name="actualities[{{ $index }}][title]" class="form-control"
+                                            <input type="text" name="actualities[{{ $index }}][title]"
+                                                class="form-control"
                                                 value="{{ $actuality->title ?? old('actualities.' . $index . '.title') }}"
                                                 placeholder="Titre de l'actualité">
                                         </div>
@@ -293,26 +342,31 @@
                                                 placeholder="Description de l'actualité">{{ $actuality->description ?? old('actualities.' . $index . '.description') }}</textarea>
                                         </div>
                                         <div class="form-group">
-                                            <input type="text" name="actualities[{{ $index }}][location]" class="form-control"
+                                            <input type="text" name="actualities[{{ $index }}][location]"
+                                                class="form-control"
                                                 value="{{ $actuality->location ?? old('actualities.' . $index . '.location') }}"
                                                 placeholder="Lieu">
                                         </div>
                                         <div class="form-group">
-                                            <input type="text" name="actualities[{{ $index }}][additional_info_1]"
+                                            <input type="text"
+                                                name="actualities[{{ $index }}][additional_info_1]"
                                                 class="form-control"
                                                 value="{{ $actuality->additional_info_1 ?? old('actualities.' . $index . '.additional_info_1') }}"
                                                 placeholder="Information supplémentaire 1">
                                         </div>
                                         <div class="form-group">
-                                            <input type="text" name="actualities[{{ $index }}][additional_info_2]"
+                                            <input type="text"
+                                                name="actualities[{{ $index }}][additional_info_2]"
                                                 class="form-control"
                                                 value="{{ $actuality->additional_info_2 ?? old('actualities.' . $index . '.additional_info_2') }}"
                                                 placeholder="Information supplémentaire 2">
                                         </div>
-                                        <img src="data:image/png;base64,{{ base64_encode($actuality->image->image_data) }}" alt="{{ $actuality->image->alt_text }}" class="actuality-image">
+                                        <img src="data:image/png;base64,{{ base64_encode($actuality->image->image_data) }}"
+                                            alt="{{ $actuality->image->alt_text }}" class="actuality-image">
                                     </div>
                                 @endforeach
-                                <button type="submit" class="btn btn-primary mt-3 btn-update">Mettre à jour les actualités</button>
+                                <button type="submit" class="btn btn-primary mt-3 btn-update">Mettre à jour les
+                                    actualités</button>
                             </form>
                         @else
                             <p>Aucune actualité n'est disponible.</p>
@@ -330,6 +384,7 @@
                     <h2 class="dash-subttl">Modifier les images des activités</h2>
                     <form action="{{ route('update.slider.images') }}" method="POST" enctype="multipart/form-data">
                         @csrf
+                        <input type="hidden" name="nonce" value="{{ $nonce }}">
                         @method('POST')
                         @php
                             $sliderImages = App\Models\SliderImage::all();
@@ -341,8 +396,8 @@
                                         alt="{{ $image->alt_text }}">
                                     <div class="image-overlay">
                                         <label for="image-{{ $image->id }}" class="file-input-label">Choisir</label>
-                                        <input type="file" id="image-{{ $image->id }}" name="images[{{ $image->id }}]"
-                                            class="file-input" accept="image/*">
+                                        <input type="file" id="image-{{ $image->id }}"
+                                            name="images[{{ $image->id }}]" class="file-input" accept="image/*">
                                     </div>
                                 </div>
                             @endforeach
@@ -358,6 +413,7 @@
                     <h2 class="dash-subttl">Modifier les images des actualités</h2>
                     <form action="{{ route('update.slider.images2') }}" method="POST" enctype="multipart/form-data">
                         @csrf
+                        <input type="hidden" name="nonce" value="{{ $nonce }}">
                         @method('POST')
                         @php
                             $sliderImages2 = App\Models\SliderImage2::all();
@@ -369,8 +425,8 @@
                                         alt="{{ $image->alt_text }}">
                                     <div class="image-overlay">
                                         <label for="image2-{{ $image->id }}" class="file-input-label">Choisir</label>
-                                        <input type="file" id="image2-{{ $image->id }}" name="images2[{{ $image->id }}]"
-                                            class="file-input" accept="image/*">
+                                        <input type="file" id="image2-{{ $image->id }}"
+                                            name="images2[{{ $image->id }}]" class="file-input" accept="image/*">
                                     </div>
                                 </div>
                             @endforeach

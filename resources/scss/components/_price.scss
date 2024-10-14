@@ -68,6 +68,15 @@
 @media screen and (min-width: 900px) {
     .price-container,
     .price-rule-txt {
-        width: 60%;
+        width: 40%;
+        padding: 3rem;
+
+    }
+    .price-nb{
+        margin-left: 5rem;
+        line-height: 3rem;
+    }
+    .price-txt{
+        line-height: 3rem;
     }
 }

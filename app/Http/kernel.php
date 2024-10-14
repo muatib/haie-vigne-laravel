@@ -18,7 +18,10 @@ class Kernel extends HttpKernel
     protected $routeMiddleware = [
 
         'admin' => \App\Http\Middleware\AdminMiddleware::class,
+        'custom.csrf' => \App\Http\Middleware\CustomCsrfMiddleware::class,
+        'check.referer' => \App\Http\Middleware\CheckReferer::class,
+        'double.submit.cookie' => \App\Http\Middleware\DoubleSubmitCookieMiddleware::class,
     ];
 
-    // ...
+
 }

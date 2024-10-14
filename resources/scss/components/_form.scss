@@ -60,6 +60,7 @@
     box-sizing: border-box;
     text-align: center;
     color: black;
+    height: fit-content;
 }
 .form-lnk {
     font-size: 1.5rem;
@@ -67,6 +68,14 @@
 .form-main-txt {
     font-size: 2.5rem;
     text-decoration: underline;
+}
+.form-main-ttl{
+    font-size: 3rem;
+    text-decoration: underline;
+    font-weight: 550;
+    color: black;
+    text-align: center;
+
 }
 .form-ttl {
     font-size: 2.5rem;
@@ -249,4 +258,34 @@
 }
 .is-invalid {
     border-color: red !important;
+}
+.rgpd-info{
+line-height: 1.5rem;
+text-align: left;
+border: 2px solid rgba(119, 115, 115, 0.548);
+padding: 2rem;
+margin-bottom: 3rem;
+}
+.rgpd-txt1{
+    margin-bottom: 2rem;
+}
+.rgpd-consent-container {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+}
+
+.rgpd-consent-checkbox {
+    margin-right: 1rem;
+    margin-top: 0.4rem;
+}
+
+.rgpd-consent-label {
+    font-size: 1.5rem;
+    line-height: 1.4;
+}
+
+.rgpd-consent-link {
+    color: #007bff;
+    text-decoration: underline;
 }

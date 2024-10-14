@@ -11,12 +11,11 @@ $courseNames = [
     'jeudi_14h00' => 'Stretching',
     'jeudi_15h00' => 'Pilates',
     'jeudi_20h00' => 'Pilates',
-
 ];
 @endphp
 
-<div class="user-account-container">
-    <h1 class="acc-ttl">Mon compte</h1>
+<div class="user-account-container" role="region" aria-labelledby="account-title">
+    <h1 id="account-title" class="acc-ttl">Mon compte</h1>
     <div class="account-info">
         <p class="acc-txt"><strong>Nom :</strong> {{ Auth::user()->lastname }} {{ Auth::user()->firstname }}</p>
         <p class="acc-txt"><strong>Email :</strong> {{ Auth::user()->email }}</p>
@@ -25,13 +24,13 @@ $courseNames = [
             <p class="acc-txt"><strong>Date d'inscription :</strong> {{ Auth::user()->form->created_at->format('d/m/Y') }}</p>
             <p class="acc-txt"><strong>Total cotisation :</strong> {{ Auth::user()->form->total }} €</p>
 
-            <h2 class="acc-subtl">Cours choisis</h2>
-            <table class="course-table">
+            <h2 class="acc-subtl" id="selected-courses">Cours choisis</h2>
+            <table class="course-table" aria-labelledby="selected-courses">
                 <thead>
                     <tr>
-                        <th>Jour</th>
-                        <th>Heure</th>
-                        <th>Type de cours</th>
+                        <th scope="col">Jour</th>
+                        <th scope="col">Heure</th>
+                        <th scope="col">Type de cours</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -53,9 +52,9 @@ $courseNames = [
         @endif
     </div>
 
-    <form action="{{ route('logout') }}" method="POST" class="logout-form">
+    <form action="{{ route('logout') }}" method="POST" class="logout-form" aria-label="Formulaire de déconnexion">
         @csrf
-        <button class="btn logout-btn custom-btn" type="submit">Se déconnecter</button>
+        <button class="btn logout-btn custom-btn" type="submit" aria-label="Se déconnecter">Se déconnecter</button>
     </form>
 </div>
 
