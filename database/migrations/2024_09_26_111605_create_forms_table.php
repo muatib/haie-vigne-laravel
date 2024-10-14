@@ -30,6 +30,16 @@ return new class extends Migration
             $table->string('question9')->nullable();
             $table->string('file_upload')->nullable();
             $table->timestamps();
+            $table->decimal('total', 10, 2)->nullable();
+            $table->string('payment_method')->nullable();
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->string('file_name')->nullable();
+            $table->boolean('rgpd_consent')->default(false);
+            $table->date('rgpd_consent_date')->nullable();
+            $table->boolean('needs_medical_certificate')->default(false);
+            $table->date('medical_certificate_deadline')->nullable();
+            $table->enum('registration_status', ['pending', 'approved', 'rejected'])->default('pending');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
         });
     }
 
@@ -41,5 +51,3 @@ return new class extends Migration
         Schema::dropIfExists('forms');
     }
 };
-
-

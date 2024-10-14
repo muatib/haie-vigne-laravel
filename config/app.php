@@ -1,7 +1,7 @@
 <?php
 
 return [
-
+    'Carbon' => Illuminate\Support\Carbon::class,
     /*
     |--------------------------------------------------------------------------
     | Application Name

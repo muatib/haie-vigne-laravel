@@ -1,7 +1,7 @@
 
 @vite(['resources/js/app.js', 'resources/js/sliders.js'])
 <section class="actuality-slider">
-    <h2 class="planning-ttl">Notre actualité</h2>
+    <h2 class="planning-ttl"></h2>
     @if ($sliderImages2->isEmpty())
         <p>Aucune image d'actualité n'est disponible.</p>
     @else
@@ -22,7 +22,7 @@
 
 <section class="actuality-lg">
     <div class="actuality-lg-left" id="actuality-content">
-        <h1 class="actuality-ttl-lg">Notre actualité</h1>
+        <h1 class="actuality-ttl-lg"></h1>
         <!-- Le contenu de l'actualité sera injecté ici -->
     </div>
     <div class="actuality-lg-right">

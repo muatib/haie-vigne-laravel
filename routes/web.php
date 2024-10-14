@@ -26,6 +26,10 @@ use App\Models\{
 // Middleware group for 'web'
 Route::middleware(['web', CheckReferer::class, DoubleSubmitCookieMiddleware::class])->group(function () {
 
+    Route::get('/export-users-by-course/{course}', [AdminController::class, 'exportUsersByCourse'])
+    ->name('export.users.by.course')
+    ->middleware(['auth', 'admin']);
+
     // Home and index
     Route::get('/', [IndexController::class, 'index'])->name('home');
     Route::get('/index', function () {

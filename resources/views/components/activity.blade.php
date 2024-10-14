@@ -6,7 +6,7 @@
         <p>Aucune image n'est disponible.</p>
     @else
         @foreach ($sliderImages as $index => $image)
-            <div class="slide-container"> <!-- Ensure this class matches JS selector -->
+            <div class="slide-container">
                 <img class="slide-image" src="{{ $image->full_path }}" alt="{{ $image->alt_text }}">
                 <button class="slide-left-arrow"><</button>
                 <a href="{{ url('activityContent#activity-box-' . ($index + 1)) }}">
@@ -16,7 +16,7 @@
             </div>
         @endforeach
     @endif
-  </section>
+</section>
 
 
 <section class="activity-lg">

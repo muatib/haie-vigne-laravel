@@ -32,7 +32,22 @@
     box-shadow: 4px 4px 4px rgba(177, 174, 174, 0.74);
     border: 1px solid rgba(177, 174, 174, 0.74);
 }
+.map-container {
+    width: 90%;
+    height: 400px;
+    margin: 0 auto;
+    padding: 1rem;
+    box-sizing: border-box;
+    background-color: $light-blue;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  }
 
+  .map-container iframe {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+  }
 @media screen and (min-width: 900px){
     .main-txt-container{
         width: 90%;
@@ -40,4 +55,7 @@
     .img-up{
         height: 15rem;
     }
+.map-container{
+    width: 40%;
+}
 }

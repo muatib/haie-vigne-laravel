@@ -48,7 +48,7 @@
 </div>
 
 <img class="separation" src="{{ asset('asset/img/separation.png') }}" alt="Séparation visuelle" aria-hidden="true">
-
+<h2 class="main-ttl">Nos activités</h2>
 @include('components.activity')
 
 <img class="separation" src="{{ asset('asset/img/separation.png') }}" alt="Séparation visuelle" aria-hidden="true">
@@ -59,7 +59,7 @@
         <button class="price-btn" aria-label="Voir les tarifs">Tarifs</button>
     </a>
 </section>
-
+<img class="separation" src="{{ asset('asset/img/separation.png') }}" alt="Séparation visuelle" aria-hidden="true">
 <section class="planning" role="region" aria-labelledby="planning-heading">
     <h2 id="planning-heading" class="planning-ttl">Le planning de la saison</h2>
     <div class="calendar-container">
@@ -68,10 +68,20 @@
             class="calendar-frame" aria-label="Calendrier des événements"></iframe>
     </div>
 </section>
+<h2 class="main-ttl">Ou nous trouver</h2>
+<div class="map-container">
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2607.927540085867!2d-0.38758978773338193!3d49.18296157125868!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x480a42ddfd1d31a9%3A0xfafc76fdcd7e9f2c!2sCentre%20Sportif%20La%20Haie%20Vign%C3%A9!5e0!3m2!1sfr!2sfr!4v1728918163537!5m2!1sfr!2sfr"
+            frameborder="0" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+  </div>
+<img class="separation" src="{{ asset('asset/img/separation.png') }}" alt="Séparation visuelle" aria-hidden="true">
+
+<h2 class="planning-ttl">Notre actualité</h2>
+@include('components.actuality')
 
 <img class="separation" src="{{ asset('asset/img/separation.png') }}" alt="Séparation visuelle" aria-hidden="true">
 
-@include('components.actuality')
+
+
 
 @include('components.cookie')
 

@@ -36,6 +36,7 @@
                 <li><a class="nav-lnk link" href="{{ route('home') }}">Accueil</a></li>
                 <li><a class="nav-lnk link" href="{{ url('price') }}">tarifs</a></li>
                 <li><a class="nav-lnk link" href="{{ url('activityContent') }}">Nos activités</a></li>
+                <li><a class="nav-lnk link" href="{{ url('actualityContent') }}">Notre actualité</a></li>
                 <li><a class="nav-lnk link" href="{{ url('contact') }}">Nous contacter</a></li>
                 <li><a class="nav-lnk link" href="{{ url('form') }}">S'inscrire</a></li>
             </ul>
@@ -54,11 +55,14 @@
                 @endif
 
                 <li class="menu-container-itm">
-                    <a class="menu-container-lnk" href="{{ url('index') }}">Accueil</a>
+                    <li><a class="menu-container-lnk" href="{{ route('home') }}">Accueil</a>
                 </li>
 
                 <li class="menu-container-itm">
                     <a class="menu-container-lnk" href="{{ url('activityContent') }}">Nos activités</a>
+                </li>
+                <li class="menu-container-itm">
+                    <a class="menu-container-lnk" href="{{ url('actualityContent') }}">Notre actualité</a>
                 </li>
                 <li class="menu-container-itm">
                     <a class="menu-container-lnk" href="{{ url('price') }}">Tarifs</a>

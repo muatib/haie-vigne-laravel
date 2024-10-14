@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateActualitiesTable extends Migration
+class CreateActivitiesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -21,19 +21,17 @@ class CreateActualitiesTable extends Migration
             $table->text('additional_info_1')->nullable();
             $table->text('additional_info_2')->nullable();
 
-            $table->foreignId('image_id')->constrained('slider_image_2')->onDelete('cascade');
+            $table->foreignId('image_id')->constrained('slider_image')->onDelete('cascade');
             $table->timestamps();
         });
-    }
-
+ }
     /**
      * Reverse the migrations.
      *
      * @return void
      */
-    public function down()
+     public function down()
     {
-        Schema::dropIfExists('actualities');
+        Schema::dropIfExists('activities');
     }
 }
-

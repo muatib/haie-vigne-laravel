@@ -13,14 +13,26 @@ use App\Models\SliderImage2;
 use App\Models\Actuality;
 use App\Services\NonceGenerator;
 
+/**
+ * AdminController handles administrative functions for the application.
+ */
 class AdminController extends Controller
 {
+    /**
+     * Constructor for AdminController.
+     * Applies authentication and admin middleware to all controller actions.
+     */
     public function __construct()
     {
         $this->middleware('auth');
         $this->middleware('admin');
     }
 
+    /**
+     * Display the admin dashboard with users, forms, images, and actualities.
+     *
+     * @return \Illuminate\View\View
+     */
     public function index()
     {
         $users = [];
@@ -65,6 +77,12 @@ class AdminController extends Controller
         return view('dashboard', compact('users', 'forms', 'images', 'actualities'));
     }
 
+    /**
+     * Filter users by course.
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\View\View
+     */
     public function filterUsersByCourse(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -88,6 +106,12 @@ class AdminController extends Controller
         return view('dashboard', compact('filteredUsers', 'course'));
     }
 
+    /**
+     * Export users by course to a CSV file.
+     *
+     * @param string $course
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function exportUsersByCourse($course)
     {
         $validator = Validator::make(['course' => $course], [
@@ -102,31 +126,21 @@ class AdminController extends Controller
             $query->where('courses', 'like', '%' . $course . '%');
         })->with('form')->get();
 
-        $csvFileName = 'users_' . $course . '.csv';
-        $headers = array(
-            "Content-type" => "text/csv",
-            "Content-Disposition" => "attachment; filename=$csvFileName",
-            "Pragma" => "no-cache",
-            "Cache-Control" => "must-revalidate, post-check=0, pre-check=0",
-            "Expires" => "0"
-        );
+        $csvContent = "Nom,Prénom,Téléphone\n";
+        foreach ($filteredUsers as $user) {
+            $csvContent .= $user->lastname . ',' . $user->firstname . ',' . ($user->form->phone ?? 'N/A') . "\n";
+        }
 
-        $columns = array('Nom', 'Prénom', 'Téléphone');
-
-        $callback = function () use ($filteredUsers, $columns) {
-            $file = fopen('php://output', 'w');
-            fputcsv($file, $columns);
-
-            foreach ($filteredUsers as $user) {
-                fputcsv($file, array($user->lastname, $user->firstname, $user->form->phone ?? 'N/A'));
-            }
-
-            fclose($file);
-        };
-
-        return response()->stream($callback, 200, $headers);
+        return response($csvContent)
+            ->header('Content-Type', 'text/csv')
+            ->header('Content-Disposition', "attachment; filename=users_$course.csv");
     }
 
+    /**
+     * Display the dashboard with activities and actualities.
+     *
+     * @return \Illuminate\View\View
+     */
     public function showDashboard()
     {
         $activities = Activity::with('image')->orderBy('id', 'asc')->get();
@@ -138,6 +152,12 @@ class AdminController extends Controller
         ]);
     }
 
+    /**
+     * Update activities information.
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function updateActivities(Request $request)
     {
         if (!NonceGenerator::verify($request->input('nonce'))) {
@@ -177,6 +197,12 @@ class AdminController extends Controller
         }
     }
 
+    /**
+     * Update slider images.
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function updateSliderImages(Request $request)
     {
         if (!NonceGenerator::verify($request->input('nonce'))) {
@@ -206,6 +232,12 @@ class AdminController extends Controller
         }
     }
 
+    /**
+     * Update actualities information.
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function updateActualities(Request $request)
     {
         if (!NonceGenerator::verify($request->input('nonce'))) {
@@ -243,6 +275,12 @@ class AdminController extends Controller
         }
     }
 
+    /**
+     * Update slider images for actualities.
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function updateSliderImages2(Request $request)
     {
         if (!NonceGenerator::verify($request->input('nonce'))) {
@@ -271,4 +309,6 @@ class AdminController extends Controller
             return redirect()->back()->with('error', 'Une erreur est survenue lors de la mise à jour des images des actualités.');
         }
     }
+
+
 }
