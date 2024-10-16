@@ -1,17 +1,13 @@
-
 .contact-ttl {
-    font-size: 3.5rem;
+    font-size: 1.5rem;
     text-align: center;
-    margin: 1rem;
     font-weight: 550;
-    text-decoration: underline;
-    margin-top: 3rem;
-    margin-bottom: 2rem;
+    margin-top: 4rem;
+    margin-bottom: 4rem;
     color: black;
 }
 .contact-input {
-    margin-bottom: 1rem;
-    margin-top: -1rem;
+    margin-bottom: 2rem;
     height: 3rem;
     padding: 0.5rem;
 }
@@ -24,17 +20,16 @@
 .message-label {
     margin-bottom: 1rem;
     color: black;
-    font-size: 1.5rem;
+    font-size: 1rem;
 }
 
 .contact-label {
     color: black;
     font-size: 1.5rem;
-
+    margin-bottom: 2rem;
 }
 .contact-btn {
-
-    margin: 2rem auto;
+    margin: 1rem auto;
     width: 200px;
     height: 50px;
     border-radius: 50px;
@@ -45,8 +40,8 @@
 
     box-shadow: 4px 4px 4px rgba(177, 174, 174, 0.74);
 }
-@media screen and (min-width: 900px){
-    .contact-container{
+@media screen and (min-width: 900px) {
+    .contact-container {
         width: 70%;
         display: block;
         margin: 5rem auto;

@@ -1,7 +1,7 @@
 @include('components.header')
 
 <img class="img-up" src="{{ asset('asset/img/Vector 1.png') }}" alt="Illustration des tarifs">
-<h1 class="main-ttl" id="pricing-title">Tarifs saison 2023 / 2024</h1>
+<h1 class="price-ttl" id="pricing-title">Tarifs saison 2023 / 2024</h1>
 
 <section class="price-container" role="region" aria-labelledby="pricing-title">
     <div class="price-txt" aria-label="Tarifs par nombre de cours">

@@ -1,7 +1,7 @@
 .footer-container {
     height: fit-content;
     background-color: $lavander;
-    margin-top: 4rem;
+    margin-top: 6rem;
     border-top: rgba(185, 180, 180, 0.877) 4px solid;
     border-top-left-radius: 0.5rem;
     border-top-right-radius: 0.5rem;
@@ -9,19 +9,27 @@
     display: grid;
     grid-template-columns: 70% 30%;
     gap: 1rem;
-    padding: 1rem;
+    padding: 0.5rem;
     color: black;
+    line-height: 1.5rem;
 
   }
   .footer-txt{
-      font-size: 1rem;
-      text-align: center;
-      margin-left: 3rem;
+      font-size: 0.9rem;
+    //   text-align: center;
+    //   margin-left: 3rem;
       width: 100%;
   }
   .insta{
       margin-left: 0.5rem;
   }
+.facebook{
+    margin-left: 1rem;
+    margin-top: 1rem;
+}
+.follow-txt{
+    margin-bottom: 1rem;
+}
 @media screen and (min-width: 900px){
     .footer-container {
         display: flex;
@@ -42,5 +50,13 @@
 
     .insta {
         margin-left: 1rem;
+    }
+    .facebook{
+        margin-left: 1.5rem;
+        margin-top: 2rem;
+        width: 3rem;
+    }
+    .follow-txt{
+        margin-bottom: 2rem;
     }
 }

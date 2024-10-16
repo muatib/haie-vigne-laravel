@@ -16,6 +16,10 @@ class Activity extends Model
         'additional_line1',
         'additional_line2',
     ];
+    protected $casts = [
+        'additional_line1' => 'string',
+        'additional_line2' => 'string',
+    ];
     public function image() {
         return $this->belongsTo(SliderImage::class, 'image_id');
     }

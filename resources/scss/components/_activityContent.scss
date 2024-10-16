@@ -1,16 +1,15 @@
-
 .activity-box {
     background-color: $light-blue;
     border-radius: 5px;
     border: 1px solid #ccc;
     box-shadow: 4px 4px 4px rgba(177, 174, 174, 0.74);
-    margin: 2rem auto;
-    padding: 1rem;
+    margin: 6rem auto;
+    padding: 0.5rem;
     width: 90%;
 }
 .activity-txt {
     color: black;
-    font-size: 2rem;
+    font-size: 1rem;
     text-align: center;
     margin: 2rem 0 1rem 0;
 }
@@ -18,19 +17,21 @@
 .activity-ttl {
     color: black;
     text-align: center;
-    font-weight: 300;
-    font-size: 4rem;
-    margin: 3rem 0 2rem 0;
+    font-weight: 700;
+    font-size: 1.5rem;
+    margin: 2rem 0 2rem 0;
 }
 
 .activity-img {
     display: block;
     margin: auto;
-    width: 40%;
+    width: 50%;
 }
 .box-content {
-    display: grid;
-    grid-template-columns: 65% 35%;
+
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
     color: black;
     background-color: rgba(201, 190, 190, 0.87);
     font-family: Roboto;
@@ -39,6 +40,7 @@
     border-radius: 5px;
     line-height: 1.5rem;
     margin-top: 2rem;
+
 }
 
 .box-left-content,
@@ -47,29 +49,39 @@
     flex-direction: column;
 }
 
-.box-left-content p,
-.box-right-content p {
-    margin: 0;
-    padding: 2px 0;
-}
+// .box-left-content p,
+// .box-right-content p {
+//     margin: 0;
+//     padding: 2px 0;
+// }
 
 @media screen and (min-width: 900px) {
     .box-content {
-        width: 60%;
+        width: 70%;
         margin: 0 auto;
         padding: 1rem;
         font-size: 1.5rem;
         line-height: 3rem;
+        margin-bottom: 2rem;
+        gap: 15rem;
     }
     .box-right {
-        text-align: right;
+        // text-align: right;
         margin-right: 1rem;
     }
     .box-left {
         margin-left: 1rem;
     }
-    .activity-box{
-        width: 60% ;
+    .activity-box {
+        width: 60%;
         height: 60%;
+        border-color: $light-blue;
+    }
+    .activity-txt {
+        margin-bottom: 2rem;
+        font-size: 1.5rem;
+    }
+    .activity-ttl{
+        font-size: 2rem;
     }
 }

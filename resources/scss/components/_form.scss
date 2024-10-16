@@ -26,8 +26,9 @@
 .form-txt {
     color: black;
     font-size: 1rem;
-    margin: 1rem;
+    margin: 0.5rem;
     font-family: Roboto;
+    margin-bottom: 2rem;
 }
 
 .alert {
@@ -51,7 +52,7 @@
 }
 .down-form {
     background-color: $lavander;
-    padding: 2rem;
+    // padding: 0.5rem;
     border: 1px solid #ccc;
     box-shadow: 4px 4px 4px rgba(177, 174, 174, 0.74);
     border-radius: 5px;
@@ -70,11 +71,12 @@
     text-decoration: underline;
 }
 .form-main-ttl{
-    font-size: 3rem;
+    font-size: 1.5rem;
     text-decoration: underline;
-    font-weight: 550;
+    font-weight: 700;
     color: black;
     text-align: center;
+    margin: 2rem 0 2rem 0;
 
 }
 .form-ttl {
@@ -85,7 +87,7 @@
     text-decoration: underline;
 }
 .form-ttl-total {
-    font-size: 2rem;
+    font-size: 1.5rem;
     margin: 1rem 0 1rem 0;
 }
 .course-options {
@@ -95,12 +97,12 @@
     flex-direction: column;
 }
 .form-scd-ttl {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     text-align: center;
-    margin: 1.5rem 0 1rem 0;
+    margin: 2rem 0 2rem 0;
     font-weight: 500;
-    font-family: Italianno;
-    font-size: 2rem;
+    font-family: AfacadFlux;
+
 }
 .course-ttl {
     text-align: left;
@@ -197,9 +199,9 @@
     text-align: center;
 }
 .contact-label {
-    font-size: 2rem;
-    margin: 1rem 0 1rem 0;
-    text-align: center;
+    font-size: 1rem;
+    margin: 1rem 0 0 0;
+
 }
 .separation-form {
     display: block;
@@ -262,8 +264,8 @@
 .rgpd-info{
 line-height: 1.5rem;
 text-align: left;
-border: 2px solid rgba(119, 115, 115, 0.548);
-padding: 2rem;
+// border: 2px solid rgba(119, 115, 115, 0.548);
+padding: 1rem;
 margin-bottom: 3rem;
 }
 .rgpd-txt1{
@@ -281,7 +283,7 @@ margin-bottom: 3rem;
 }
 
 .rgpd-consent-label {
-    font-size: 1.5rem;
+    font-size: 1rem;
     line-height: 1.4;
 }
 

@@ -28,6 +28,9 @@ class AdminController extends Controller
         $this->middleware('admin');
     }
 
+    // EXTRACT FORMS DATA FROM DATABASE
+
+
     /**
      * Display the admin dashboard with users, forms, images, and actualities.
      *
@@ -77,6 +80,8 @@ class AdminController extends Controller
         return view('dashboard', compact('users', 'forms', 'images', 'actualities'));
     }
 
+    //FILTER USERS BY CHOSEN COURSES
+
     /**
      * Filter users by course.
      *
@@ -105,6 +110,8 @@ class AdminController extends Controller
 
         return view('dashboard', compact('filteredUsers', 'course'));
     }
+
+    // EXPORT THE FILTERED USERS
 
     /**
      * Export users by course to a CSV file.
@@ -152,85 +159,9 @@ class AdminController extends Controller
         ]);
     }
 
-    /**
-     * Update activities information.
-     *
-     * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function updateActivities(Request $request)
-    {
-        if (!NonceGenerator::verify($request->input('nonce'))) {
-            return redirect()->route('dashboard')->with('error', 'Invalid form submission. Please try again.');
-        }
 
-        $validator = Validator::make($request->all(), [
-            'activities' => 'required|array',
-            'activities.*.id' => 'required|exists:activities,id',
-            'activities.*.title' => 'sometimes|string|max:255',
-            'activities.*.description' => 'sometimes|string',
-            'activities.*.location' => 'sometimes|string|max:255',
-            'activities.*.schedule' => 'sometimes|string',
-            'activities.*.coach' => 'sometimes|string',
-            'activities.*.additional_line1' => 'sometimes|string|max:255',
-            'activities.*.additional_line2' => 'sometimes|string|max:255',
-        ]);
 
-        if ($validator->fails()) {
-            return redirect()->route('dashboard')->withErrors($validator)->withInput();
-        }
-
-        try {
-            $activitiesData = $request->input('activities');
-
-            foreach ($activitiesData as $activityData) {
-                $activity = Activity::findOrFail($activityData['id']);
-                $activity->update(array_filter($activityData, function ($key) {
-                    return in_array($key, ['title', 'description', 'location', 'schedule', 'coach', 'additional_line1', 'additional_line2']);
-                }, ARRAY_FILTER_USE_KEY));
-            }
-
-            return redirect()->route('dashboard')->with('success', 'Activities updated successfully');
-        } catch (\Exception $e) {
-            Log::error('Error updating activities: ' . $e->getMessage());
-            return redirect()->route('dashboard')->with('error', 'An error occurred while updating activities.');
-        }
-    }
-
-    /**
-     * Update slider images.
-     *
-     * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function updateSliderImages(Request $request)
-    {
-        if (!NonceGenerator::verify($request->input('nonce'))) {
-            return redirect()->back()->with('error', 'Invalid form submission. Please try again.');
-        }
-
-        $validator = Validator::make($request->all(), [
-            'images' => 'required|array',
-            'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
-        ]);
-
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
-        }
-
-        try {
-            foreach ($request->file('images') as $id => $image) {
-                $sliderImage = SliderImage::findOrFail($id);
-                $sliderImage->image_data = file_get_contents($image->getRealPath());
-                $sliderImage->image_path = $image->getClientOriginalName();
-                $sliderImage->save();
-            }
-            return redirect()->back()->with('success', 'Images mises à jour avec succès.');
-        } catch (\Exception $e) {
-            Log::error('Error updating slider images: ' . $e->getMessage());
-            return redirect()->back()->with('error', 'Une erreur est survenue lors de la mise à jour des images.');
-        }
-    }
+    // UPDATE CONTENT OF SLIDERS
 
     /**
      * Update actualities information.
@@ -274,6 +205,96 @@ class AdminController extends Controller
             return redirect()->route('dashboard')->with('error', 'An error occurred while updating actualities.');
         }
     }
+    /**
+     * Update activities information.
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function updateActivities(Request $request)
+    {
+
+        Log::info('updateActivities called');
+        Log::info($request->all());
+
+        if (!NonceGenerator::verify($request->input('nonce'))) {
+            Log::warning('Invalid nonce');
+            return redirect()->route('dashboard')->with('error', 'Invalid form submission. Please try again.');
+        }
+
+        $validator = Validator::make($request->all(), [
+            'activities' => 'required|array',
+            'activities.*.id' => 'required|exists:activities,id',
+            'activities.*.title' => 'sometimes|nullable|string|max:255',
+            'activities.*.description' => 'sometimes|nullable|string',
+            'activities.*.location' => 'sometimes|nullable|string|max:255',
+            'activities.*.schedule' => 'sometimes|nullable|string',
+            'activities.*.coach' => 'sometimes|nullable|string',
+            'activities.*.additional_line1' => 'sometimes|nullable|string|max:255',
+            'activities.*.additional_line2' => 'sometimes|nullable|string|max:255',
+        ]);
+
+        if ($validator->fails()) {
+            Log::warning('Validation failed', $validator->errors()->toArray());
+            return redirect()->route('dashboard')->withErrors($validator)->withInput();
+        }
+
+        try {
+            $activitiesData = $request->input('activities');
+            Log::info('Activities data', $activitiesData);
+            foreach ($activitiesData as $activityData) {
+                $activity = Activity::findOrFail($activityData['id']);
+                $activity->update(array_filter($activityData, function ($key) {
+                    return in_array($key, ['title', 'description', 'location', 'schedule', 'coach', 'additional_line1', 'additional_line2']);
+                }, ARRAY_FILTER_USE_KEY));
+            }
+
+            return redirect()->route('dashboard')->with('success', 'Activities updated successfully');
+        } catch (\Exception $e) {
+
+            Log::error('Error updating activities: ' . $e->getMessage());
+            return redirect()->route('dashboard')->with('error', 'An error occurred while updating activities.');
+        }
+    }
+
+    //UPDATE SLIDERS AND CONTENT IMAGES
+
+    /**
+     * Update slider images.
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function updateSliderImages(Request $request)
+    {
+        if (!NonceGenerator::verify($request->input('nonce'))) {
+            return redirect()->back()->with('error', 'Invalid form submission. Please try again.');
+        }
+
+        $validator = Validator::make($request->all(), [
+            'images' => 'required|array',
+            'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        try {
+            foreach ($request->file('images') as $id => $image) {
+                $sliderImage = SliderImage::findOrFail($id);
+                $sliderImage->image_data = file_get_contents($image->getRealPath());
+                $sliderImage->image_path = $image->getClientOriginalName();
+                $sliderImage->save();
+            }
+            return redirect()->back()->with('success', 'Images mises à jour avec succès.');
+        } catch (\Exception $e) {
+            Log::error('Error updating slider images: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Une erreur est survenue lors de la mise à jour des images.');
+        }
+    }
+
+
 
     /**
      * Update slider images for actualities.
@@ -309,6 +330,4 @@ class AdminController extends Controller
             return redirect()->back()->with('error', 'Une erreur est survenue lors de la mise à jour des images des actualités.');
         }
     }
-
-
 }

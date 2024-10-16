@@ -1,7 +1,7 @@
 .slider-ttl {
     color: black;
-    font-size: 2rem;
-    font-weight: 400;
+    font-size: 1.5rem;
+    font-weight: 700;
     text-align: center;
     margin-bottom: 3rem;
 }
@@ -13,10 +13,10 @@
     height: 30px;
     border-radius: 50px;
     border: 1px solid #cac1c1;
-    position: absolute; /* Positionne le bouton de manière cohérente */
-    bottom: 1rem; /* Fixe le bouton en bas */
+    position: absolute;
+    bottom: 1rem;
     left: 50%;
-    transform: translateX(-50%); /* Centre le bouton horizontalement */
+    transform: translateX(-50%);
     font-family: Roboto;
     box-shadow: 2px 2px 2px goldenrod;
 }
@@ -29,21 +29,21 @@
     font-size: 1.5rem;
     border-radius: 100px;
     width: 30px;
-    background-color: #add8e6; /* Ajuste la couleur pour la visibilité */
+    background-color: #add8e6;
     color: black;
-    position: absolute; /* Permet un positionnement précis */
-    top: 50%; /* Centre verticalement */
+    position: absolute;
+    top: 50%;
     transform: translateY(-50%);
 }
 
 .slider-left-arrow,
 .slide-left-arrow {
-    left: 1rem; /* Positionne la flèche gauche */
+    left: 1rem;
 }
 
 .slider-right-arrow,
 .slide-right-arrow {
-    right: 1rem; /* Positionne la flèche droite */
+    right: 1rem;
 }
 
 .slide-container,
@@ -52,14 +52,15 @@
     display: block;
     margin: 0 auto;
     width: 325px;
-    position: relative; /* Nécessaire pour que les flèches et le bouton soient bien positionnés */
+    position: relative;
+    box-shadow: 4px 4px 4px rgba(177, 174, 174, 0.74);
 }
 
 .slide-image,
 .actuality-slider-image {
     width: 100%;
-    height: 200px; /* Définit une hauteur fixe pour une uniformité d'affichage */
-    object-fit: cover; /* Assure que l'image remplisse le conteneur sans distorsion */
+    height: 250px;
+    object-fit: cover;
     border-radius: 10px;
     display: block;
     margin: 0 auto;

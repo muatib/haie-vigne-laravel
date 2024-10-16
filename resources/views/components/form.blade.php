@@ -29,7 +29,7 @@
             aria-label="Télécharger le formulaire d'inscription en PDF">Télécharger le
             formulaire</a>
     @else
-        <p class="form-main-txt">Création de compte et inscription</p>
+        <h2 class="form-main-ttl">Création de compte </BR> et inscription</h2>
         <p class="form-txt">Veuillez remplir le formulaire ci-dessous pour créer votre compte et vous inscrire</p>
     @endif
 
@@ -41,7 +41,7 @@
     aria-labelledby="form-title">
     @csrf
     <input type="hidden" name="nonce" value="{{ $nonce }}">
-    <h2 id="form-title" class="visually-hidden">Formulaire d'inscription</h2>
+    <h2 class="form-main-ttl" id="form-title" class="visually-hidden">Formulaire d'inscription</h2>
     @auth
         <input type="hidden" name="user_id" value="{{ Auth::id() }}">
     @else
@@ -84,7 +84,7 @@
 
     <img class="separation-form" src="{{ asset('asset/img/separation.png') }}" alt="" aria-hidden="true">
 
-    <h2 class="form-ttl" id="form-title">Choix des cours :</h2>
+    <h2 class="form-main-ttl" id="form-title">Choix des cours :</h2>
     <h3 class="form-scd-ttl">Nombre de cours par semaine :</h3>
 
     <div class="course-options" role="group" aria-labelledby="form-title">
@@ -160,7 +160,7 @@
 
     <img class="separation-form" src="{{ asset('asset/img/separation.png') }}" alt="" aria-hidden="true">
 
-    <h2 class="form-ttl" id="health-questionnaire-title">Questionnaire de santé : </h2>
+    <h2 class="form-main-ttl" id="health-questionnaire-title">Questionnaire de santé : </h2>
 
     <div class="health-questions" role="group" aria-labelledby="health-questionnaire-title">
         <h3 class="form-scd-ttl">Durant les 12 derniers mois :</h3>
@@ -267,7 +267,7 @@
     </div>
 
     <div class="cond-container">
-        <label for="file_upload" class="contact-label">Certificat médical :</label>
+        <label for="file_upload" class="contact-label">Joindre un fichier :</label>
         <input class="contact-input form-up" type="file" name="file_upload" id="file_upload" aria-required="true">
     </div>
 
@@ -277,8 +277,8 @@
             <option value="" disabled selected>--</option>
             <option value="cheque">Chèque bancaire</option>
             <option value="virement">Virement bancaire</option>
-            <option value="carte">Carte bancaire</option>
-            <option value="paypal">PayPal</option>
+            {{-- <option value="carte">Carte bancaire</option>
+            <option value="paypal">PayPal</option> --}}
         </select>
     </div>
 
@@ -299,10 +299,6 @@
             form.addEventListener('submit', function(e) {
                 var csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
                 var csrfInput = document.querySelector('input[name="_token"]');
-
-                console.log('Meta CSRF Token:', csrfToken);
-                console.log('Form CSRF Token:', csrfInput.value);
-                console.log('Cookie CSRF Token:', document.cookie.split('; ').find(row => row.startsWith('XSRF-TOKEN=')).split('=')[1]);
             });
         });
         </script>

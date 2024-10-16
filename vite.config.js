@@ -6,6 +6,7 @@ export default defineConfig({
         laravel({
             input: [
                 "resources/sass/app.scss",
+
                 "resources/js/app.js",
                 "resources/js/bootstrap.js",
                 "resources/js/burger.js",
@@ -19,12 +20,10 @@ export default defineConfig({
     build: {
         rollupOptions: {
             output: {
-
-                assetFileNames: 'assets/[name].[hash].[ext]',
-                chunkFileNames: 'assets/[name].[hash].js',
-                entryFileNames: 'assets/[name].[hash].js',
-            }
-        }
-    }
+                assetFileNames: "assets/[name].[hash].[ext]",
+                chunkFileNames: "assets/[name].[hash].js",
+                entryFileNames: "assets/[name].[hash].js",
+            },
+        },
+    },
 });
-

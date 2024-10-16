@@ -177,7 +177,7 @@
             </table>
         </form>
     @else
-        <p>Aucun formulaire trouvé.</p>
+        <p class="form-txt">Aucun formulaire trouvé.</p>
     @endif
 </div>
 
@@ -191,15 +191,16 @@
     <form id="filter-form" action="{{ route('filter.users.by.course') }}" method="GET">
         <select name="course" id="course-select" class="course-select">
             <option value="">Sélectionner un cours</option>
-            <option value="lundi_12h30">Lundi 12h30</option>
-            <option value="lundi_20h00">Lundi 20h00</option>
-            <option value="mardi_10h30">Mardi 10h30</option>
-            <option value="mardi_11h30">Mardi 11h30</option>
-            <option value="mardi_12h30">Mardi 12h30</option>
-            <option value="mardi_20h00">Mardi 20h00</option>
-            <option value="mercredi_20h00">Mercredi 20h00</option>
-            <option value="jeudi_15h00">Jeudi 15h00</option>
-            <option value="jeudi_20h00">Jeudi 20h00</option>
+
+            <option value="lundi_20h00">Lundi 20h00 fitness</option>
+            <option value="mardi_11h30">Mardi 11h30 fitness</option>
+            <option value="mardi_12h30">Mardi 12h30 pilates</option>
+            <option value="mardi_20h00">Mardi 20h00 fitness</option>
+            <option value="mercredi_20h00">Mercredi 20h00 pilates</option>
+            <option value="jeudi_15h00">Jeudi 12h20 yoga</option>
+            <option value="jeudi_20h00">Jeudi 14h00 stretching</option>
+            <option value="jeudi_15h00">Jeudi 15h00 pilates</option>
+            <option value="jeudi_20h00">Jeudi 20h00 pilates</option>
         </select>
         <button type="submit" class="filter-btn">Filtrer</button>
     </form>
@@ -244,7 +245,7 @@
                 <div class="table-container activities-form">
                     <h2 class="dash-subttl">Éditer les activités</h2>
 
-                    <p>Test d'affichage du formulaire des activités</p>
+
 
                     @if (isset($images))
                         <p>La variable $images est définie.</p>

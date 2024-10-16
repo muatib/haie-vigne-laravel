@@ -3,11 +3,11 @@
 
 <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image" href="{{ asset('img/enqueteur caen.png') }}" />
+    <link rel="icon" type="image" href="{{ asset('img/Logo.png') }}" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Association Haie-Vigné</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    @vite(['resources/js/app.js', 'resources/js/burger.js', 'resources/js/activity.js', 'resources/js/slider.js', 'resources/js/form.js', 'resources/js/dashboard.js', 'resources/js/activitySlider.js', 'resources/js/calendar.js'])
+    @vite(['resources/js/app.js', 'resources/js/burger.js', 'resources/js/activity.js', 'resources/js/sliders.js', 'resources/js/form.js', 'resources/js/dashboard.js', ])
     @vite('resources/scss/main.scss')
 
 </head>

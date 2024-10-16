@@ -1,9 +1,10 @@
 .price-ttl {
     color: black;
-    font-size: 2rem;
-    font-weight: 400;
+    font-size: 1.5rem;
+    font-weight: 700;
     text-align: center;
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
+    margin-top: 3rem;
 }
 .price-btn {
     display: block;
@@ -31,7 +32,7 @@
 }
 .price-container {
     display: grid;
-    grid-template-columns: 80% 20%;
+    grid-template-columns: 80% 30%;
     padding: 1rem;
     margin: 0 auto;
     background-color: $light-blue;
@@ -57,9 +58,9 @@
     border: 1px solid rgba(177, 174, 174, 0.74);
 }
 .price-rule-ttl {
-    font-family: italianno;
-    font-weight: 400;
-    font-size: 2.5rem;
+    font-family: AfacadFlux;
+    font-weight: 700;
+    font-size: 1.5rem;
     text-align: center;
     margin-bottom: 1.5rem;
     margin-top: 1rem;
@@ -68,7 +69,7 @@
 @media screen and (min-width: 900px) {
     .price-container,
     .price-rule-txt {
-        width: 40%;
+        width: 45%;
         padding: 3rem;
 
     }

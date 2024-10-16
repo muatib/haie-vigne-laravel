@@ -8,12 +8,16 @@
       font-family: Roboto;
       src: url(../font/Roboto.ttf);
     }
+    @font-face {
+        font-family: AfacadFlux;
+        src: url(../font/AfacadFlux.ttf);
+    }
   }
 
   body {
-    background-color: $light-green;
+    background-color: rgba(241, 236, 236, 0.932);
     color: white;
-    font-family: "Italianno";
+    font-family: "AfacadFlux";
   }
   .link {
     text-decoration: none;

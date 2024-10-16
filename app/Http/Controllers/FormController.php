@@ -84,13 +84,12 @@ class FormController extends Controller
     public function submitForm(Request $request)
     {
 
-        Log::info('Nonce reçu : ' . $request->input('nonce'));
-        Log::info('Nonce en session : ' . session('nonce'));
+
 
         if (!NonceGenerator::verify($request->input('nonce'))) {
             return redirect()->back()->with('error', 'Invalid form submission. Please try again.');
         }
-        Log::info('Nonce vérifié avec succès');
+
         $currentDate = now();
         $startDate = Carbon::create($currentDate->year, 9, 1);
         $endDate = Carbon::create($currentDate->year, 6, 30);

@@ -1,99 +1,105 @@
-// .actuality-box {
-//     background-color: $light-blue;
-//     border-radius: 5px;
-//     border: 1px solid #ccc;
-//     box-shadow: 4px 4px 4px rgba(177, 174, 174, 0.74);
-//     margin: 2rem auto;
-//     padding: 1rem;
-//     width: 90%;
-// }
+.actuality-box {
+    background-color: $light-blue;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-shadow: 4px 4px 4px rgba(177, 174, 174, 0.74);
+    margin: 4rem auto;
+    padding: 1rem;
+    width: 90%;
+}
 
-// .actuality-txt {
-//     color: black;
-//     font-size: 2rem;
-//     text-align: center;
-//     margin: 2rem 0 1rem 0;
-// }
+.actuality-txt {
+    color: black;
+    font-size: 1rem;
+    text-align: center;
+    margin: 2rem 0 1rem 0;
+}
 
-// .actuality-ttl {
-//     color: black;
-//     text-align: center;
-//     font-weight: 300;
-//     font-size: 4rem;
-//     margin: 3rem 0 2rem 0;
-// }
+.actuality-ttl {
+    color: black;
+    text-align: center;
+    font-weight: 700;
+    font-size: 1.5rem;
+    margin: 2rem 0 2rem 0;
+}
 
-// .actuality-img {
-//     display: block;
-//     margin: auto;
-//     width: 40%;
-// }
+.actuality-img {
+    display: block;
+    margin: auto;
+    width: 40%;
+}
 
-// .actuality-lg {
-//     display: flex;
-//     background-color: $lavander;
-//     border-radius: 10px;
-//     box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.733);
-//     overflow: hidden;
-//     margin: 2rem auto;
-//     max-width: 90%;
-//     height: 700px;
-// }
+.actuality-lg {
+    display: flex;
+    background-color: $lavander;
+    border-radius: 10px;
+    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.733);
+    overflow: hidden;
+    margin: 2rem auto;
+    max-width: 90%;
+    height: 700px;
+}
 
-// .actuality-lg-left {
-//     flex: 1;
-//     padding: 2rem;
-//     display: flex;
-//     flex-direction: column;
-//     justify-content: flex-start;
-//     overflow-y: auto;
-// }
+.actuality-lg-left {
+    flex: 1;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    overflow-y: auto;
+}
 
-// .actuality-lg-right {
-//     width: 250px;
-//     background-color: $lavander;
-//     padding: 1rem;
-//     display: flex;
-//     flex-direction: column;
-//     justify-content: space-between;
-//     height: 100%;
-// }
+.actuality-lg-right {
+    width: 250px;
+    background-color: $lavander;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
 
-// .actuality-ttl-lg {
-//     font-size: 2rem;
-//     color: #333;
-//     text-align: center;
-// }
+.actuality-ttl-lg {
+    font-size: 2rem;
+    color: #333;
+    text-align: center;
+}
 
-// .actuality-content {
-//     flex: 1;
-//     display: flex;
-//     flex-direction: column;
-//     gap: 1rem;
-//     overflow-y: auto;
-// }
+.actuality-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    overflow-y: auto;
+}
 
-// .actuality-lg-img {
-//     width: 100%;
-//     height: auto;
-//     border-radius: 5px;
-//     cursor: pointer;
-//     transition: transform 0.3s ease;
-//     object-fit: cover;
-// }
+.actuality-lg-img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    object-fit: cover;
+}
 
-// .actuality-lg-right img {
-//     height: calc(25% - 0.75rem);
-// }
+.actuality-lg-right img {
+    height: calc(25% - 0.75rem);
+}
 
-// @media screen and (max-width: 899px) {
-//     .actuality-lg {
-//         display: none;
-//     }
-// }
+@media screen and (max-width: 899px) {
+    .actuality-lg {
+        display: none;
+    }
+}
 
-// @media screen and (min-width: 900px) {
-//     .actuality-slider {
-//         display: none;
-//     }
-// }
+@media screen and (min-width: 900px) {
+    .actuality-slider {
+        display: none;
+    }
+    .actuality-box{
+        width: 60%;
+    }
+    .actuality-txt{
+        margin-bottom: 2rem;
+    }
+}
