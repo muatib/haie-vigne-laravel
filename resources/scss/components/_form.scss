@@ -6,7 +6,7 @@
     border-radius: 0.5rem;
     padding: 1rem;
     width: 90%;
-    background-color: $light-blue;
+    background-color: $lavander;
     line-height: 1.5rem;
     margin: 2rem auto;
     color: black;
@@ -54,7 +54,7 @@
     background-color: $lavander;
     // padding: 0.5rem;
     border: 1px solid #ccc;
-    box-shadow: 4px 4px 4px rgba(177, 174, 174, 0.74);
+    box-shadow: 10px 10px 10px rgba(177, 174, 174, 0.74);
     border-radius: 5px;
     width: 90%;
     margin: 2rem auto;
@@ -65,6 +65,7 @@
 }
 .form-lnk {
     font-size: 1.5rem;
+    margin-bottom: 2rem;
 }
 .form-main-txt {
     font-size: 2.5rem;
@@ -97,7 +98,7 @@
     flex-direction: column;
 }
 .form-scd-ttl {
-    font-size: 1.4rem;
+    font-size: 1.5rem;
     text-align: center;
     margin: 2rem 0 2rem 0;
     font-weight: 500;
@@ -141,10 +142,10 @@
     margin-right: 5rem;
 }
 .total {
-    background-color: $lavander;
+    background-color: rgba(228, 220, 220, 0.87);;
     padding: 0.3rem;
     border: 1px solid #ccc;
-    box-shadow: 4px 4px 4px rgba(177, 174, 174, 0.74);
+    box-shadow: 10px 10px 10px rgba(177, 174, 174, 0.74);
     border-radius: 5px;
     margin: 2rem 0 2rem 0;
 }
@@ -177,21 +178,22 @@
 .nbtxt {
     font-size: 1.5rem;
     text-align: center;
-    background-color: $lavander;
-    padding: 0.5rem;
+    background-color: rgba(228, 220, 220, 0.87);;
+    padding: 1rem;
     border-radius: 5px;
     border: 1px solid #ccc;
-    box-shadow: 4px 4px 4px rgba(177, 174, 174, 0.74);
+    box-shadow: 10px 10px 10px rgba(177, 174, 174, 0.74);
     margin-bottom: 2rem;
 }
 .cond-txt {
     font-family: Roboto;
+    margin-bottom: 2rem;
 }
 .cond-container {
-    background-color: $lavander;
+    background-color: rgba(228, 220, 220, 0.87);;
     padding: 0.5rem;
     border: 1px solid #ccc;
-    box-shadow: 4px 4px 4px rgba(177, 174, 174, 0.74);
+    box-shadow: 10px 10px 10px rgba(177, 174, 174, 0.74);
     border-radius: 5px;
     width: 100%;
     margin: 1rem auto;
@@ -209,7 +211,7 @@
 }
 .pay-choice {
     margin-top: 1rem;
-    background-color: $lavander;
+    background-color: rgba(228, 220, 220, 0.87);
     border-radius: 5px;
 }
 @media screen and (min-width: 900px) {
@@ -251,21 +253,30 @@
         box-shadow: none;
         margin-left: 0.5rem;
         text-align: center;
+        background-color: rgba(228, 220, 220, 0.87);
 
     }
 
     .contact-label{
         margin-right: 2rem;
     }
+    .contact-btn{
+        background-color: $light-blue;
+    }
+    .contact-btn:hover{
+        background-color: $light-green;
+
+    }
+
 }
-.is-invalid {
-    border-color: red !important;
+.link-wrapper {
+    margin-bottom: 2rem;
 }
 .rgpd-info{
 line-height: 1.5rem;
 text-align: left;
 // border: 2px solid rgba(119, 115, 115, 0.548);
-padding: 1rem;
+padding: 2rem;
 margin-bottom: 3rem;
 }
 .rgpd-txt1{

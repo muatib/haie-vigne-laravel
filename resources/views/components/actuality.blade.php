@@ -23,7 +23,7 @@
 <section class="actuality-lg">
     <div class="actuality-lg-left" id="actuality-content">
         <h1 class="actuality-ttl-lg"></h1>
-        <!-- Le contenu de l'actualité sera injecté ici -->
+
     </div>
     <div class="actuality-lg-right">
         @foreach ($sliderImages2 as $index => $image)

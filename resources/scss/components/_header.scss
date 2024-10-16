@@ -141,6 +141,7 @@
             width: 0;
         }
     }
+
 }
 // OVERLAY MENU BURGER
 
@@ -174,11 +175,15 @@
     .menu-container-lnk {
         color: black;
         display: block;
-        font-size: 2rem;
+        font-size: 1.5rem;
         margin-bottom: 0.5rem;
         margin-left: 15px;
         text-decoration: none;
         text-align: left;
+        line-height: 2.5rem;
+    }
+    .menu-container-lnk:hover{
+        color: $light-blue;
     }
 }
 @media screen and (max-width: 900px) {
@@ -231,6 +236,10 @@
         font-size: 1.5rem;
         color: black;
     }
+    .link:hover{
+        color: white;
+        text-decoration: underline;
+    }
     .fa-user {
         margin-left: 30%;
     }
@@ -281,12 +290,13 @@
     .user-status-text {
         flex-grow: 1;
         text-align: center;
-        font-size: 1.5rem;
+        font-size: 1rem;
         font-weight: bold;
         color: black;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
+        font-family: AfacadFlux;
     }
 }
 .header-actions {

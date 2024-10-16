@@ -41,22 +41,27 @@
     }
 
     .footer-txt {
-        font-size: 1rem;
+        font-size: 1.5rem;
         text-align: left;
         margin-left: 0;
         width: auto;
         flex: 1;
+        line-height: 3rem;
     }
 
     .insta {
         margin-left: 1rem;
     }
     .facebook{
-        margin-left: 1.5rem;
-        margin-top: 2rem;
+        margin-left: 12rem;
+        margin-top: 1rem;
         width: 3rem;
     }
     .follow-txt{
-        margin-bottom: 2rem;
+        margin-bottom: 1rem;
+        margin-left: 9.5rem;
+    }
+    .footer-dwn{
+        text-align: right;
     }
 }

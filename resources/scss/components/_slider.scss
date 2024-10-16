@@ -164,35 +164,9 @@
     .actuality-slider {
         display: none;
     }
+    .activity-lg{
+        background-color: $lavander;
+    }
 }
 
-.actuality-box {
-    background-color: #add8e6;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    box-shadow: 4px 4px 4px rgba(177, 174, 174, 0.74);
-    margin: 2rem auto;
-    padding: 1rem;
-    width: 90%;
-}
 
-.actuality-txt {
-    color: black;
-    font-size: 2rem;
-    text-align: center;
-    margin: 2rem 0 1rem 0;
-}
-
-.actuality-ttl {
-    color: black;
-    text-align: center;
-    font-weight: 300;
-    font-size: 4rem;
-    margin: 3rem 0 2rem 0;
-}
-
-.actuality-img {
-    display: block;
-    margin: auto;
-    width: 40%;
-}

@@ -7,7 +7,7 @@ $courseNames = [
     'mardi_12h30' => 'Pilates',
     'mardi_20h00' => 'Fitness',
     'mercredi_20h00' => 'Pilates',
-    'jeudi_12h30' => 'Yoga',
+    'jeudi_12h20' => 'Yoga',
     'jeudi_14h00' => 'Stretching',
     'jeudi_15h00' => 'Pilates',
     'jeudi_20h00' => 'Pilates',
@@ -54,7 +54,7 @@ $courseNames = [
 
     <form action="{{ route('logout') }}" method="POST" class="logout-form" aria-label="Formulaire de déconnexion">
         @csrf
-        <button class="btn logout-btn custom-btn" type="submit" aria-label="Se déconnecter">Se déconnecter</button>
+        <button class="btn logout-btn " type="submit" aria-label="Se déconnecter">Se déconnecter</button>
     </form>
 </div>
 

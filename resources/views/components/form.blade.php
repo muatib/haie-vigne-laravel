@@ -25,11 +25,13 @@
         <p class="form-txt">Pour votre inscription veuillez remplir le formulaire en ligne ci dessous </p>
         <p class="form-txt txt">ou</p>
         <p class="form-txt">Télécharger le document PDF ci dessous et le retourner complété à notre adresse</p>
-        <a class="form-lnk" href="{{ asset('documents/Feuille-inscription.pdf') }}" download
-            aria-label="Télécharger le formulaire d'inscription en PDF">Télécharger le
-            formulaire</a>
+        <div class="link-wrapper">
+            <a class="form-lnk" href="{{ asset('documents/Feuille-inscription.pdf') }}" download aria-label="Télécharger le formulaire d'inscription en PDF">
+              Télécharger le formulaire
+            </a>
+          </div>
     @else
-        <h2 class="form-main-ttl">Création de compte </BR> et inscription</h2>
+        <h2 class="form-main-ttl">Création de compte et inscription</h2>
         <p class="form-txt">Veuillez remplir le formulaire ci-dessous pour créer votre compte et vous inscrire</p>
     @endif
 
@@ -84,8 +86,8 @@
 
     <img class="separation-form" src="{{ asset('asset/img/separation.png') }}" alt="" aria-hidden="true">
 
-    <h2 class="form-main-ttl" id="form-title">Choix des cours :</h2>
-    <h3 class="form-scd-ttl">Nombre de cours par semaine :</h3>
+    <h2 class="form-scd-ttl" id="form-title">Choix des cours :</h2>
+
 
     <div class="course-options" role="group" aria-labelledby="form-title">
         <h3 class="course-ttl">Lundi :</h3>
@@ -160,7 +162,7 @@
 
     <img class="separation-form" src="{{ asset('asset/img/separation.png') }}" alt="" aria-hidden="true">
 
-    <h2 class="form-main-ttl" id="health-questionnaire-title">Questionnaire de santé : </h2>
+    <h2 class="form-scd-ttl" id="health-questionnaire-title">Questionnaire de santé : </h2>
 
     <div class="health-questions" role="group" aria-labelledby="health-questionnaire-title">
         <h3 class="form-scd-ttl">Durant les 12 derniers mois :</h3>

@@ -30,7 +30,7 @@
             <ul class="nav-lg-lst">
                 <li class="admin-link">
                     @if (auth()->check() && auth()->user()->is_admin)
-                        <a class="menu-container-lnk nav-lnk" href="{{ url('dashboard') }}">Page administration</a>
+                        <a class="menu-container-lnk nav-lnk link" href="{{ url('dashboard') }}">Page administration</a>
                     @endif
                 </li>
                 <li><a class="nav-lnk link" href="{{ route('home') }}">Accueil</a></li>
@@ -51,7 +51,7 @@
         <nav id="menu">
             <ul class="menu-container">
                 @if (auth()->check() && auth()->user()->is_admin)
-                    <li><a class="menu-container-lnk" href="{{ url('dashboard') }}">Page administration</a></li>
+                    <li><a class="menu-container-lnk link" href="{{ url('dashboard') }}">Page administration</a></li>
                 @endif
 
                 <li class="menu-container-itm">
