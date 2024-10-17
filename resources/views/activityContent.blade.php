@@ -1,5 +1,8 @@
 @include('components.header')
 
+
+@vite(['resources/js/burger.js'])
+
 @php
     $activities = App\Models\Activity::with('image')
         ->join('slider_images', 'activities.image_id', '=', 'slider_images.id')

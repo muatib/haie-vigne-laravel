@@ -47,7 +47,6 @@ class DoubleSubmitCookieMiddleware
             }
         }
 
-        Log::info('DoubleSubmitCookie: Verification successful');
 
         return $next($request);
     }

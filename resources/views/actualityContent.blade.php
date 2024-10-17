@@ -1,5 +1,8 @@
 @include('components.header')
 
+@vite(['resources/js/burger.js'])
+
+
 @php
     $actualities = App\Models\Actuality::with('image')
         ->join('slider_images_2', 'actualities.image_id', '=', 'slider_images_2.id')

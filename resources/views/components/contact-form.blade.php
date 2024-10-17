@@ -1,5 +1,10 @@
 
 
+@vite(['resources/js/burger.js'])
+
+
+
+
 <div class="contact-container">
 <form class="form-container " action="{{ route('contact.submit') }}" method="post">
     @csrf

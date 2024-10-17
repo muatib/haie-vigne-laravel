@@ -46,13 +46,13 @@ class AdminController extends Controller
         try {
             $users = User::all();
         } catch (\Exception $e) {
-            Log::error('Error while retrieving users: ' . $e->getMessage());
+
         }
 
         try {
             $forms = Form::all();
         } catch (\Exception $e) {
-            Log::error('Error while retrieving forms: ' . $e->getMessage());
+
         }
 
         try {
@@ -63,7 +63,7 @@ class AdminController extends Controller
                 return $activity;
             });
         } catch (\Exception $e) {
-            Log::error('Error while retrieving activities: ' . $e->getMessage());
+
         }
 
         try {
@@ -74,7 +74,7 @@ class AdminController extends Controller
                 return $actuality;
             });
         } catch (\Exception $e) {
-            Log::error('Error while retrieving actualities: ' . $e->getMessage());
+
         }
 
         return view('dashboard', compact('users', 'forms', 'images', 'actualities'));

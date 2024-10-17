@@ -26,10 +26,11 @@
         <p class="form-txt txt">ou</p>
         <p class="form-txt">Télécharger le document PDF ci dessous et le retourner complété à notre adresse</p>
         <div class="link-wrapper">
-            <a class="form-lnk" href="{{ asset('documents/Feuille-inscription.pdf') }}" download aria-label="Télécharger le formulaire d'inscription en PDF">
-              Télécharger le formulaire
+            <a class="form-lnk" href="{{ asset('documents/Feuille-inscription.pdf') }}" download
+                aria-label="Télécharger le formulaire d'inscription en PDF">
+                Télécharger le formulaire
             </a>
-          </div>
+        </div>
     @else
         <h2 class="form-main-ttl">Création de compte et inscription</h2>
         <p class="form-txt">Veuillez remplir le formulaire ci-dessous pour créer votre compte et vous inscrire</p>
@@ -270,12 +271,14 @@
 
     <div class="cond-container">
         <label for="file_upload" class="contact-label">Joindre un fichier :</label>
-        <input class="contact-input form-up" type="file" name="file_upload" id="file_upload" aria-required="true">
+        <input class="contact-input form-up" type="file" name="file_upload" id="file_upload"
+            aria-required="true">
     </div>
 
     <div class="cond-container">
         <label for="payment_method" class="contact-label">Choisissez votre mode de paiement :</label>
-        <select class="contact-input pay-choice" name="payment_method" id="payment_method" required aria-required="true">
+        <select class="contact-input pay-choice" name="payment_method" id="payment_method" required
+            aria-required="true">
             <option value="" disabled selected>--</option>
             <option value="cheque">Chèque bancaire</option>
             <option value="virement">Virement bancaire</option>
@@ -294,13 +297,13 @@
     <p class="form-txt">Aprés
         la validation d'inscription vous serez redirigé vers la page des informations de paiement</p>
     <button class="contact-btn" type="submit">S'inscrire</button>
-    </form>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var form = document.querySelector('form');
-            form.addEventListener('submit', function(e) {
-                var csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-                var csrfInput = document.querySelector('input[name="_token"]');
-            });
+</form>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var form = document.querySelector('form');
+        form.addEventListener('submit', function(e) {
+            var csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+            var csrfInput = document.querySelector('input[name="_token"]');
         });
-        </script>
+    });
+</script>

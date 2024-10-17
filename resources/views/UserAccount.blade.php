@@ -1,5 +1,8 @@
 @include('components.header')
 
+@vite(['resources/js/burger.js'])
+
+
 @php
 $courseNames = [
     'lundi_20h00' => 'Fitness',

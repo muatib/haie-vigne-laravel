@@ -1,4 +1,9 @@
 @include('components.header')
+
+
+@vite(['resources/js/burger.js', 'components/js/dashboerd.js'])
+
+
 @php
     use Carbon\Carbon;
     $nonce = App\Services\NonceGenerator::generate();

@@ -1,5 +1,6 @@
 .header-container {
-    background-color: $lavander;
+    background-color: $lavanderHeader;
+    backdrop-filter: blur(10px);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -17,7 +18,6 @@
 .header-logo {
     display: flex;
     flex-direction: row;
-
 }
 .logo-txt {
     margin-left: -15px;
@@ -59,7 +59,6 @@
 }
 
 .user-status-indicator i {
-
     transition: color 0.3s ease;
     flex-shrink: 0;
 }
@@ -141,7 +140,6 @@
             width: 0;
         }
     }
-
 }
 // OVERLAY MENU BURGER
 
@@ -160,7 +158,7 @@
     transition: all 0.2s ease-in-out;
     filter: drop-shadow(5px 5px 30px rgb(92, 89, 89));
     border: 2px solid grey;
-    background: $lavander;
+    background: $lavanderHeader;
 
     &.overlay {
         visibility: visible;
@@ -175,17 +173,17 @@
     .menu-container-lnk {
         color: black;
         display: block;
-        font-size: 1.5rem;
+        font-size: 2rem;
         margin-bottom: 0.5rem;
         margin-left: 15px;
         text-decoration: none;
         text-align: left;
-        line-height: 2.5rem;
-    }
-    .menu-container-lnk:hover{
-        color: $light-blue;
     }
 }
+    .menu-container-lnk:hover {
+        color: $light-blue;
+    }
+
 @media screen and (max-width: 900px) {
     .nav-lg-lst {
         display: none;
@@ -229,6 +227,7 @@
 
     .header-actions {
         margin-left: 2rem;
+        width: fit-content;
     }
 
     .nav-lnk {
@@ -236,9 +235,13 @@
         font-size: 1.5rem;
         color: black;
     }
-    .link:hover{
-        color: white;
+    .link:hover,
+    .nav-lnk.active {
+        color: rgba(64, 70, 156, 0.979);
         text-decoration: underline;
+        font-weight: 700;
+
+        transition: 0.3s ease-in-out;
     }
     .fa-user {
         margin-left: 30%;
@@ -290,7 +293,7 @@
     .user-status-text {
         flex-grow: 1;
         text-align: center;
-        font-size: 1rem;
+        font-size: 0.8rem;
         font-weight: bold;
         color: black;
         white-space: nowrap;

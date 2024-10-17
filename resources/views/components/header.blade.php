@@ -1,13 +1,22 @@
-<!DOCTYPE html>
-<html lang="fr">
-
 <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image" href="{{ asset('img/Logo.png') }}" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Association Haie-Vigné</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    @vite(['resources/js/app.js', 'resources/js/burger.js', 'resources/js/activity.js', 'resources/js/sliders.js', 'resources/js/form.js', 'resources/js/dashboard.js', ])
+    <title>Association sportive Haie-Vigné</title>
+    <meta name="description" content="L'association existe depuis 1991. En 2023, nous avons changé de nom 'Association Sport et Bien-Etre Haie Vigné'. Nous avons rejoint la fédération de l'Ufolep.">
+
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="{{ asset('img/Logo.png') }}" />
+
+    <!-- Preconnect to external domains -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://fonts.bunny.net">
+
+    <!-- Asynchronously load Font Awesome -->
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"></noscript>
+    {{-- @vite(['resources/js/app.js', 'resources/js/burger.js',  'resources/js/sliders.js', 'resources/js/form.js', 'resources/js/dashboard.js', ]) --}}
+    @yield('scripts')
     @vite('resources/scss/main.scss')
 
 </head>

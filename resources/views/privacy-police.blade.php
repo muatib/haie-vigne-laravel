@@ -2,6 +2,10 @@
 
 @include('components.header')
 
+
+@vite(['resources/js/burger.js'])
+
+
 <h1 class="privacy-ttl">Politique de confidentialité :</h1>
 <p class="privacy-txt">Les informations recueillies sur ce formulaire sont enregistrées dans un fichier informatisé par l'Association Sportive Haie-Vigné.<br> La base légale du traitement est [base légale du traitement]. <br>
 

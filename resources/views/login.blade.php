@@ -1,5 +1,9 @@
 @include('components.header')
 
+
+@vite(['resources/js/burger.js'])
+
+
 @if (session('success'))
     <div class="alert alert-success" role="alert" aria-live="polite">
         {{ session('success') }}

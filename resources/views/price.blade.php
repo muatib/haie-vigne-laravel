@@ -1,5 +1,8 @@
 @include('components.header')
 
+@vite(['resources/js/burger.js'])
+
+
 <img class="img-up" src="{{ asset('asset/img/Vector 1.png') }}" alt="Illustration des tarifs">
 <h1 class="price-ttl" id="pricing-title">Tarifs saison 2023 / 2024</h1>
 

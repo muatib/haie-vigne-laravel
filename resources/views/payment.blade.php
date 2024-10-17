@@ -1,5 +1,9 @@
 @include('components.header')
 
+
+@vite(['resources/js/burger.js'])
+
+
 <h1 class="pay-ttl">Page de paiement</h1>
 <h2 class="pay-scdttl">. 1 - Par chéque bancaire libéllé à l'ordre :</h2>
 <p class="pay-txt">GV Haie-Vigné</p>

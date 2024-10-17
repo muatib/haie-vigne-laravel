@@ -1,21 +1,25 @@
-document.addEventListener("DOMContentLoaded", function () {
-    const burgerMenu = document.getElementById("burger__menu");
-    const overlay = document.getElementById("menu");
+(function () {
+    document.addEventListener("DOMContentLoaded", function () {
+        const burgerMenu = document.getElementById("burger__menu");
+        const overlay = document.getElementById("menu");
 
-    if (burgerMenu && overlay) {
-      burgerMenu.addEventListener("click", function () {
-        this.classList.toggle("close");
-        overlay.classList.toggle("overlay");
-      });
-    }
-  });
-  $ = function (id) {
-    return document.getElementById(id);
-  };
+        if (burgerMenu && overlay) {
+            burgerMenu.addEventListener("click", function () {
+                this.classList.toggle("close");
+                overlay.classList.toggle("overlay");
+            });
+        }
+    });
 
-  const show = function (id) {
-    $(id).style.display = "block";
-  };
-  const hide = function (id) {
-    $(id).style.display = "none";
-  };
+    window.$ = function (id) {
+        return document.getElementById(id);
+    };
+
+    window.show = function (id) {
+        $(id).style.display = "block";
+    };
+
+    window.hide = function (id) {
+        $(id).style.display = "none";
+    };
+})();

@@ -37,8 +37,16 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         // Update the displayed total and the hidden input field
-        document.getElementById("total").textContent = total + " €";
-        document.getElementById("total_input").value = total;
+        const totalElement = document.getElementById("total");
+        const totalInputElement = document.getElementById("total_input");
+
+        if (totalElement) {
+            totalElement.textContent = total + " €";
+        }
+
+        if (totalInputElement) {
+            totalInputElement.value = total;
+        }
     }
 
     // Calculate the initial total on page load

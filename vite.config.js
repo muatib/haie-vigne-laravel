@@ -6,7 +6,6 @@ export default defineConfig({
         laravel({
             input: [
                 "resources/sass/app.scss",
-
                 "resources/js/app.js",
                 "resources/js/bootstrap.js",
                 "resources/js/burger.js",
@@ -18,6 +17,8 @@ export default defineConfig({
         }),
     ],
     build: {
+        minify: 'terser',
+        cssMinify: true,
         rollupOptions: {
             output: {
                 assetFileNames: "assets/[name].[hash].[ext]",
