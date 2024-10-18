@@ -14,11 +14,12 @@
     <section id="activity-box-{{ $index + 1 }}" class="activity-box activity-box-lg" role="region" aria-labelledby="activity-title-{{ $index + 1 }}">
         <h1 id="activity-title-{{ $index + 1 }}" class="activity-ttl">{{ $activity->title }}</h1>
         <p class="activity-txt" aria-label="Description de l'activité">{{ $activity->description }}</p>
-        <img class="activity-img activity-img-lg" src="data:image/png;base64,{{ base64_encode($activity->image->image_data) }}"
-            alt="{{ $activity->image->alt_text }}">
+        {{-- <img class="activity-img activity-img-lg" src="data:image/png;base64,{{ base64_encode($activity->image->image_data) }}" --}}
+            {{-- alt="{{ $activity->image->alt_text }}"> --}}
+
         <p class="activity-txt" aria-label="Lieu de l'activité">{{ $activity->location }}</p>
 
-        <div class="box-content" role="list">
+        <div class="box-content box-content-lg" role="list">
             <ul class="box-left" aria-label="Horaires de l'activité">
                 <li><h4>Horaire :</h4></li>
                 <li class="box-left-content">

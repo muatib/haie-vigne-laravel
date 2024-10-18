@@ -18,7 +18,13 @@
     background-color: rgba(241, 236, 236, 0.932);
     color: white;
     font-family: "AfacadFlux";
+    padding-top: 3rem;
   }
   .link {
     text-decoration: none;
   }
+html, body{
+    overflow-x: hidden;
+    width: 100%;
+    position: relative;
+}

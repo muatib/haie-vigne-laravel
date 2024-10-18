@@ -1,25 +1,10 @@
-(function () {
-    document.addEventListener("DOMContentLoaded", function () {
-        const burgerMenu = document.getElementById("burger__menu");
-        const overlay = document.getElementById("menu");
 
-        if (burgerMenu && overlay) {
-            burgerMenu.addEventListener("click", function () {
-                this.classList.toggle("close");
-                overlay.classList.toggle("overlay");
-            });
-        }
+document.addEventListener('DOMContentLoaded', function() {
+    const menuToggle = document.getElementById('burger__menu');
+    const menu = document.getElementById('menu');
+
+    menuToggle.addEventListener('click', function() {
+        menu.classList.toggle('overlay');
+        menuToggle.classList.toggle('active');  // Ajoute/retire la classe 'active'
     });
-
-    window.$ = function (id) {
-        return document.getElementById(id);
-    };
-
-    window.show = function (id) {
-        $(id).style.display = "block";
-    };
-
-    window.hide = function (id) {
-        $(id).style.display = "none";
-    };
-})();
+});

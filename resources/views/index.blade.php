@@ -1,6 +1,8 @@
+
+<title>Association Sport et Bien-Être Haie-Vigné | Activités sportives à Caen</title>
 @include('components.header')
 
-<img class="img-up" src="{{ asset('asset/img/Vector 1.png') }}" alt="Logo" aria-hidden="true">
+<img class="img-up" src="{{ asset('asset/img/Vector 1.png') }}" alt="Décoration page Haie-Vigné" aria-hidden="true">
 
 @php
     $isAuthenticated = auth()->check();
@@ -8,7 +10,7 @@
     $isAdmin = $user ? $user->is_admin : false;
 @endphp
 
-<h1 class="main-ttl" aria-label="Présentation de l'association">L'association en quelques mots</h1>
+<h1 class="main-ttl" aria-label="Présentation de l'association">Bienvenue sur le site de l'association sport et bien être Haie-vigné</h1>
 
 <div class="main-txt-container" role="main">
     <p class="main-txt-itm" aria-label="Historique de la Fédération">
@@ -35,9 +37,9 @@
     <p class="main-txt-itm">Tous nos animateurs sont des professionnels du sport.</p>
     </p>
 
-    <p class="main-txt-itm" aria-label="Buts et objectifs">
+    <h2 class="actuality-main-ttl" aria-label="Buts et objectifs">
         Buts et objectifs de l’association :
-    </p>
+    </h2>
 
     <ul class="main-txt-itm" aria-label="Liste des objectifs de l'association">
         <li>- Proposer un large choix de séances en termes d’activités et d’horaires</li>
@@ -76,7 +78,7 @@
   </div>
 <img class="separation" src="{{ asset('asset/img/separation.png') }}" alt="Séparation visuelle" aria-hidden="true">
 
-<h2 class="planning-ttl">Notre actualité</h2>
+<h2 class="actuality-main-ttl">Notre actualité</h2>
 @include('components.actuality')
 
 

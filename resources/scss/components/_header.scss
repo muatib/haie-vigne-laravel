@@ -11,13 +11,19 @@
     border-bottom: rgba(185, 180, 180, 0.877) 4px solid;
     top: 0;
     left: 0;
-    position: sticky;
+    position: fixed;
     width: 100%;
     z-index: 2;
+
 }
 .header-logo {
     display: flex;
     flex-direction: row;
+}
+.logo-site{
+    height: 10rem;
+    margin-top: 2rem;
+    margin-left: -0.5rem;
 }
 .logo-txt {
     margin-left: -15px;
@@ -25,7 +31,6 @@
 .header-user-img {
     position: relative;
     left: 30%;
-
     bottom: 3%;
 }
 .account-icon {
@@ -38,7 +43,6 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-
     border-radius: 15px;
     transition: background-color 0.3s ease;
     height: 50px;
@@ -79,114 +83,99 @@
     overflow: hidden;
     text-overflow: ellipsis;
 }
-// MENU BURGER
 
+// MENU BURGER
 .menu-toggle {
     height: 27px;
     width: 30px;
-    margin: 50px;
     position: relative;
     overflow: visible;
     z-index: 2;
-    left: 2.5rem;
-    top: -0.5rem;
-
-    .menu-toggle-bar,
-    .menu-toggle-bar:before,
-    .menu-toggle-bar:after {
-        background: $brown;
-        display: block;
-        height: 2px;
-        opacity: 1;
-        position: absolute;
-        transition: 0.3s ease-in-out;
-    }
-
-    .menu-toggle-bar:before,
-    .menu-toggle-bar:after {
-        content: "";
-    }
-    .menu-toggle-bar:before {
-        left: 0px;
-        top: -7px;
-        width: 27px;
-    }
-    .menu-toggle-bar {
-        right: 0px;
-        top: 13px;
-        width: 27px;
-    }
-    .menu-toggle-bar:after {
-        left: 0px;
-        top: 7px;
-        width: 27px;
-    }
-    &.close {
-        .menu-toggle-bar:before {
-            top: 0px;
-            transform: rotate(90deg);
-            width: 27px;
-        }
-        .menu-toggle {
-            transform: rotate(-45deg);
-            top: 13px;
-            width: 27px;
-        }
-        .menu-toggle-bar:after {
-            top: 0px;
-            left: 0;
-            transform: rotate(90deg);
-            opacity: 0;
-            width: 0;
-        }
-    }
+    cursor: pointer;
+    margin-right: 2rem;
+    margin-left: auto;
+    margin-top: -1rem;
 }
-// OVERLAY MENU BURGER
 
+.menu-toggle-bar,
+.menu-toggle-bar:before,
+.menu-toggle-bar:after {
+    background: #000;
+    content: "";
+    display: block;
+    height: 2px;
+    position: absolute;
+    transition: 0.3s ease-in-out;
+}
+
+.menu-toggle-bar {
+    top: 13px;
+    width: 27px;
+}
+
+.menu-toggle-bar:before {
+    top: -7px;
+    width: 27px;
+}
+
+.menu-toggle-bar:after {
+    bottom: -7px;
+    width: 27px;
+}
+.menu-toggle.active .menu-toggle-bar {
+    background-color: transparent;
+}
+
+.menu-toggle.active .menu-toggle-bar:before {
+    top: 0;
+    transform: rotate(45deg);
+}
+
+.menu-toggle.active .menu-toggle-bar:after {
+    bottom: 0;
+    transform: rotate(-45deg);
+}
 #menu {
     z-index: 1;
-    min-width: 80%;
-    min-height: 60%;
+    width: 70%;
+    max-width: 300px;
+    height: 50vh;
     position: fixed;
-    margin-left: 4.5rem;
     top: 0;
-    height: 0;
-    visibility: hidden;
-    opacity: 0;
-    text-align: center;
-    padding-top: 20px;
-    transition: all 0.2s ease-in-out;
-    filter: drop-shadow(5px 5px 30px rgb(92, 89, 89));
-    border: 2px solid grey;
-    background: $lavanderHeader;
-
-    &.overlay {
-        visibility: visible;
-        opacity: 1;
-        padding-top: 4rem;
-
-        border-radius: 0.5rem;
-    }
-    .menu-container {
-        padding: 1rem;
-    }
-    .menu-container-lnk {
-        color: black;
-        display: block;
-        font-size: 2rem;
-        margin-bottom: 0.5rem;
-        margin-left: 15px;
-        text-decoration: none;
-        text-align: left;
-    }
+    right: -300px;
+    background: $lavanderBurger;
+    transition: 0.3s ease-in-out;
+    padding-top: 60px;
+    border-bottom-left-radius: 10px;
+    box-shadow: 10px 10px 10px 10px rgba(177, 174, 174, 0.74);
 }
-    .menu-container-lnk:hover {
-        color: $light-blue;
-    }
 
-@media screen and (max-width: 900px) {
-    .nav-lg-lst {
+#menu.overlay {
+    right: 0;
+}
+
+.menu-container {
+    padding: 1rem;
+}
+
+.menu-container-lnk {
+    color: black;
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    text-decoration: none;
+}
+
+@media screen and (max-width: 899px) {
+    .nav-lg {
         display: none;
+    }
+    .menu-toggle {
+        display: block;
+    }
+    .header-container {
+        justify-content: space-between;
     }
 }
 @media screen and (min-width: 550px) {
@@ -198,11 +187,14 @@
         z-index: 2;
     }
 }
+
 @media screen and (min-width: 900px) {
-    .menu-toggle {
+    .menu-toggle,
+    #menu {
         display: none;
     }
     .nav-lg {
+        display: block;
         width: 100%;
     }
 
@@ -210,6 +202,7 @@
         display: flex;
         align-items: center;
         justify-content: space-around;
+        height: 8rem;
     }
 
     .header-logo {
@@ -240,7 +233,6 @@
         color: rgba(64, 70, 156, 0.979);
         text-decoration: underline;
         font-weight: 700;
-
         transition: 0.3s ease-in-out;
     }
     .fa-user {
@@ -255,7 +247,7 @@
         display: flex;
         flex-direction: row;
         align-items: center;
-        padding: 5px 40px 5px 2px; /* Réduit le padding gauche */
+        padding: 5px 40px 5px 2px;
         border-radius: 50px;
         transition: background-color 0.3s ease;
         min-width: 160px;
@@ -279,7 +271,6 @@
         margin-right: 8px;
         flex-shrink: 0;
         transition: color 0.3s ease;
-        flex-shrink: 0;
     }
 
     .user-status-indicator.logged-in i {
@@ -301,7 +292,13 @@
         text-overflow: ellipsis;
         font-family: AfacadFlux;
     }
+    .logo-site{
+        height: 15rem;
+        margin-top: 3rem;
+        margin-left: 0.5rem;
+    }
 }
+
 .header-actions {
     display: flex;
     justify-content: space-between;

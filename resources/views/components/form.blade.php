@@ -25,14 +25,11 @@
         <p class="form-txt">Pour votre inscription veuillez remplir le formulaire en ligne ci dessous </p>
         <p class="form-txt txt">ou</p>
         <p class="form-txt">Télécharger le document PDF ci dessous et le retourner complété à notre adresse</p>
-        <div class="link-wrapper">
-            <a class="form-lnk" href="{{ asset('documents/Feuille-inscription.pdf') }}" download
-                aria-label="Télécharger le formulaire d'inscription en PDF">
-                Télécharger le formulaire
-            </a>
-        </div>
+        <a class="form-lnk" href="{{ asset('documents/Feuille-inscription.pdf') }}" download
+            aria-label="Télécharger le formulaire d'inscription en PDF">Télécharger le
+            formulaire</a>
     @else
-        <h2 class="form-main-ttl">Création de compte et inscription</h2>
+        <p class="form-main-ttl">Création de compte </br> et inscription</p>
         <p class="form-txt">Veuillez remplir le formulaire ci-dessous pour créer votre compte et vous inscrire</p>
     @endif
 
@@ -44,7 +41,8 @@
     aria-labelledby="form-title">
     @csrf
     <input type="hidden" name="nonce" value="{{ $nonce }}">
-    <h2 class="form-main-ttl" id="form-title" class="visually-hidden">Formulaire d'inscription</h2>
+
+    <h2 id="form-title" class="visually-hidden">Formulaire d'inscription</h2>
     @auth
         <input type="hidden" name="user_id" value="{{ Auth::id() }}">
     @else
@@ -87,7 +85,7 @@
 
     <img class="separation-form" src="{{ asset('asset/img/separation.png') }}" alt="" aria-hidden="true">
 
-    <h2 class="form-scd-ttl" id="form-title">Choix des cours :</h2>
+    <h2 class="form-main-ttl" id="form-title">Choix des cours :</h2>
 
 
     <div class="course-options" role="group" aria-labelledby="form-title">
@@ -95,7 +93,7 @@
         <div class="course-item">
             <label class="course-type" for="lundi_20h00">Fitness</label>
             <span class="course-time">20h00-21h00</span>
-            <input class="course-input" type="checkbox" id="lundi_20h00" name="courses[]" value="lundi_20h"
+            <input class="course-input" type="checkbox" id="lundi_20h00" name="courses[]" value="lundi_20h00"
                 aria-label="Fitness lundi 20h00-21h00">
         </div>
 
@@ -129,9 +127,9 @@
 
         <h3 class="course-ttl">Jeudi :</h3>
         <div class="course-item">
-            <label class="course-type" for="jeudi_12h30">Yoga</label>
-            <span class="course-time-1">12h30-13h30</span>
-            <input class="course-input" type="checkbox" id="jeudi_12h30" name="courses[]" value="jeudi_12h30"
+            <label class="course-type" for="jeudi_12h20">Yoga</label>
+            <span class="course-time-1">12h20-13h20</span>
+            <input class="course-input" type="checkbox" id="jeudi_12h20" name="courses[]" value="jeudi_12h20"
                 aria-label="Yoga jeudi 12h30-13h30">
         </div>
         <div class="course-item">
@@ -163,7 +161,7 @@
 
     <img class="separation-form" src="{{ asset('asset/img/separation.png') }}" alt="" aria-hidden="true">
 
-    <h2 class="form-scd-ttl" id="health-questionnaire-title">Questionnaire de santé : </h2>
+    <h2 class="form-main-ttl" id="health-questionnaire-title">Questionnaire de santé : </h2>
 
     <div class="health-questions" role="group" aria-labelledby="health-questionnaire-title">
         <h3 class="form-scd-ttl">Durant les 12 derniers mois :</h3>
@@ -282,8 +280,8 @@
             <option value="" disabled selected>--</option>
             <option value="cheque">Chèque bancaire</option>
             <option value="virement">Virement bancaire</option>
-            {{-- <option value="carte">Carte bancaire</option>
-            <option value="paypal">PayPal</option> --}}
+            <!--<option value="carte">Carte bancaire</option>-->
+            <!--<option value="paypal">PayPal</option>-->
         </select>
     </div>
 
@@ -291,7 +289,8 @@
         <input type="checkbox" name="rgpd_consent" id="rgpd_consent" required class="rgpd-consent-checkbox">
         <label for="rgpd_consent" class="rgpd-consent-label">
             J'accepte que mes données personnelles soient collectées et traitées conformément à la <br>
-            <a href="{{ route('privacy-police') }}" class="rgpd-consent-link">politique de confidentialité</a>.
+            <a href="{{ route('privacy-police') }}" class="rgpd-consent-link" target="_blank">politique de
+                confidentialité</a>.
         </label>
     </div>
     <p class="form-txt">Aprés
@@ -304,6 +303,11 @@
         form.addEventListener('submit', function(e) {
             var csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
             var csrfInput = document.querySelector('input[name="_token"]');
+
+            console.log('Meta CSRF Token:', csrfToken);
+            console.log('Form CSRF Token:', csrfInput.value);
+            console.log('Cookie CSRF Token:', document.cookie.split('; ').find(row => row.startsWith(
+                'XSRF-TOKEN=')).split('=')[1]);
         });
     });
 </script>

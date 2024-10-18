@@ -4,7 +4,7 @@
 .main-ttl {
     color: black;
     font-weight: 200;
-    font-size: 3rem;
+    font-size: 1.5rem;
     font-weight: 700;
     text-align: center;
     margin-top: 3rem;
@@ -55,14 +55,34 @@
     text-align: center;
     margin-bottom: 4rem;
   }
+  .actuality-main-ttl{
+    color: black;
+    font-weight: 200;
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-align: center;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+  }
 @media screen and (min-width: 900px){
     .main-txt-container{
         width: 90%;
     }
     .img-up{
-        height: 15rem;
+        height: 20rem;
+        margin-top:3rem;
     }
 .map-container{
     width: 40%;
 }
+.main-ttl{
+    font-size: 3rem;
 }
+.map-ttl{
+    font-size: 3rem;
+}
+.actuality-main-ttl{
+    font-size: 3rem;
+}
+
+ }

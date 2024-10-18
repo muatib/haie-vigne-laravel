@@ -47,4 +47,5 @@ class Form extends Model
         'updated_at',
         'medical_certificate_deadline',
     ];
+
 }

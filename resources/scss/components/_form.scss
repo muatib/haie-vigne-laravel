@@ -214,6 +214,15 @@
     background-color: rgba(228, 220, 220, 0.87);
     border-radius: 5px;
 }
+.alert-warning {
+    background-color: #fff3cd;
+    border: 1px solid #ffeeba;
+    color: #856404;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+}
+
 @media screen and (min-width: 900px) {
     .down-form,
     .form-container {
@@ -266,6 +275,9 @@
     .contact-btn:hover{
         background-color: $light-green;
 
+    }
+    .contact-ttl{
+        font-size: 3rem;
     }
 
 }

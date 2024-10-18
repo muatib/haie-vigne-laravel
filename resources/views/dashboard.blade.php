@@ -1,7 +1,7 @@
 @include('components.header')
 
 
-@vite(['resources/js/burger.js', 'components/js/dashboerd.js'])
+@vite(['resources/js/burger.js', 'resources/js/dashboard.js'])
 
 
 @php
@@ -196,7 +196,6 @@
     <form id="filter-form" action="{{ route('filter.users.by.course') }}" method="GET">
         <select name="course" id="course-select" class="course-select">
             <option value="">Sélectionner un cours</option>
-
             <option value="lundi_20h00">Lundi 20h00 fitness</option>
             <option value="mardi_11h30">Mardi 11h30 fitness</option>
             <option value="mardi_12h30">Mardi 12h30 pilates</option>
@@ -250,7 +249,7 @@
                 <div class="table-container activities-form">
                     <h2 class="dash-subttl">Éditer les activités</h2>
 
-
+                    <p>Test d'affichage du formulaire des activités</p>
 
                     @if (isset($images))
                         <p>La variable $images est définie.</p>
